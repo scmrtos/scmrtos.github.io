@@ -297,27 +297,27 @@ The decision to forgo dynamic process creation is driven by resource conservatio
 <p>Recommended file placement: common part in a separate <code>core</code> directory, platform-dependent part in a <code>&lt;target&gt;</code> directory (where <code>target</code> is the name of the target port), and project-dependent part directly in the project source files. This layout facilitates storage, portability, maintenance, and safer updates when upgrading to new versions.</p>
 <p>The common part source code is in eight files:</p>
 <ul>
-<li><code>scmRTOS.h</code> – main header file, including the entire system header hierarchy.</li>
-<li><code>os_kernel.h</code> – primary kernel type declarations and definitions.</li>
-<li><code>os_kernel.cpp</code> – kernel object declarations and function definitions.</li>
-<li><code>scmRTOS_defs.h</code> – auxiliary declarations and macros.</li>
-<li><code>os_services.h</code> – service type and template definitions.</li>
-<li><code>os_services.cpp</code> – service function definitions.</li>
-<li><code>usrlib.h</code> – support library type and template definitions.</li>
-<li><code>usrlib.cpp</code> – support library function definitions.</li>
+<li><strong>scmRTOS.h</strong>. Main header file, including the entire system header hierarchy.</li>
+<li><strong>os_kernel.h</strong>. Primary kernel type declarations and definitions.</li>
+<li><strong>os_kernel.cpp</strong>. Kernel object declarations and function definitions.</li>
+<li><strong>scmRTOS_defs.h</strong>. Auxiliary declarations and macros.</li>
+<li><strong>os_services.h</strong>. Service type and template definitions.</li>
+<li><strong>os_services.cpp</strong>. Service function definitions.</li>
+<li><strong>usrlib.h</strong>. Support library type and template definitions.</li>
+<li><strong>usrlib.cpp</strong>. Support library function definitions.</li>
 </ul>
 <p>As evident from the list, <strong>scmRTOS</strong> includes a small support library containing code used by OS components<sup id="fnref:3"><a class="footnote-ref" href="#fn:3">3</a></sup>. Since this library is not essentially part of the OS, it will not be discussed further here.</p>
 <p>The platform-dependent part source code is in three files:</p>
 <ul>
-<li><code>os_target.h</code> – platform-dependent declarations and macros.</li>
-<li><code>os_target_asm.ext</code><sup id="fnref:4"><a class="footnote-ref" href="#fn:4">4</a></sup> – low-level code for context switching and OS startup functions.</li>
-<li><code>os_target.cpp</code> – process stack frame initialization function definition, system timer interrupt handler, and the idle process root function.</li>
+<li><strong>os_target.h</strong>. Platform-dependent declarations and macros.</li>
+<li><strong>os_target_asm.ext</strong><sup id="fnref:4"><a class="footnote-ref" href="#fn:4">4</a></sup>. Low-level code for context switching and OS startup functions.</li>
+<li><strong>os_target.cpp</strong>. Process stack frame initialization function definition, system timer interrupt handler, and the idle process root function.</li>
 </ul>
 <p>The project-dependent part consists of three header files:</p>
 <ul>
-<li><code>scmRTOS_config.h</code> – configuration macros and type aliases, particularly for timeout object bit widths.</li>
-<li><code>scmRTOS_target_cfg.h</code> – code for tailoring OS mechanisms to the project; e.g., specifying the interrupt vector for the system timer handler, system timer control macros, context switch interrupt activation function definition, etc.</li>
-<li><code>scmRTOS_extensions.h</code> – extension inclusion control. See <a href="../kernel/#kernel-agent">TKernelAgent and Extensions</a> for details.</li>
+<li><strong>scmRTOS_config.h</strong>. Configuration macros and type aliases, particularly for timeout object bit widths.</li>
+<li><strong>scmRTOS_target_cfg.h</strong>. Code for tailoring OS mechanisms to the project; e.g., specifying the interrupt vector for the system timer handler, system timer control macros, context switch interrupt activation function definition, etc.</li>
+<li><strong>scmRTOS_extensions.h</strong>. Extension inclusion control. See <a href="../kernel/#kernel-agent">TKernelAgent and Extensions</a> for details.</li>
 </ul>
 <h3 id="internal-structure">Internal Structure<a class="headerlink" href="#internal-structure" title="Permanent link">🔗</a></h3>
 <p>Everything related to <strong>scmRTOS</strong>, except a few assembly-implemented functions with <code>extern "C"</code> linkage, is placed inside the <code>OS</code> namespace that provides a dedicated namespace for OS components.</p>
