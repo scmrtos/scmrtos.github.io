@@ -320,7 +320,7 @@ The decision to forgo dynamic process creation is driven by resource conservatio
 <li><code>scmRTOS_extensions.h</code> – extension inclusion control. See <a href="../kernel/#kernel-agent">TKernelAgent and Extensions</a> for details.</li>
 </ul>
 <h3 id="internal-structure">Internal Structure<a class="headerlink" href="#internal-structure" title="Permanent link">🔗</a></h3>
-<p>Everything related to <strong>scmRTOS</strong>, except a few assembly-implemented functions with <code>extern "C"</code> linkage, is placed inside the <code>OS</code> namespace—providing a dedicated namespace for OS components.</p>
+<p>Everything related to <strong>scmRTOS</strong>, except a few assembly-implemented functions with <code>extern "C"</code> linkage, is placed inside the <code>OS</code> namespace that provides a dedicated namespace for OS components.</p>
 <p>Within this namespace, the following classes are declared<sup id="fnref:5"><a class="footnote-ref" href="#fn:5">5</a></sup>:</p>
 <ul>
 <li><code>TKernel</code>. Since only one kernel instance exists, there is only one object of this class. Users should not create the class instances.</li>
