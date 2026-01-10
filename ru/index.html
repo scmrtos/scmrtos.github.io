@@ -1,9 +1,9 @@
-<!DOCTYPE html><html class="writer-html5" lang="en"><head>
+<!DOCTYPE html><html class="writer-html5" lang="ru"><head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <link rel="shortcut icon" href="../img/favicon.ico">
-    <title>Features - scmRTOS</title>
+    <title>Общие сведения - scmRTOS</title>
     <link rel="stylesheet" href="../css/theme.css">
     <link rel="stylesheet" href="../css/theme_extra.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css">
@@ -11,8 +11,8 @@
     
       <script>
         // Current page data
-        var mkdocs_page_name = "Features";
-        var mkdocs_page_input_path = "en/features.md";
+        var mkdocs_page_name = "\u041e\u0431\u0449\u0438\u0435 \u0441\u0432\u0435\u0434\u0435\u043d\u0438\u044f";
+        var mkdocs_page_input_path = "ru/index.md";
         var mkdocs_page_url = null;
       </script>
     
@@ -46,7 +46,7 @@
       select.style.background = "#fff";
       //select.style.border = "1px solid #ccc";
 
-      const currentLang = "en";
+      const currentLang = "ru";
 
       const languages = [
           { code: 'en', name: 'English', prefix: '/' },
@@ -54,7 +54,7 @@
       ];
       
       // get the page path and remove the leading slash
-      let pagePath = "features/".replace(/^\//, '');
+      let pagePath = "ru/".replace(/^\//, '');
       
       // remove current lang prefix from the path
       const currentLangObj = languages.find(lang => lang.code === currentLang);
@@ -71,7 +71,7 @@
           }
       }
       
-      console.log("Current lang:", currentLang, "page.url raw:", "features/", "normalized path:", pagePath);
+      console.log("Current lang:", currentLang, "page.url raw:", "ru/", "normalized path:", pagePath);
       
       languages.forEach(lang => {
           const option = document.createElement("option");
@@ -133,56 +133,54 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
     <div class="wy-side-scroll">
       <div class="wy-side-nav-search">
-          <a href=".." class="icon icon-home"> scmRTOS
+          <a href="./" class="icon icon-home"> scmRTOS
         </a><div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
-      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here">
+      <input type="text" name="q" placeholder="Поиск в документации" aria-label="Поиск в документации" title="Введите поисковый запрос">
   </form>
 </div>
       </div>
 
-      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <ul>
-                <li class="toctree-l1"><a class="reference internal" href="..">Synopsys</a>
-                </li>
-              </ul>
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Навигационное меню">
               <ul class="current">
-                <li class="toctree-l1 current"><a class="reference internal current" href="#">Features</a>
-    <ul class="current">
-    </ul>
+                <li class="toctree-l1 current"><a class="reference internal current" href="#">Общие сведения</a>
                 </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../platforms/">Supported Platforms</a>
+                <li class="toctree-l1"><a class="reference internal" href="features/">Характеристики</a>
                 </li>
               </ul>
-              <p class="caption"><span class="caption-text">Intro</span></p>
               <ul>
-                  <li class="toctree-l1"><a class="reference internal" href="../src/intro/">Not a Preface</a>
+                <li class="toctree-l1"><a class="reference internal" href="platforms/">Поддерживаемые платформы</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Введение</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="src/intro/">Вместо предисловия</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../src/overview/">Overview</a>
+                  <li class="toctree-l1"><a class="reference internal" href="src/overview/">Обзор операционной системы</a>
                   </li>
               </ul>
-              <p class="caption"><span class="caption-text">RTOS Components</span></p>
+              <p class="caption"><span class="caption-text">Компоненты</span></p>
               <ul>
-                  <li class="toctree-l1"><a class="reference internal" href="../src/kernel/">Kernel</a>
+                  <li class="toctree-l1"><a class="reference internal" href="src/kernel/">Ядро</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../src/processes/">Processes</a>
+                  <li class="toctree-l1"><a class="reference internal" href="src/processes/">Процессы</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../src/ipcs/">Interprocess Communications</a>
+                  <li class="toctree-l1"><a class="reference internal" href="src/ipcs/">Межпроцессное взаимодействие</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../src/ports/">Ports</a>
+                  <li class="toctree-l1"><a class="reference internal" href="src/ports/">Порты</a>
                   </li>
               </ul>
-              <p class="caption"><span class="caption-text">Appendix</span></p>
+              <p class="caption"><span class="caption-text">Приложения</span></p>
               <ul>
-                  <li class="toctree-l1"><a class="reference internal" href="../src/debug/">Debug</a>
+                  <li class="toctree-l1"><a class="reference internal" href="src/debug/">Отладка</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../src/profiler/">Process Profiling</a>
+                  <li class="toctree-l1"><a class="reference internal" href="src/profiler/">Профилировка процессов</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../src/example-job-queue/">Example: Job Queue</a>
+                  <li class="toctree-l1"><a class="reference internal" href="src/example-job-queue/">Пример: очередь заданий</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../src/glossary/">Glossary</a>
+                  <li class="toctree-l1"><a class="reference internal" href="src/glossary/">Термины и сокращения</a>
                   </li>
               </ul>
       </div>
@@ -190,16 +188,16 @@
     </nav>
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+      <nav class="wy-nav-top" role="navigation" aria-label="Мобильная версия навигации">
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="..">scmRTOS</a>
+          <a href="./">scmRTOS</a>
         
       </nav>
       <div class="wy-nav-content">
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
-    <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
-      <li class="breadcrumb-item active">Features</li>
+    <li><a href="./" class="icon icon-home" aria-label="Документация"></a></li>
+      <li class="breadcrumb-item active">Общие сведения</li>
     <li class="wy-breadcrumbs-aside">
     </li>
   </ul>
@@ -208,38 +206,23 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h4 id="written-entirely-on-c">Written entirely on C++:<a class="headerlink" href="#written-entirely-on-c" title="Permanent link">🔗</a></h4>
-<ul>
-<li>High reliability</li>
-<li>Simplicity and ease-of-use</li>
-</ul>
-<h4 id="introduce-extensions-mechanism-at-kernel-level">Introduce Extensions mechanism at kernel level:<a class="headerlink" href="#introduce-extensions-mechanism-at-kernel-level" title="Permanent link">🔗</a></h4>
-<ul>
-<li>User defined extensions</li>
-<li>Debug features</li>
-</ul>
-<h4 id="minimal-process-switching-latency">Minimal process switching latency:<a class="headerlink" href="#minimal-process-switching-latency" title="Permanent link">🔗</a></h4>
-<ul>
-<li>900 ns on Cortex-M4 @ 168 MHz</li>
-<li>1.8 us on Blackfin @ 200 MHz</li>
-<li>2.7 us on Cortex-M3 @ 72 MHz</li>
-<li>700 ns on Cortex-A9 @ 400 MHz (with full FPU context save/restore)</li>
-<li>5 us on ARM7 @ 50 MHz</li>
-<li>38-42 us on AVR @ 8 MHz</li>
-<li>45-50 us on MSP430 @ 5 MHz</li>
-<li>18-20 us on STM8 @ 16 MHz</li>
-</ul>
-<h4 id="footprint">Footprint:<a class="headerlink" href="#footprint" title="Permanent link">🔗</a></h4>
-<ul>
-<li>from 512 bytes of RAM</li>
-<li>from ~1K code</li>
-</ul>
+                <p><strong>scmRTOS</strong> &nbsp;– это компактная операционная система (ОС) реального времени, предназначенная для использования в микроконтроллерах (МК). </p>
+<p><strong>scmRTOS</strong> способна выполняться на совсем крошечных МК, имеющих объём оперативной памяти порядка 512 байт. Она написана на языке программирования С++ и поддерживает <a href="platforms/">ряд платформ</a>. Подробное описание ОС, включая <a href="src/intro/">интерактивную документацию</a>, приведено в следующих разделах сайта.</p>
+<p>Исходный код ОС может быть склонирован или загружен с сайта <a href="https://github.com/scmrtos/scmrtos">github.com</a>. Там же можно найти <a href="https://github.com/scmrtos/scmrtos-sample-projects">ряд примеров</a>, которые иллюстрируют использование ОС и могут служить отправной точкой для рабочих проектов.</p>
+<p>Полный архив, включающий исходный код ОС, примеры, документацию<sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup> и т.п. также может быть загружен с <a href="https://github.com/scmrtos/scmrtos/releases/">соответствующей страницы проекта на github.com</a>.</p>
+<div class="footnote">
+<hr>
+<ol>
+<li id="fn:1">
+<p>Данный архив включает в себя PDF версии документации. Этот вариант является устаревшим и не рекомендуется для использования рекомендуется. Вместо него предлагается <a href="src/intro/">онлайн вариант</a>, как более удобный, оперативный и содержащий описание всех актуальных изменений.&nbsp;<a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text">↩</a></p>
+</li>
+</ol>
+</div>
               
             </div>
           </div><footer>
-    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
-        <a href=".." class="btn btn-neutral float-left" title="Synopsys"><span class="icon icon-circle-arrow-left"></span> Previous</a>
-        <a href="../platforms/" class="btn btn-neutral float-right" title="Supported Platforms">Next <span class="icon icon-circle-arrow-right"></span></a>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Навигация по странице">
+        <a href="features/" class="btn btn-neutral float-right" title="Характеристики">Вперед <span class="icon icon-circle-arrow-right"></span></a>
     </div>
 
   <hr>
@@ -248,7 +231,7 @@
     <!-- Copyright etc -->
   </div>
 
-  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+  Собрано в <a href="https://www.mkdocs.org/">MkDocs</a> с использованием <a href="https://github.com/readthedocs/sphinx_rtd_theme">темы</a> от <a href="https://readthedocs.org">Read the Docs</a>.
 </footer>
           
         </div>
@@ -258,14 +241,12 @@
 
   </div>
 
-  <div class="rst-versions" role="note" aria-label="Versions">
+  <div class="rst-versions" role="note" aria-label="Версии">
   <span class="rst-current-version" data-toggle="rst-current-version">
     
     
-      <span><a href=".." style="color: #fcfcfc">« Previous</a></span>
     
-    
-      <span><a href="../platforms/" style="color: #fcfcfc">Next »</a></span>
+      <span><a href="features/" style="color: #fcfcfc">Вперед »</a></span>
     
   </span>
 </div>

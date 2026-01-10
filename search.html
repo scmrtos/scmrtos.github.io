@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="ru" >
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -15,7 +15,106 @@
       <script src="./js/html5shiv.min.js"></script>
     <![endif]-->
       <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
-      <script>hljs.highlightAll();</script> 
+      <script>hljs.highlightAll();</script>
+   
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const selectorDiv = document.createElement("div");
+      selectorDiv.style.padding = "0.7em 0";
+      selectorDiv.style.textAlign = "center";
+      selectorDiv.style.borderBottom = "1px solid #ddd";
+      selectorDiv.style.marginBottom = "0.7em";
+
+      selectorDiv.style.display = "flex";
+      selectorDiv.style.alignItems = "center";
+      selectorDiv.style.gap = "10px";
+      selectorDiv.style.justifyContent = "center";
+
+      const select = document.createElement("select");
+      select.id = "lang-switcher";
+      select.style.width = "30%";
+      select.style.padding = "0.1em";
+      select.style.fontSize = "0.7em";
+      select.style.borderRadius = "10px";
+      select.style.textAlign = "center";
+      select.style.background = "#fff";
+      //select.style.border = "1px solid #ccc";
+
+      const currentLang = "en";
+
+      const languages = [
+          { code: 'en', name: 'English', prefix: '/' },
+          { code: 'ru', name: 'Русский', prefix: '/ru/' }
+      ];
+      
+      // get the page path and remove the leading slash
+      let pagePath = "".replace(/^\//, '');
+      
+      // remove current lang prefix from the path
+      const currentLangObj = languages.find(lang => lang.code === currentLang);
+      if (currentLangObj && currentLangObj.prefix !== '/') {
+          // remove the leading slash from the prefix for comparison
+          const langPrefixWithoutSlash = currentLangObj.prefix.replace(/^\//, '');
+          
+          // if the path starts with the lang prefix, delete it
+          if (pagePath.startsWith(langPrefixWithoutSlash)) {
+              pagePath = pagePath.substring(langPrefixWithoutSlash.length);
+              
+              // remove the possible remaining leading slash
+              pagePath = pagePath.replace(/^\//, '');
+          }
+      }
+      
+      console.log("Current lang:", currentLang, "page.url raw:", "", "normalized path:", pagePath);
+      
+      languages.forEach(lang => {
+          const option = document.createElement("option");
+          let targetUrl;
+      
+          // build target URL
+          if (pagePath === '') {
+              // main page
+              targetUrl = lang.prefix === '/' ? '/' : lang.prefix;
+              // make sure the path ended with a slash
+              if (!targetUrl.endsWith('/')) {
+                  targetUrl += '/';
+              }
+          } else {
+              // all remaining pages - just combine the prefix and the path
+              targetUrl = lang.prefix + pagePath;
+          }
+      
+          option.value = targetUrl;
+          option.text = lang.name;
+          if (lang.code === currentLang) option.selected = true;
+      
+          select.appendChild(option);
+      });
+
+      const label = document.createElement("div");
+      label.style.fontSize = "0.8em";
+      label.style.color = "#fff";
+      label.style.marginTop = "0.3em";
+      label.textContent = "Language / Язык";
+
+      selectorDiv.appendChild(label);
+      selectorDiv.appendChild(select);
+
+      // Insert at top of sidebar
+      const target = document.querySelector(".wy-side-nav-search");
+      if (target) {
+        target.insertBefore(selectorDiv, target.firstChild);
+      } else {
+        console.warn("Could not find .wy-side-nav-search for lang selector");
+      }
+
+      select.addEventListener("change", function() {
+        if (this.value) window.location.href = this.value;
+      });
+    });
+  </script>
+
 </head>
 
 <body class="wy-body-for-nav" role="document">
@@ -24,45 +123,70 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
     <div class="wy-side-scroll">
       <div class="wy-side-nav-search">
-          <a href="./." class="icon icon-home"> scmRTOS
+          <a href="./ru/" class="icon icon-home"> scmRTOS
         </a><div role="search">
   <form id ="rtd-search-form" class="wy-form" action="./search.html" method="get">
-      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+      <input type="text" name="q" placeholder="Поиск в документации" aria-label="Поиск в документации" title="Введите поисковый запрос" />
   </form>
 </div>
       </div>
 
-      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Навигационное меню">
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="./.">Synopsys</a>
+                <li class="toctree-l1"><a class="reference internal" href="./ru/">Общие сведения</a>
                 </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="./features/">Features</a>
+                <li class="toctree-l1"><a class="reference internal" href="./ru/features/">Характеристики</a>
                 </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="./platforms/">Supported Platforms</a>
+                <li class="toctree-l1"><a class="reference internal" href="./ru/platforms/">Поддерживаемые платформы</a>
                 </li>
               </ul>
+              <p class="caption"><span class="caption-text">Введение</span></p>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="./doc/">Documentation</a>
-                </li>
+                  <li class="toctree-l1"><a class="reference internal" href="./ru/src/intro/">Вместо предисловия</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="./ru/src/overview/">Обзор операционной системы</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Компоненты</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="./ru/src/kernel/">Ядро</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="./ru/src/processes/">Процессы</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="./ru/src/ipcs/">Межпроцессное взаимодействие</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="./ru/src/ports/">Порты</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Приложения</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="./ru/src/debug/">Отладка</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="./ru/src/profiler/">Профилировка процессов</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="./ru/src/example-job-queue/">Пример: очередь заданий</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="./ru/src/glossary/">Термины и сокращения</a>
+                  </li>
               </ul>
       </div>
     </div>
     </nav>
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+      <nav class="wy-nav-top" role="navigation" aria-label="Мобильная версия навигации">
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="./.">scmRTOS</a>
+          <a href="./ru/">scmRTOS</a>
         
       </nav>
       <div class="wy-nav-content">
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
-    <li><a href="./." class="icon icon-home" aria-label="Docs"></a></li>
+    <li><a href="./ru/" class="icon icon-home" aria-label="Документация"></a></li>
     <li class="wy-breadcrumbs-aside">
     </li>
   </ul>
@@ -72,15 +196,15 @@
             <div class="section" itemprop="articleBody">
               
 
-  <h1 id="search">Search Results</h1>
+  <h1 id="search">Результаты поиска</h1>
 
   <form id="content_search" action="search.html">
     <span role="status" aria-live="polite" class="ui-helper-hidden-accessible"></span>
-    <input name="q" id="mkdocs-search-query" type="text" class="search_input search-query ui-autocomplete-input" placeholder="Search the Docs" aria-label="Search the Docs" autocomplete="off" autofocus title="Type search term here">
+    <input name="q" id="mkdocs-search-query" type="text" class="search_input search-query ui-autocomplete-input" placeholder="Поиск в документах" aria-label="Поиск в документах" autocomplete="off" autofocus title="Введите поисковый запрос">
   </form>
 
-  <div id="mkdocs-search-results" class="search-results" data-no-results-text="No results found">
-    Searching...
+  <div id="mkdocs-search-results" class="search-results" data-no-results-text="Ничего не найдено">
+    Поиск...
   </div>
 
 
@@ -93,7 +217,7 @@
     <!-- Copyright etc -->
   </div>
 
-  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+  Собрано в <a href="https://www.mkdocs.org/">MkDocs</a> с использованием <a href="https://github.com/readthedocs/sphinx_rtd_theme">темы</a> от <a href="https://readthedocs.org">Read the Docs</a>.
 </footer>
           
         </div>
@@ -103,7 +227,7 @@
 
   </div>
 
-  <div class="rst-versions" role="note" aria-label="Versions">
+  <div class="rst-versions" role="note" aria-label="Версии">
   <span class="rst-current-version" data-toggle="rst-current-version">
     
     
@@ -116,10 +240,6 @@
     <script src="./js/theme.js"></script>
       <script src="./js/mathjax.js"></script>
       <script src="./js/mathjax/tex-mml-chtml.js"></script>
-      <script src="./js/wavedrom.min.js"></script>
-      <script src="./js/wavedrom_loader.js"></script>
-      <script src="./js/wavedrom.unpkg.js"></script>
-      <script src="./js/wavedrom_skin_default.js"></script>
       <script src="./search/main.js"></script>
     <script>
         jQuery(function () {

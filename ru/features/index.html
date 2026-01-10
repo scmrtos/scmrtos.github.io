@@ -1,0 +1,296 @@
+<!DOCTYPE html><html class="writer-html5" lang="ru"><head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link rel="shortcut icon" href="../../img/favicon.ico">
+    <title>Характеристики - scmRTOS</title>
+    <link rel="stylesheet" href="../../css/theme.css">
+    <link rel="stylesheet" href="../../css/theme_extra.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css">
+        <link href="../../extra.css" rel="stylesheet">
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "\u0425\u0430\u0440\u0430\u043a\u0442\u0435\u0440\u0438\u0441\u0442\u0438\u043a\u0438";
+        var mkdocs_page_input_path = "ru/features.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script>
+   
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const selectorDiv = document.createElement("div");
+      selectorDiv.style.padding = "0.7em 0";
+      selectorDiv.style.textAlign = "center";
+      selectorDiv.style.borderBottom = "1px solid #ddd";
+      selectorDiv.style.marginBottom = "0.7em";
+
+      selectorDiv.style.display = "flex";
+      selectorDiv.style.alignItems = "center";
+      selectorDiv.style.gap = "10px";
+      selectorDiv.style.justifyContent = "center";
+
+      const select = document.createElement("select");
+      select.id = "lang-switcher";
+      select.style.width = "30%";
+      select.style.padding = "0.1em";
+      select.style.fontSize = "0.7em";
+      select.style.borderRadius = "10px";
+      select.style.textAlign = "center";
+      select.style.background = "#fff";
+      //select.style.border = "1px solid #ccc";
+
+      const currentLang = "ru";
+
+      const languages = [
+          { code: 'en', name: 'English', prefix: '/' },
+          { code: 'ru', name: 'Русский', prefix: '/ru/' }
+      ];
+      
+      // get the page path and remove the leading slash
+      let pagePath = "ru/features/".replace(/^\//, '');
+      
+      // remove current lang prefix from the path
+      const currentLangObj = languages.find(lang => lang.code === currentLang);
+      if (currentLangObj && currentLangObj.prefix !== '/') {
+          // remove the leading slash from the prefix for comparison
+          const langPrefixWithoutSlash = currentLangObj.prefix.replace(/^\//, '');
+          
+          // if the path starts with the lang prefix, delete it
+          if (pagePath.startsWith(langPrefixWithoutSlash)) {
+              pagePath = pagePath.substring(langPrefixWithoutSlash.length);
+              
+              // remove the possible remaining leading slash
+              pagePath = pagePath.replace(/^\//, '');
+          }
+      }
+      
+      console.log("Current lang:", currentLang, "page.url raw:", "ru/features/", "normalized path:", pagePath);
+      
+      languages.forEach(lang => {
+          const option = document.createElement("option");
+          let targetUrl;
+      
+          // build target URL
+          if (pagePath === '') {
+              // main page
+              targetUrl = lang.prefix === '/' ? '/' : lang.prefix;
+              // make sure the path ended with a slash
+              if (!targetUrl.endsWith('/')) {
+                  targetUrl += '/';
+              }
+          } else {
+              // all remaining pages - just combine the prefix and the path
+              targetUrl = lang.prefix + pagePath;
+          }
+      
+          option.value = targetUrl;
+          option.text = lang.name;
+          if (lang.code === currentLang) option.selected = true;
+      
+          select.appendChild(option);
+      });
+
+      const label = document.createElement("div");
+      label.style.fontSize = "0.8em";
+      label.style.color = "#fff";
+      label.style.marginTop = "0.3em";
+      label.textContent = "Language / Язык";
+
+      selectorDiv.appendChild(label);
+      selectorDiv.appendChild(select);
+
+      // Insert at top of sidebar
+      const target = document.querySelector(".wy-side-nav-search");
+      if (target) {
+        target.insertBefore(selectorDiv, target.firstChild);
+      } else {
+        console.warn("Could not find .wy-side-nav-search for lang selector");
+      }
+
+      select.addEventListener("change", function() {
+        if (this.value) window.location.href = this.value;
+      });
+    });
+  </script>
+
+<link href="../../assets/stylesheets/glightbox.min.css" rel="stylesheet"><script src="../../assets/javascripts/glightbox.min.js"></script><style id="glightbox-style">
+            html.glightbox-open { overflow: initial; height: 100%; }
+            .gslide-title { margin-top: 0px; user-select: text; }
+            .gslide-desc { color: #666; user-select: text; }
+            .gslide-image img { background: white; }
+        </style></head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../" class="icon icon-home"> scmRTOS
+        </a><div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Поиск в документации" aria-label="Поиск в документации" title="Введите поисковый запрос">
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Навигационное меню">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../">Общие сведения</a>
+                </li>
+              </ul>
+              <ul class="current">
+                <li class="toctree-l1 current"><a class="reference internal current" href="#">Характеристики</a>
+    <ul class="current">
+    </ul>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../platforms/">Поддерживаемые платформы</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Введение</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../src/intro/">Вместо предисловия</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../src/overview/">Обзор операционной системы</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Компоненты</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../src/kernel/">Ядро</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../src/processes/">Процессы</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../src/ipcs/">Межпроцессное взаимодействие</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../src/ports/">Порты</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Приложения</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../src/debug/">Отладка</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../src/profiler/">Профилировка процессов</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../src/example-job-queue/">Пример: очередь заданий</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../src/glossary/">Термины и сокращения</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Мобильная версия навигации">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../">scmRTOS</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../" class="icon icon-home" aria-label="Документация"></a></li>
+      <li class="breadcrumb-item active">Характеристики</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h4 id="c">Реализована на C++:<a class="headerlink" href="#c" title="Permanent link">🔗</a></h4>
+<ul>
+<li>предоставляет более безопасную (чем в парадигме процедурного программирования) модель использования за счёт принципов инкапсуляции и абстракции&nbsp;– отделения интерфейса от реализации;</li>
+<li>более простое использование в рамках объектной модели языка программирования.</li>
+</ul>
+<h4 id="_1">Предоставляет механизм расширений:<a class="headerlink" href="#_1" title="Permanent link">🔗</a></h4>
+<ul>
+<li>позволяет дополнять проект собственными расширениями, не внося правок в код ОС;</li>
+<li>содержит отладочные средства, на основе представленного механизма, которые могут, в том числе, использоваться как отправная точка при разработке собственных расширений.</li>
+</ul>
+<h4 id="_2">Время передачи управления между процессами<sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup>:<a class="headerlink" href="#_2" title="Permanent link">🔗</a></h4>
+<ul>
+<li>900 ns on Cortex-M4 @ 168 MHz</li>
+<li>1.8 us on Blackfin @ 200 MHz</li>
+<li>2.7 us on Cortex-M3 @ 72 MHz</li>
+<li>700 ns on Cortex-A9 @ 400 MHz (with full FPU context save/restore)</li>
+<li>5 us on ARM7 @ 50 MHz</li>
+<li>38-42 us on AVR @ 8 MHz</li>
+<li>45-50 us on MSP430 @ 5 MHz</li>
+<li>18-20 us on STM8 @ 16 MHz</li>
+</ul>
+<h4 id="_3">Компактный размер:<a class="headerlink" href="#_3" title="Permanent link">🔗</a></h4>
+<ul>
+<li>от 512 байт оперативной памяти;</li>
+<li>от ~1k байт памяти программ.</li>
+</ul>
+<div class="footnote">
+<hr>
+<ol>
+<li id="fn:1">
+<p>Это включает в себя полное время передачи, включая работу функций средств межпроцессного взаимодействия и планировщика, а не только переключение контекстов.&nbsp;<a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text">↩</a></p>
+</li>
+</ol>
+</div>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Навигация по странице">
+        <a href="../" class="btn btn-neutral float-left" title="Общие сведения"><span class="icon icon-circle-arrow-left"></span> Назад</a>
+        <a href="../platforms/" class="btn btn-neutral float-right" title="Поддерживаемые платформы">Вперед <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Собрано в <a href="https://www.mkdocs.org/">MkDocs</a> с использованием <a href="https://github.com/readthedocs/sphinx_rtd_theme">темы</a> от <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Версии">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../" style="color: #fcfcfc">« Назад</a></span>
+    
+    
+      <span><a href="../platforms/" style="color: #fcfcfc">Вперед »</a></span>
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../js/mathjax.js"></script>
+      <script src="../../js/mathjax/tex-mml-chtml.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+
+
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+</script></body></html>

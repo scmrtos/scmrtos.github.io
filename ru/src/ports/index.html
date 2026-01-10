@@ -1,0 +1,441 @@
+<!DOCTYPE html><html class="writer-html5" lang="ru"><head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <title>Порты - scmRTOS</title>
+    <link rel="stylesheet" href="../../../css/theme.css">
+    <link rel="stylesheet" href="../../../css/theme_extra.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css">
+        <link href="../../../extra.css" rel="stylesheet">
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "\u041f\u043e\u0440\u0442\u044b";
+        var mkdocs_page_input_path = "ru/src/ports.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script>
+   
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const selectorDiv = document.createElement("div");
+      selectorDiv.style.padding = "0.7em 0";
+      selectorDiv.style.textAlign = "center";
+      selectorDiv.style.borderBottom = "1px solid #ddd";
+      selectorDiv.style.marginBottom = "0.7em";
+
+      selectorDiv.style.display = "flex";
+      selectorDiv.style.alignItems = "center";
+      selectorDiv.style.gap = "10px";
+      selectorDiv.style.justifyContent = "center";
+
+      const select = document.createElement("select");
+      select.id = "lang-switcher";
+      select.style.width = "30%";
+      select.style.padding = "0.1em";
+      select.style.fontSize = "0.7em";
+      select.style.borderRadius = "10px";
+      select.style.textAlign = "center";
+      select.style.background = "#fff";
+      //select.style.border = "1px solid #ccc";
+
+      const currentLang = "ru";
+
+      const languages = [
+          { code: 'en', name: 'English', prefix: '/' },
+          { code: 'ru', name: 'Русский', prefix: '/ru/' }
+      ];
+      
+      // get the page path and remove the leading slash
+      let pagePath = "ru/src/ports/".replace(/^\//, '');
+      
+      // remove current lang prefix from the path
+      const currentLangObj = languages.find(lang => lang.code === currentLang);
+      if (currentLangObj && currentLangObj.prefix !== '/') {
+          // remove the leading slash from the prefix for comparison
+          const langPrefixWithoutSlash = currentLangObj.prefix.replace(/^\//, '');
+          
+          // if the path starts with the lang prefix, delete it
+          if (pagePath.startsWith(langPrefixWithoutSlash)) {
+              pagePath = pagePath.substring(langPrefixWithoutSlash.length);
+              
+              // remove the possible remaining leading slash
+              pagePath = pagePath.replace(/^\//, '');
+          }
+      }
+      
+      console.log("Current lang:", currentLang, "page.url raw:", "ru/src/ports/", "normalized path:", pagePath);
+      
+      languages.forEach(lang => {
+          const option = document.createElement("option");
+          let targetUrl;
+      
+          // build target URL
+          if (pagePath === '') {
+              // main page
+              targetUrl = lang.prefix === '/' ? '/' : lang.prefix;
+              // make sure the path ended with a slash
+              if (!targetUrl.endsWith('/')) {
+                  targetUrl += '/';
+              }
+          } else {
+              // all remaining pages - just combine the prefix and the path
+              targetUrl = lang.prefix + pagePath;
+          }
+      
+          option.value = targetUrl;
+          option.text = lang.name;
+          if (lang.code === currentLang) option.selected = true;
+      
+          select.appendChild(option);
+      });
+
+      const label = document.createElement("div");
+      label.style.fontSize = "0.8em";
+      label.style.color = "#fff";
+      label.style.marginTop = "0.3em";
+      label.textContent = "Language / Язык";
+
+      selectorDiv.appendChild(label);
+      selectorDiv.appendChild(select);
+
+      // Insert at top of sidebar
+      const target = document.querySelector(".wy-side-nav-search");
+      if (target) {
+        target.insertBefore(selectorDiv, target.firstChild);
+      } else {
+        console.warn("Could not find .wy-side-nav-search for lang selector");
+      }
+
+      select.addEventListener("change", function() {
+        if (this.value) window.location.href = this.value;
+      });
+    });
+  </script>
+
+<link href="../../../assets/stylesheets/glightbox.min.css" rel="stylesheet"><script src="../../../assets/javascripts/glightbox.min.js"></script><style id="glightbox-style">
+            html.glightbox-open { overflow: initial; height: 100%; }
+            .gslide-title { margin-top: 0px; user-select: text; }
+            .gslide-desc { color: #666; user-select: text; }
+            .gslide-image img { background: white; }
+        </style></head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../../" class="icon icon-home"> scmRTOS
+        </a><div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Поиск в документации" aria-label="Поиск в документации" title="Введите поисковый запрос">
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Навигационное меню">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../">Общие сведения</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../features/">Характеристики</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../platforms/">Поддерживаемые платформы</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Введение</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../intro/">Вместо предисловия</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../overview/">Обзор операционной системы</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Компоненты</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../kernel/">Ядро</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../processes/">Процессы</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../ipcs/">Межпроцессное взаимодействие</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Порты</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#_2">Общие замечания</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#_3">Объекты портирования</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#_4">Макросы</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#_5">Типы</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#_6">Функции</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#_7">Портирование</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#_8">Запуск в составе рабочего проекта</a>
+    </li>
+    </ul>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Приложения</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../debug/">Отладка</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../profiler/">Профилировка процессов</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../example-job-queue/">Пример: очередь заданий</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../glossary/">Термины и сокращения</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Мобильная версия навигации">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../">scmRTOS</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../" class="icon icon-home" aria-label="Документация"></a></li>
+          <li class="breadcrumb-item">Компоненты</li>
+      <li class="breadcrumb-item active">Порты</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="_1">Порты<a class="headerlink" href="#_1" title="Permanent link">🔗</a></h1>
+<h2 id="_2">Общие замечания<a class="headerlink" href="#_2" title="Permanent link">🔗</a></h2>
+<p>Ввиду больших отличий как аппаратных архитектур, так и средств разработки под них, возникает необходимость в специальной адаптации кода ОС<sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup> под них. Результатом этой работы является платформеннозависимая часть, которая в совокупности с общей частью и составляет порт под ту или иную платформу. Процесс подготовки платформеннозависимой части называется портированием.</p>
+<p>В настоящей главе будут рассмотрены, главным образом, платформеннозависимые части, их содержимое и особенности,  также дана краткая инструкция по портированию ОС, т.е. что нужно сделать, чтобы создать порт.</p>
+<p>Платформеннозависимая часть каждой целевой платформы содержится в отдельной директории и минимально содержит три файла:</p>
+<ul>
+<li>os_target.h – платформеннозависимые объявления и макросы.</li>
+<li>os_target_asm.ext<sup id="fnref:2"><a class="footnote-ref" href="#fn:2">2</a></sup> – низкоуровневый код, функции переключения контекста, старта ОС.</li>
+<li>os_target.cpp – определения функции инициализации стекового кадра процесса и функции обработчика прерывания от таймера, используемого в качестве системного.</li>
+</ul>
+<p>Настройка кода ОС на целевую платформу осуществляется путём:</p>
+<ul>
+<li>определения специальных макросов препроцессора;</li>
+<li>директивами условной трансляции;</li>
+<li>определением типов, определяемых пользователем, реализация которых зависит от целевой платформы;</li>
+<li>заданием псевдонимов некоторых типов;</li>
+<li>определением функций, код которых вынесен на уровень порта.</li>
+</ul>
+<p>Важной и "тонкой" частью кода порта является определение ассемблерных подпрограмм, осуществляющих старт системы, сохранение контекста прерываемого процесса, переключение указателей стека и восстановление контекста процесса, получившего управление, в том числе и обработчик программного прерывания, в теле которого производится переключение контекстов процессов. Чтобы реализовать этот код, от разработчика порта требуются глубокие знания целевой аппаратной архитектуры на низком уровне, а также умение использовать программный пакет (компилятор, ассемблер, линкер) для работы со "смешанными"<sup id="fnref:3"><a class="footnote-ref" href="#fn:3">3</a></sup> проектами. </p>
+<p>Процесс портирования сводится, главным образом, к определению объектов портирования и написанию платформеннозависимого кода.</p>
+<h2 id="_3">Объекты портирования<a class="headerlink" href="#_3" title="Permanent link">🔗</a></h2>
+<h3 id="_4">Макросы<a class="headerlink" href="#_4" title="Permanent link">🔗</a></h3>
+<p>Существует ряд платформеннозависимых макросов, которые должны быть определены. Если значение макроса в том или ином порте не требуется, то макрос должен быть определён пустым. Перечень макросов и их описания приведены ниже.</p>
+<hr>
+<p></p><div class="language-cpp highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="n">INLINE</span>
+</span></code></pre></div>
+Задаёт поведение функций при встраивании. Обычно состоит из платформеннозависимой директивы безусловного встраивания и ключевого слова <code>inline</code>.<p></p>
+<hr>
+<p>OS_PROCESS</p>
+<p>Квалифицирует исполняемую функцию процесса. Содержит платформеннозависимый атрибут, указывающий компилятору, что функция не имеет возврата, поэтому preserved<sup id="fnref:4"><a class="footnote-ref" href="#fn:4">4</a></sup> регистры процессора можно использовать без сохранения. Это экономит код и пространство в стеке.</p>
+<hr>
+<div class="language-cpp highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">OS_INTERRUPT</span>
+</span></code></pre></div>
+<p>Содержит платформеннозависимое расширение, используемое для квалификации обработчиков прерываний на целевой платформе.</p>
+<hr>
+<div class="language-cpp highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">DUMMY_INSTR</span><span class="p">()</span>
+</span></code></pre></div>
+<p>Макрос, определяющий пустую инструкцию целевого процессора (как правило, это инструкция <code>NOP</code>). Используется в цикле ожидания переключения контекстов в планировщике (в варианте с программным прерыванием переключения контекстов).</p>
+<hr>
+<div class="language-cpp highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="n">INLINE_PROCESS_CTOR</span>
+</span></code></pre></div>
+<p>Определяет поведение встраивания конструкторов процессов. Если нужно встраивание, то значение этого макроса должно <code>INLINE</code>, если  встраивание не нужно, то значение макроса должно быть оставлено пустым.</p>
+<hr>
+<div class="language-cpp highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="n">SYS_TIMER_CRIT_SECT</span><span class="p">()</span>
+</span></code></pre></div>
+<p>Используется в обработчике прерываний системного таймера и задаёт, будет ли использоваться в нём критическая секция, которая актуальна в случае, если целевой процессор имеет приоритетный многоуровневый контроллер прерываний, что может привести к тому, что обработчик прерываний от системного таймера может быть прерван в непредсказуемый момент другим, более высокоуровневым, обработчиком прерываний, который может производить доступ к тем же ресурсам ОС, что и обработчик прерываний от системного таймера.</p>
+<hr>
+<div class="language-cpp highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="n">CONTEXT_SWITCH_HOOK_CRIT_SECT</span>
+</span></code></pre></div>
+<p>Определяет, будет хук переключателя контекстов выполняться в критической секции или нет. Очень важно, чтобы хук переключателя контекстов выполнялся целостно по отношению к манипуляциям с переменными ядра (<code>SchedProcPriority</code>, в частности), а это означает, что во время выполнения хука не должен вызываться планировщик. Вызов планировщика может произойти из обработчика прерываний в случае, если процессор имеет аппаратный приоритетный контроллер прерываний и программное прерывание переключения контекстов имеет более низкий приоритет по сравнению с другими прерываниями.</p>
+<p>В этом случае код хука переключателя контекстов должен выполняться в критической секции и значение макроса должно быть <code>TCritSect cs</code>. Это очень важный момент, если его не соблюсти, то в процессе работы системы будут возникать трудноуловимые ошибки, поэтому при портировании тут нужно проявить внимательность и аккуратность.</p>
+<hr>
+<div class="language-cpp highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="n">SEPARATE_RETURN_STACK</span>
+</span></code></pre></div>
+<p>Для платформ, имеющих отдельный стек возвратов, значение этого макроса должно быть равно 1. Для остальных платформ&nbsp;– 0.</p>
+<hr>
+<h3 id="_5">Типы<a class="headerlink" href="#_5" title="Permanent link">🔗</a></h3>
+<p></p><div class="language-cpp highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="n">stack_item_t</span>
+</span></code></pre></div>
+Псевдоним встроенного типа, задаёт тип элемента стека целевого процессора.<p></p>
+<hr>
+<p></p><div class="language-cpp highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="n">status_reg_t</span>
+</span></code></pre></div>
+Псевдоним встроенного типа, соответствующий разрядности статусного регистра целевого процессора.<p></p>
+<hr>
+<p></p><div class="language-cpp highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="n">TCritSect</span>
+</span></code></pre></div>
+Класс-"обёртка" для организации критической секции.<p></p>
+<hr>
+<div class="language-cpp highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="n">TPrioMaskTable</span>
+</span></code></pre></div>
+<p>Класс, содержащий таблицу масок (тегов) приоритетов. Служит для повышения эффективности работы системы. Может отсутствовать на некоторых платформах, на таких, где есть аппаратные средства для вычисления тегов по значению приоритета,&nbsp;– например, аппаратный shifter.</p>
+<hr>
+<p></p><div class="language-cpp highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="n">TISRW</span>
+</span></code></pre></div>
+Класс-"обёртка" для обработчиков прерываний, в которых используются сервисы ОС.<p></p>
+<h3 id="_6">Функции<a class="headerlink" href="#_6" title="Permanent link">🔗</a></h3>
+<p></p><div class="language-cpp highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="n">get_prio_tag</span><span class="p">()</span>
+</span></code></pre></div>
+Преобразует номер приоритета в соответствующий тег. Функционально это сдвиг единицы в двоичном слове на количество позиций, равное номеру приоритета.<p></p>
+<hr>
+<p></p><div class="language-cpp highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="n">highest_priority</span><span class="p">()</span>
+</span></code></pre></div>
+Возвращает номер приоритета, соответствующего тегу наиболее приоритетного процесса в карте процессов, переданной функции в качестве аргумента.<p></p>
+<hr>
+<p></p><div class="language-cpp highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="n">disable_context_switch</span><span class="p">()</span>
+</span></code></pre></div>
+Запрещает переключение контекстов. В настоящее время реализуется путём запрещения прерываний.<p></p>
+<hr>
+<p></p><div class="language-cpp highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="n">enable_context_switch</span><span class="p">()</span>
+</span></code></pre></div>
+Разрешает переключение контекстов. В настоящее время реализуется через разрешение прерываний.<p></p>
+<hr>
+<p></p><div class="language-cpp highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="n">os_start</span><span class="p">()</span>
+</span></code></pre></div>
+Производит старт операционной системы. Сама функция реализована на ассемблере. Получает в качестве аргумента указатель стека самого приоритетного процесса и осуществляет передачу ему управления путём восстановления  контекста из его стека.<p></p>
+<hr>
+<p></p><div class="language-cpp highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="n">os_context_switcher</span><span class="p">()</span>
+</span></code></pre></div>
+Функция, реализованная на ассемблере, производит переключение контекстов процессов в варианте с прямой передачей управления.<p></p>
+<hr>
+<p></p><div class="language-cpp highlight"><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="n">context_switcher_isr</span><span class="p">()</span>
+</span></code></pre></div>
+Обработчик прерываний переключения контекстов. Реализуется на ассемблере. Производит сохранение контекста прерываемого процесса, переключение указателей стеков процессов путём вызова <code>context_switch_hook()</code><sup id="fnref:5"><a class="footnote-ref" href="#fn:5">5</a></sup> и восстановление контекста активируемого процесса.<p></p>
+<hr>
+<p></p><div class="language-cpp highlight"><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="n">TBaseProcess</span><span class="o">::</span><span class="n">init_stack_frame</span><span class="p">()</span>
+</span></code></pre></div>
+Функция подготовки стекового кадра, которая формирует значения ячеек памяти в стеке таким образом, чтобы состояние стека было таким, как будто процесс, которому принадлежит стек, прерван и контекст процесса сохранён в стеке. Функция используется конструктором процесса и при рестарте процесса.<p></p>
+<hr>
+<div class="language-cpp highlight"><pre><span></span><code><span id="__span-20-1"><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="n">system_timer_isr</span><span class="p">()</span>
+</span></code></pre></div>
+<p>Обработчик прерываний системного таймера. Вызывает функцию <code>TKernel::system_timer()</code>.</p>
+<h2 id="_7">Портирование<a class="headerlink" href="#_7" title="Permanent link">🔗</a></h2>
+<p>Для портирования, как правило, достаточно определить для целевой платформы все вышеперечисленные макросы, типы и функции.</p>
+<p>Наиболее "тонкая" и ответственная работа при портировании выпадает на реализацию ассемблерного кода и на функцию подготовки стекового кадра. Ряд моментов, на которые следует обратить особое внимание:</p>
+<ul>
+<li>выяснить, какие используются соглашения о вызове функций у используемого компилятора, чтобы знать, какие регистры (или область стека) используются для передачи аргументов тех или иных типов;</li>
+<li>определить особенности работы процессора в части сохранения адресов возвратов и статусных регистров при возникновении прерывания&nbsp;– это необходимо для понимания, как формируется стековый кадр на целевой аппаратной платформе, что, в свою очередь, важно для реализации функции (и обработчика прерываний) переключения контекстов, и функции формирования стекового кадра;</li>
+<li>проверить схему кодирования экспортируемых/импортируемых имён ассемблера. В простейшем случае имена объектов и функций на С (и <code>"extern C"</code><sup id="fnref:6"><a class="footnote-ref" href="#fn:6">6</a></sup> на С++) на ассемблере видны без изменений, но на некоторых платформах<sup id="fnref:7"><a class="footnote-ref" href="#fn:7">7</a></sup> к самому имени могут добавляться префиксы и/или суффиксы, что потребует ассемблерные функции именовать в соответствии с этой схемой, иначе линкер не сможет правильно выполнить связи.</li>
+</ul>
+<p>Весь ассемблерный код должен быть помещён в файл os_target_asm.ext, упомянутый выше. Определения макросов и типов, а также встраиваемых функций&nbsp;– в файл os_target.h. В файле os_target.cpp объявляются объекты типов, если необходимо,&nbsp;– например, <code>OS::TPrioMaskTable OS::PrioMaskTable</code>, а также определяются функция <code>TBaseProcess::init_stack_frame()</code> и обработчик прерывания системного таймера <code>system_timer_isr()</code>.</p>
+<p>Вышеописанное является лишь общими сведениями, относящимися к порту ОС, при портировании возникает достаточно много нюансов, описание которых является весьма частным и выходит за рамки настоящего документа.</p>
+<div class="admonition tip">
+<p class="admonition-title"><strong>СОВЕТ</strong></p>
+<p>При создании нового порта имеет смысл взять за основу или в качестве примера один из существующих&nbsp;– это значительно облегчает процесс портирования. Какой именно выбрать из имеющихся портов, зависит от близости аппаратной и программной частей платформы, на которую осуществляется портирование.</p>
+</div>
+<h2 id="_8">Запуск в составе рабочего проекта<a class="headerlink" href="#_8" title="Permanent link">🔗</a></h2>
+<p>Для повышения гибкости и эффективности использования часть платформеннозависимого кода, зависящая от частных особенностей того или иного проекта и конкретно используемого микроконтроллера, вынесена на уровень проекта. Сюда, как правило, относится выбор аппаратного таймера процессора, используемого в качестве системного, а также выбор прерывания переключения контекстов, если процессор не имеет специализированного программного прерывания.</p>
+<p>Для конфигурирования порта проект должен содержать файлы:</p>
+<ul>
+<li>scmRTOS_config.h;</li>
+<li>scmRTOS_target_cfg.h;</li>
+</ul>
+<p>scmRTOS_config.h содержит большинство конфигурационных макросов, задающих такие параметры, как количество процессов в программе, способ передачи управления, включение функции системного времени, разрешение использования пользовательских хуков, порядок нумерации значений приоритетов и т.д.</p>
+<p>В scmRTOS_target_cfg.h размещён код управления ресурсами целевого процессора, выбранными для реализации системных функций&nbsp;– всё тот же системный таймер, прерывание переключения контекстов.</p>
+<p>Содержимое обоих конфигурационных файлов подробно описано в документах, посвящённых конкретным портам.</p>
+<div class="footnote">
+<hr>
+<ol>
+<li id="fn:1">
+<p>Это касается не только ОС, но и других кроссплатформенных программ.&nbsp;<a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text">↩</a></p>
+</li>
+<li id="fn:2">
+<p>Расширение ассемблерного файла для целевого процессора.&nbsp;<a class="footnote-backref" href="#fnref:2" title="Jump back to footnote 2 in the text">↩</a></p>
+</li>
+<li id="fn:3">
+<p>Т.е. содержащими исходные файлы на разных языках программирования&nbsp;– в нашем случае С++ и ассемблер целевой аппаратной платформы.&nbsp;<a class="footnote-backref" href="#fnref:3" title="Jump back to footnote 3 in the text">↩</a></p>
+</li>
+<li id="fn:4">
+<p>Те, значение которых перед использованием должно быть сохранено, а после использования восстановлено, чтобы вызывающая функция не получила искажения контекста при вызове другой функции.&nbsp;<a class="footnote-backref" href="#fnref:4" title="Jump back to footnote 4 in the text">↩</a></p>
+</li>
+<li id="fn:5">
+<p>Через функцию-"обёртку"" <code>os_context_switch_hook()</code>, имеющую спецификацию связывания <code>"extern C"</code>.&nbsp;<a class="footnote-backref" href="#fnref:5" title="Jump back to footnote 5 in the text">↩</a></p>
+</li>
+<li id="fn:6">
+<p>Имена в С++ подвергаются специальному кодированию в целях поддержки перегрузки имён функций, а также для типобезопасного связывания, по какой причине получить к ним доступ на ассемблере задача трудновыполнимая. Поэтому имена функций, описанных в файлах, которые компилируются С++ компилятором и к которым необходим доступ из ассемблерного кода, должны быть объявлены в исходных файлах как <code>"extern C"</code>.&nbsp;<a class="footnote-backref" href="#fnref:6" title="Jump back to footnote 6 in the text">↩</a></p>
+</li>
+<li id="fn:7">
+<p>В частности, на Blackfin.&nbsp;<a class="footnote-backref" href="#fnref:7" title="Jump back to footnote 7 in the text">↩</a></p>
+</li>
+</ol>
+</div>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Навигация по странице">
+        <a href="../ipcs/" class="btn btn-neutral float-left" title="Межпроцессное взаимодействие"><span class="icon icon-circle-arrow-left"></span> Назад</a>
+        <a href="../debug/" class="btn btn-neutral float-right" title="Отладка">Вперед <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Собрано в <a href="https://www.mkdocs.org/">MkDocs</a> с использованием <a href="https://github.com/readthedocs/sphinx_rtd_theme">темы</a> от <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Версии">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../ipcs/" style="color: #fcfcfc">« Назад</a></span>
+    
+    
+      <span><a href="../debug/" style="color: #fcfcfc">Вперед »</a></span>
+    
+  </span>
+</div>
+    <script src="../../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../../..";</script>
+    <script src="../../../js/theme_extra.js"></script>
+    <script src="../../../js/theme.js"></script>
+      <script src="../../../js/mathjax.js"></script>
+      <script src="../../../js/mathjax/tex-mml-chtml.js"></script>
+      <script src="../../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+
+
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+</script></body></html>

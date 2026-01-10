@@ -1,20 +1,18 @@
-<!DOCTYPE html>
-<html class="writer-html5" lang="en" >
-<head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="description" content="None" />
-      <link rel="shortcut icon" href="img/favicon.ico" />
+<!DOCTYPE html><html class="writer-html5" lang="en"><head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="description" content="None">
+      <link rel="shortcut icon" href="img/favicon.ico">
     <title>scmRTOS</title>
-    <link rel="stylesheet" href="css/theme.css" />
-    <link rel="stylesheet" href="css/theme_extra.css" />
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
-        <link href="extra.css" rel="stylesheet" />
+    <link rel="stylesheet" href="css/theme.css">
+    <link rel="stylesheet" href="css/theme_extra.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css">
+        <link href="extra.css" rel="stylesheet">
     
       <script>
         // Current page data
         var mkdocs_page_name = "Synopsys";
-        var mkdocs_page_input_path = "index.md";
+        var mkdocs_page_input_path = "en/index.md";
         var mkdocs_page_url = null;
       </script>
     
@@ -22,12 +20,112 @@
       <script src="js/html5shiv.min.js"></script>
     <![endif]-->
       <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
-      <script>hljs.highlightAll();</script> 
- <link href="assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
-    html.glightbox-open { overflow: initial; height: 100%; }
-    .gslide-title { margin-top: 0px; user-select: text; }
-    .gslide-desc { color: #666; user-select: text; }
-    .gslide-image img { background: white; }</style> <script src="assets/javascripts/glightbox.min.js"></script></head>
+      <script>hljs.highlightAll();</script>
+   
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const selectorDiv = document.createElement("div");
+      selectorDiv.style.padding = "0.7em 0";
+      selectorDiv.style.textAlign = "center";
+      selectorDiv.style.borderBottom = "1px solid #ddd";
+      selectorDiv.style.marginBottom = "0.7em";
+
+      selectorDiv.style.display = "flex";
+      selectorDiv.style.alignItems = "center";
+      selectorDiv.style.gap = "10px";
+      selectorDiv.style.justifyContent = "center";
+
+      const select = document.createElement("select");
+      select.id = "lang-switcher";
+      select.style.width = "30%";
+      select.style.padding = "0.1em";
+      select.style.fontSize = "0.7em";
+      select.style.borderRadius = "10px";
+      select.style.textAlign = "center";
+      select.style.background = "#fff";
+      //select.style.border = "1px solid #ccc";
+
+      const currentLang = "en";
+
+      const languages = [
+          { code: 'en', name: 'English', prefix: '/' },
+          { code: 'ru', name: 'Русский', prefix: '/ru/' }
+      ];
+      
+      // get the page path and remove the leading slash
+      let pagePath = "".replace(/^\//, '');
+      
+      // remove current lang prefix from the path
+      const currentLangObj = languages.find(lang => lang.code === currentLang);
+      if (currentLangObj && currentLangObj.prefix !== '/') {
+          // remove the leading slash from the prefix for comparison
+          const langPrefixWithoutSlash = currentLangObj.prefix.replace(/^\//, '');
+          
+          // if the path starts with the lang prefix, delete it
+          if (pagePath.startsWith(langPrefixWithoutSlash)) {
+              pagePath = pagePath.substring(langPrefixWithoutSlash.length);
+              
+              // remove the possible remaining leading slash
+              pagePath = pagePath.replace(/^\//, '');
+          }
+      }
+      
+      console.log("Current lang:", currentLang, "page.url raw:", "", "normalized path:", pagePath);
+      
+      languages.forEach(lang => {
+          const option = document.createElement("option");
+          let targetUrl;
+      
+          // build target URL
+          if (pagePath === '') {
+              // main page
+              targetUrl = lang.prefix === '/' ? '/' : lang.prefix;
+              // make sure the path ended with a slash
+              if (!targetUrl.endsWith('/')) {
+                  targetUrl += '/';
+              }
+          } else {
+              // all remaining pages - just combine the prefix and the path
+              targetUrl = lang.prefix + pagePath;
+          }
+      
+          option.value = targetUrl;
+          option.text = lang.name;
+          if (lang.code === currentLang) option.selected = true;
+      
+          select.appendChild(option);
+      });
+
+      const label = document.createElement("div");
+      label.style.fontSize = "0.8em";
+      label.style.color = "#fff";
+      label.style.marginTop = "0.3em";
+      label.textContent = "Language / Язык";
+
+      selectorDiv.appendChild(label);
+      selectorDiv.appendChild(select);
+
+      // Insert at top of sidebar
+      const target = document.querySelector(".wy-side-nav-search");
+      if (target) {
+        target.insertBefore(selectorDiv, target.firstChild);
+      } else {
+        console.warn("Could not find .wy-side-nav-search for lang selector");
+      }
+
+      select.addEventListener("change", function() {
+        if (this.value) window.location.href = this.value;
+      });
+    });
+  </script>
+
+<link href="assets/stylesheets/glightbox.min.css" rel="stylesheet"><script src="assets/javascripts/glightbox.min.js"></script><style id="glightbox-style">
+            html.glightbox-open { overflow: initial; height: 100%; }
+            .gslide-title { margin-top: 0px; user-select: text; }
+            .gslide-desc { color: #666; user-select: text; }
+            .gslide-image img { background: white; }
+        </style></head>
 
 <body class="wy-body-for-nav" role="document">
 
@@ -37,8 +135,8 @@
       <div class="wy-side-nav-search">
           <a href="." class="icon icon-home"> scmRTOS
         </a><div role="search">
-  <form id ="rtd-search-form" class="wy-form" action="./search.html" method="get">
-      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  <form id="rtd-search-form" class="wy-form" action="./search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here">
   </form>
 </div>
       </div>
@@ -56,9 +154,34 @@
                 <li class="toctree-l1"><a class="reference internal" href="platforms/">Supported Platforms</a>
                 </li>
               </ul>
+              <p class="caption"><span class="caption-text">Intro</span></p>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="doc/">Documentation</a>
-                </li>
+                  <li class="toctree-l1"><a class="reference internal" href="src/intro/">Not a Preface</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="src/overview/">Overview</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">RTOS Components</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="src/kernel/">Kernel</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="src/processes/">Processes</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="src/ipcs/">Interprocess Communications</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="src/ports/">Ports</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Appendix</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="src/debug/">Debug</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="src/profiler/">Process Profiling</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="src/example-job-queue/">Example: Job Queue</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="src/glossary/">Glossary</a>
+                  </li>
               </ul>
       </div>
     </div>
@@ -78,20 +201,20 @@
     <li class="wy-breadcrumbs-aside">
     </li>
   </ul>
-  <hr/>
+  <hr>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
                 <p><strong>scmRTOS</strong> is tiny Real-Time Preemptive Operating System intended for use with Single-Chip Microcontrollers. </p>
-<p><strong>scmRTOS</strong> is capable to run on tiny uCs with as small amount of RAM as 512 bytes. The RTOS is written on C++ and supports <a href="platforms/">various platforms</a>. Seen next sections and <a href="doc/">online documentation</a> for more details.</p>
+<p><strong>scmRTOS</strong> is capable to run on tiny uCs with as small amount of RAM as 512 bytes. The RTOS is written on C++ and supports <a href="platforms/">various platforms</a>. Seen next sections and <a href="src/intro/">online documentation</a> for more details.</p>
 <p>Source code can be cloned or downloaded from <a href="https://github.com/scmrtos/scmrtos">github.com</a>. There are a <a href="https://github.com/scmrtos/scmrtos-sample-projects">number of sample projects</a> that demonstrates RTOS usage.</p>
 <p>Full distribution including RTOS sources, sample projects, documentation<sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup>, etc available on <a href="https://github.com/scmrtos/scmrtos/releases/">releases page</a>.</p>
 <div class="footnote">
-<hr />
+<hr>
 <ol>
 <li id="fn:1">
-<p>Distribution includes PDF documents. It's recommended to use <a href="doc/">online documentation</a>, as it is updated more frequently and contains all the latest changes.&#160;<a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+<p>Distribution includes PDF documents. It's recommended to use <a href="src/intro/">online documentation</a>, as it is updated more frequently and contains all the latest changes.&nbsp;<a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text">↩</a></p>
 </li>
 </ol>
 </div>
@@ -102,7 +225,7 @@
         <a href="features/" class="btn btn-neutral float-right" title="Features">Next <span class="icon icon-circle-arrow-right"></span></a>
     </div>
 
-  <hr/>
+  <hr>
 
   <div role="contentinfo">
     <!-- Copyright etc -->
@@ -123,7 +246,7 @@
     
     
     
-      <span><a href="features/" style="color: #fcfcfc">Next &raquo;</a></span>
+      <span><a href="features/" style="color: #fcfcfc">Next »</a></span>
     
   </span>
 </div>
@@ -133,10 +256,6 @@
     <script src="js/theme.js"></script>
       <script src="js/mathjax.js"></script>
       <script src="js/mathjax/tex-mml-chtml.js"></script>
-      <script src="js/wavedrom.min.js"></script>
-      <script src="js/wavedrom_loader.js"></script>
-      <script src="js/wavedrom.unpkg.js"></script>
-      <script src="js/wavedrom_skin_default.js"></script>
       <script src="search/main.js"></script>
     <script>
         jQuery(function () {
@@ -144,11 +263,12 @@
         });
     </script>
 
-<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
-</script></body>
-</html>
 
-<!--
+
+
+
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+</script></body></html><!--
 MkDocs version : 1.6.1
-Build Date UTC : 2026-01-08 15:01:32.550455+00:00
+Build Date UTC : 2026-01-10 05:46:18.590720+00:00
 -->

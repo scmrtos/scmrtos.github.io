@@ -1,0 +1,350 @@
+<!DOCTYPE html><html class="writer-html5" lang="en"><head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link rel="shortcut icon" href="../../img/favicon.ico">
+    <title>Debug - scmRTOS</title>
+    <link rel="stylesheet" href="../../css/theme.css">
+    <link rel="stylesheet" href="../../css/theme_extra.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css">
+        <link href="../../extra.css" rel="stylesheet">
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Debug";
+        var mkdocs_page_input_path = "en/src/debug.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script>
+   
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const selectorDiv = document.createElement("div");
+      selectorDiv.style.padding = "0.7em 0";
+      selectorDiv.style.textAlign = "center";
+      selectorDiv.style.borderBottom = "1px solid #ddd";
+      selectorDiv.style.marginBottom = "0.7em";
+
+      selectorDiv.style.display = "flex";
+      selectorDiv.style.alignItems = "center";
+      selectorDiv.style.gap = "10px";
+      selectorDiv.style.justifyContent = "center";
+
+      const select = document.createElement("select");
+      select.id = "lang-switcher";
+      select.style.width = "30%";
+      select.style.padding = "0.1em";
+      select.style.fontSize = "0.7em";
+      select.style.borderRadius = "10px";
+      select.style.textAlign = "center";
+      select.style.background = "#fff";
+      //select.style.border = "1px solid #ccc";
+
+      const currentLang = "en";
+
+      const languages = [
+          { code: 'en', name: 'English', prefix: '/' },
+          { code: 'ru', name: 'Русский', prefix: '/ru/' }
+      ];
+      
+      // get the page path and remove the leading slash
+      let pagePath = "src/debug/".replace(/^\//, '');
+      
+      // remove current lang prefix from the path
+      const currentLangObj = languages.find(lang => lang.code === currentLang);
+      if (currentLangObj && currentLangObj.prefix !== '/') {
+          // remove the leading slash from the prefix for comparison
+          const langPrefixWithoutSlash = currentLangObj.prefix.replace(/^\//, '');
+          
+          // if the path starts with the lang prefix, delete it
+          if (pagePath.startsWith(langPrefixWithoutSlash)) {
+              pagePath = pagePath.substring(langPrefixWithoutSlash.length);
+              
+              // remove the possible remaining leading slash
+              pagePath = pagePath.replace(/^\//, '');
+          }
+      }
+      
+      console.log("Current lang:", currentLang, "page.url raw:", "src/debug/", "normalized path:", pagePath);
+      
+      languages.forEach(lang => {
+          const option = document.createElement("option");
+          let targetUrl;
+      
+          // build target URL
+          if (pagePath === '') {
+              // main page
+              targetUrl = lang.prefix === '/' ? '/' : lang.prefix;
+              // make sure the path ended with a slash
+              if (!targetUrl.endsWith('/')) {
+                  targetUrl += '/';
+              }
+          } else {
+              // all remaining pages - just combine the prefix and the path
+              targetUrl = lang.prefix + pagePath;
+          }
+      
+          option.value = targetUrl;
+          option.text = lang.name;
+          if (lang.code === currentLang) option.selected = true;
+      
+          select.appendChild(option);
+      });
+
+      const label = document.createElement("div");
+      label.style.fontSize = "0.8em";
+      label.style.color = "#fff";
+      label.style.marginTop = "0.3em";
+      label.textContent = "Language / Язык";
+
+      selectorDiv.appendChild(label);
+      selectorDiv.appendChild(select);
+
+      // Insert at top of sidebar
+      const target = document.querySelector(".wy-side-nav-search");
+      if (target) {
+        target.insertBefore(selectorDiv, target.firstChild);
+      } else {
+        console.warn("Could not find .wy-side-nav-search for lang selector");
+      }
+
+      select.addEventListener("change", function() {
+        if (this.value) window.location.href = this.value;
+      });
+    });
+  </script>
+
+<link href="../../assets/stylesheets/glightbox.min.css" rel="stylesheet"><script src="../../assets/javascripts/glightbox.min.js"></script><style id="glightbox-style">
+            html.glightbox-open { overflow: initial; height: 100%; }
+            .gslide-title { margin-top: 0px; user-select: text; }
+            .gslide-desc { color: #666; user-select: text; }
+            .gslide-image img { background: white; }
+        </style></head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> scmRTOS
+        </a><div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here">
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">Synopsys</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../features/">Features</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../platforms/">Supported Platforms</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Intro</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../intro/">Not a Preface</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../overview/">Overview</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">RTOS Components</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../kernel/">Kernel</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../processes/">Processes</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../ipcs/">Interprocess Communications</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../ports/">Ports</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Appendix</span></p>
+              <ul class="current">
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Debug</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#measuring-process-stack-usage">Measuring Process Stack Usage</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#handling-hung-processes">Handling Hung Processes</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#process-profiling">Process Profiling</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#statistical-method">Statistical Method</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#measurement-method">Measurement Method</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#usage">Usage</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#process-names">Process Names</a>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../profiler/">Process Profiling</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../example-job-queue/">Example: Job Queue</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../glossary/">Glossary</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">scmRTOS</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Appendix</li>
+      <li class="breadcrumb-item active">Debug</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="debugging">Debugging<a class="headerlink" href="#debugging" title="Permanent link">🔗</a></h1>
+<h2 id="measuring-process-stack-usage">Measuring Process Stack Usage<a class="headerlink" href="#measuring-process-stack-usage" title="Permanent link">🔗</a></h2>
+<p>A common and often difficult question in embedded software development is: what stack size is required for each process to ensure reliable and safe program operation?</p>
+<p>In bare-metal programs (without an OS), where all code executes using a single stack, tools exist to estimate required stack memory. These are based on building a call tree and known per-function stack consumption. The compiler can often perform this analysis and report results in the listing file after compilation.</p>
+<p>The final estimate is obtained by adding the stack needs of the most demanding interrupt handler to the deepest function call chain.</p>
+<p>Unfortunately, this method provides only an approximate estimate. The compiler cannot accurately construct the runtime call tree&nbsp;– particularly for indirect calls (via function pointers or virtual functions), where the actual called function is unknown at compile time. In specific cases where the programmer knows possible indirect targets, manual calculation is possible, but it is inconvenient (requiring recalculation after significant code changes) and error-prone.</p>
+<p>In general, compilers are not required to provide such information, and third-party tools face the same limitations and have not gained widespread popularity.</p>
+<p>This leaves the developer to choose a stack size balancing memory conservation against sufficient margin to avoid runtime errors. Memory-related bugs (e.g., stack overflow) are notoriously hard to diagnose due to their non-deterministic and highly individual manifestations. In practice, stacks are therefore allocated with some safety margin to account for underestimation.</p>
+<p>When using an operating system, the situation worsens: there are multiple stacks—one per configured process—leading to greater RAM pressure and forcing developers to be more conservative with margins.</p>
+<p>To address these issues, practical measurement of actual stack consumption per process can be employed. This capability, like other debugging features in <strong>scmRTOS</strong>, is enabled during configuration by setting the macro <code>scmRTOS_DEBUG_ENABLE</code> to 1.</p>
+<p>The method works as follows: during stack frame initialization, the entire stack area is filled with a known pattern value. Later, to check usage, the stack memory allocated for a process is scanned starting from the end opposite the top-of-stack (TOS), locating the point where the pattern is no longer overwritten. The number of untouched pattern cells indicates the remaining stack slack (unused margin).</p>
+<p>Stack pattern filling is performed in the platform-specific <code>init_stack_frame()</code> function when debug mode is enabled. The current stack slack for a process can be obtained at any time by calling the process object's function, which returns an integer representing the unused stack size in bytes. Based on this, the developer can adjust stack sizes to eliminate overflow risks.</p>
+<h2 id="handling-hung-processes">Handling Hung Processes<a class="headerlink" href="#handling-hung-processes" title="Permanent link">🔗</a></h2>
+<p>During development, a common scenario arises where the program behaves incorrectly, and indirect evidence points to a specific process not executing. This often occurs when a process is blocked waiting for a service (interprocess communication service object). To diagnose the cause, it is necessary to identify which service the process is waiting on.</p>
+<p>For this purpose, <strong>scmRTOS</strong> provides special debugging facilities when debug mode is enabled: upon entering a wait state, the address of the service causing the wait is recorded. When needed, the user can call the process's <code>waiting_for()</code> function, which returns a pointer to the service. With the linker map file, this address can be resolved to the service object name.</p>
+<h2 id="process-profiling">Process Profiling<a class="headerlink" href="#process-profiling" title="Permanent link">🔗</a></h2>
+<p>It is often highly valuable to understand the CPU load distribution across processes. This information helps assess algorithm correctness and detect subtle logical errors. Several methods exist for determining relative active execution time&nbsp;– this is known as process profiling.</p>
+<p>In <strong>scmRTOS</strong>, profiling is implemented as an extension and is not part of the core OS. The profiler is an extension class providing basic functionality for collecting relative execution time data and processing it. Data collection can be performed in two ways, each with its own advantages and disadvantages:</p>
+<ul>
+<li>Statistical.</li>
+<li>Measurement-based.</li>
+</ul>
+<h3 id="statistical-method">Statistical Method<a class="headerlink" href="#statistical-method" title="Permanent link">🔗</a></h3>
+<p>The statistical method requires no additional resources beyond those provided by the OS. It operates by periodically sampling the kernel variable <code>CurProcPriority</code>, which indicates the currently active process. Sampling is conveniently organized, for example, in the system timer interrupt handler: the more CPU time a process consumes, the more frequently it will be sampled as active. The drawback is low accuracy, providing only a qualitative picture.</p>
+<h3 id="measurement-method">Measurement Method<a class="headerlink" href="#measurement-method" title="Permanent link">🔗</a></h3>
+<p>This method eliminates the primary drawback of statistical profiling&nbsp;– low accuracy in determining process load. It works by directly measuring process execution time (hence the name). The user must provide timing resources: typically a hardware timer or, where available, a CPU cycle counter. This is the cost of using this method.</p>
+<h3 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">🔗</a></h3>
+<p>To use the profiler in a user project, a time measurement function must be defined and the profiler included in the project. For details, see <a href="../profiler/">the example in the Appendix on Process Profiling</a>.</p>
+<h2 id="process-names">Process Names<a class="headerlink" href="#process-names" title="Permanent link">🔗</a></h2>
+<p>To improve debugging convenience, processes can be assigned string names. The name is specified in the usual C++ manner via a constructor argument:</p>
+<div class="language-cpp highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="n">MainProc</span><span class="w"> </span><span class="n">main_proc</span><span class="p">(</span><span class="s">"Main Process"</span><span class="p">);</span>
+</span></code></pre></div>
+<p>This string argument can always be provided, but name usage is active only in debug configuration.</p>
+<p>For access from user code, the <code>TBaseProcess</code> class defines the function:</p>
+<div class="language-cpp highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="nf">name</span><span class="p">();</span>
+</span></code></pre></div>
+<p>Usage is straightforward and identical to working with C-strings in C/C++. An example of printing debug information is shown in "Listing 1. Example of Printing Debug Information".</p>
+<figure>
+<div class="language-cpp highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="mo">01</span><span class="w">    </span><span class="c1">//-------------------------------------------------------------------------</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="mo">02</span><span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="n">ProcProfiler</span><span class="o">::</span><span class="n">get_results</span><span class="p">()</span>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="mo">03</span><span class="w">    </span><span class="p">{</span>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="mo">04</span><span class="w">        </span><span class="n">print</span><span class="p">(</span><span class="s">"------------------------------</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="mo">05</span><span class="w">        </span><span class="k">for</span><span class="p">(</span><span class="kt">uint_fast8_t</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">OS</span><span class="o">::</span><span class="n">PROCESS_COUNT</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="n">i</span><span class="p">)</span>
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="mo">06</span><span class="w">        </span><span class="p">{</span>
+</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="mo">07</span><span class="w">        </span><span class="err">#</span><span class="k">if</span><span class="w"> </span><span class="n">scmRTOS_DEBUG_ENABLE</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">1</span>
+</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="mi">08</span><span class="w">            </span><span class="n">printf</span><span class="p">(</span><span class="s">"#%d | CPU %5.2f | Slack %d | %s</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="w"> </span><span class="n">i</span><span class="p">,</span><span class="w"> </span>
+</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="mi">09</span><span class="w">                   </span><span class="n">Profiler</span><span class="p">.</span><span class="n">get_result</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="o">/</span><span class="mf">100.0</span><span class="p">,</span><span class="w"> </span>
+</span><span id="__span-2-10"><a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="mi">10</span><span class="w">                   </span><span class="n">OS</span><span class="o">::</span><span class="n">get_proc</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">stack_slack</span><span class="p">(),</span><span class="w"> </span>
+</span><span id="__span-2-11"><a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="mi">11</span><span class="w">                   </span><span class="n">OS</span><span class="o">::</span><span class="n">get_proc</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">name</span><span class="p">()</span><span class="w"> </span><span class="p">);</span>
+</span><span id="__span-2-12"><a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a><span class="mi">12</span><span class="w">        </span><span class="err">#</span><span class="n">endif</span>
+</span><span id="__span-2-13"><a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a><span class="mi">13</span><span class="w">        </span><span class="p">}</span>
+</span><span id="__span-2-14"><a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a><span class="mi">14</span><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-2-15"><a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a><span class="mi">15</span><span class="w">    </span><span class="c1">//-------------------------------------------------------------------------</span>
+</span></code></pre></div>
+<figcaption>
+<p>Listing 1. Example of Printing Debug Information  </p>
+</figcaption>
+</figure>
+<p>The above code produces output similar to:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>------------------------------
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>#0 | CPU 82.52 | Slack 164 | Idle
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>#1 | CPU  0.00 | Slack 178 | Background
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>#2 | CPU  0.07 | Slack 387 | GUI
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>#3 | CPU  0.23 | Slack 259 | Video
+</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>#4 | CPU  0.00 | Slack 148 | BiasReg
+</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>#5 | CPU 17.09 | Slack 165 | RefFrame
+</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>#6 | CPU  0.03 | Slack 204 | TempMon
+</span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>#7 | CPU  0.00 | Slack 151 | Terminal
+</span><span id="__span-3-10"><a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a>#8 | CPU  0.01 | Slack 129 | Test
+</span><span id="__span-3-11"><a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a>#9 | CPU  0.01 | Slack 301 | IBoard
+</span></code></pre></div>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../ports/" class="btn btn-neutral float-left" title="Ports"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../profiler/" class="btn btn-neutral float-right" title="Process Profiling">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../ports/" style="color: #fcfcfc">« Previous</a></span>
+    
+    
+      <span><a href="../profiler/" style="color: #fcfcfc">Next »</a></span>
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../js/mathjax.js"></script>
+      <script src="../../js/mathjax/tex-mml-chtml.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+
+
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+</script></body></html>

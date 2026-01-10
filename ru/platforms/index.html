@@ -1,23 +1,23 @@
-<!DOCTYPE html><html class="writer-html5" lang="en"><head>
+<!DOCTYPE html><html class="writer-html5" lang="ru"><head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <link rel="shortcut icon" href="../img/favicon.ico">
-    <title>Supported Platforms - scmRTOS</title>
-    <link rel="stylesheet" href="../css/theme.css">
-    <link rel="stylesheet" href="../css/theme_extra.css">
+      <link rel="shortcut icon" href="../../img/favicon.ico">
+    <title>Поддерживаемые платформы - scmRTOS</title>
+    <link rel="stylesheet" href="../../css/theme.css">
+    <link rel="stylesheet" href="../../css/theme_extra.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css">
-        <link href="../extra.css" rel="stylesheet">
+        <link href="../../extra.css" rel="stylesheet">
     
       <script>
         // Current page data
-        var mkdocs_page_name = "Supported Platforms";
-        var mkdocs_page_input_path = "en/platforms.md";
+        var mkdocs_page_name = "\u041f\u043e\u0434\u0434\u0435\u0440\u0436\u0438\u0432\u0430\u0435\u043c\u044b\u0435 \u043f\u043b\u0430\u0442\u0444\u043e\u0440\u043c\u044b";
+        var mkdocs_page_input_path = "ru/platforms.md";
         var mkdocs_page_url = null;
       </script>
     
     <!--[if lt IE 9]>
-      <script src="../js/html5shiv.min.js"></script>
+      <script src="../../js/html5shiv.min.js"></script>
     <![endif]-->
       <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
       <script>hljs.highlightAll();</script>
@@ -46,7 +46,7 @@
       select.style.background = "#fff";
       //select.style.border = "1px solid #ccc";
 
-      const currentLang = "en";
+      const currentLang = "ru";
 
       const languages = [
           { code: 'en', name: 'English', prefix: '/' },
@@ -54,7 +54,7 @@
       ];
       
       // get the page path and remove the leading slash
-      let pagePath = "platforms/".replace(/^\//, '');
+      let pagePath = "ru/platforms/".replace(/^\//, '');
       
       // remove current lang prefix from the path
       const currentLangObj = languages.find(lang => lang.code === currentLang);
@@ -71,7 +71,7 @@
           }
       }
       
-      console.log("Current lang:", currentLang, "page.url raw:", "platforms/", "normalized path:", pagePath);
+      console.log("Current lang:", currentLang, "page.url raw:", "ru/platforms/", "normalized path:", pagePath);
       
       languages.forEach(lang => {
           const option = document.createElement("option");
@@ -120,7 +120,7 @@
     });
   </script>
 
-<link href="../assets/stylesheets/glightbox.min.css" rel="stylesheet"><script src="../assets/javascripts/glightbox.min.js"></script><style id="glightbox-style">
+<link href="../../assets/stylesheets/glightbox.min.css" rel="stylesheet"><script src="../../assets/javascripts/glightbox.min.js"></script><style id="glightbox-style">
             html.glightbox-open { overflow: initial; height: 100%; }
             .gslide-title { margin-top: 0px; user-select: text; }
             .gslide-desc { color: #666; user-select: text; }
@@ -133,56 +133,56 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
     <div class="wy-side-scroll">
       <div class="wy-side-nav-search">
-          <a href=".." class="icon icon-home"> scmRTOS
+          <a href="../" class="icon icon-home"> scmRTOS
         </a><div role="search">
-  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
-      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Поиск в документации" aria-label="Поиск в документации" title="Введите поисковый запрос">
   </form>
 </div>
       </div>
 
-      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Навигационное меню">
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="..">Synopsys</a>
+                <li class="toctree-l1"><a class="reference internal" href="../">Общие сведения</a>
                 </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../features/">Features</a>
+                <li class="toctree-l1"><a class="reference internal" href="../features/">Характеристики</a>
                 </li>
               </ul>
               <ul class="current">
-                <li class="toctree-l1 current"><a class="reference internal current" href="#">Supported Platforms</a>
+                <li class="toctree-l1 current"><a class="reference internal current" href="#">Поддерживаемые платформы</a>
     <ul class="current">
     </ul>
                 </li>
               </ul>
-              <p class="caption"><span class="caption-text">Intro</span></p>
+              <p class="caption"><span class="caption-text">Введение</span></p>
               <ul>
-                  <li class="toctree-l1"><a class="reference internal" href="../src/intro/">Not a Preface</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../src/intro/">Вместо предисловия</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../src/overview/">Overview</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../src/overview/">Обзор операционной системы</a>
                   </li>
               </ul>
-              <p class="caption"><span class="caption-text">RTOS Components</span></p>
+              <p class="caption"><span class="caption-text">Компоненты</span></p>
               <ul>
-                  <li class="toctree-l1"><a class="reference internal" href="../src/kernel/">Kernel</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../src/kernel/">Ядро</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../src/processes/">Processes</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../src/processes/">Процессы</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../src/ipcs/">Interprocess Communications</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../src/ipcs/">Межпроцессное взаимодействие</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../src/ports/">Ports</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../src/ports/">Порты</a>
                   </li>
               </ul>
-              <p class="caption"><span class="caption-text">Appendix</span></p>
+              <p class="caption"><span class="caption-text">Приложения</span></p>
               <ul>
-                  <li class="toctree-l1"><a class="reference internal" href="../src/debug/">Debug</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../src/debug/">Отладка</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../src/profiler/">Process Profiling</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../src/profiler/">Профилировка процессов</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../src/example-job-queue/">Example: Job Queue</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../src/example-job-queue/">Пример: очередь заданий</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../src/glossary/">Glossary</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../src/glossary/">Термины и сокращения</a>
                   </li>
               </ul>
       </div>
@@ -190,16 +190,16 @@
     </nav>
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+      <nav class="wy-nav-top" role="navigation" aria-label="Мобильная версия навигации">
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="..">scmRTOS</a>
+          <a href="../">scmRTOS</a>
         
       </nav>
       <div class="wy-nav-content">
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
-    <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
-      <li class="breadcrumb-item active">Supported Platforms</li>
+    <li><a href="../" class="icon icon-home" aria-label="Документация"></a></li>
+      <li class="breadcrumb-item active">Поддерживаемые платформы</li>
     <li class="wy-breadcrumbs-aside">
     </li>
   </ul>
@@ -208,7 +208,7 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h4 id="supported-platforms-table">Supported Platforms Table<a class="headerlink" href="#supported-platforms-table" title="Permanent link">🔗</a></h4>
+                <h4 id="_1">Поддерживаемые платформы<a class="headerlink" href="#_1" title="Permanent link">🔗</a></h4>
 <table>
 <thead>
 <tr>
@@ -276,9 +276,9 @@
               
             </div>
           </div><footer>
-    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
-        <a href="../features/" class="btn btn-neutral float-left" title="Features"><span class="icon icon-circle-arrow-left"></span> Previous</a>
-        <a href="../src/intro/" class="btn btn-neutral float-right" title="Not a Preface">Next <span class="icon icon-circle-arrow-right"></span></a>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Навигация по странице">
+        <a href="../features/" class="btn btn-neutral float-left" title="Характеристики"><span class="icon icon-circle-arrow-left"></span> Назад</a>
+        <a href="../src/intro/" class="btn btn-neutral float-right" title="Вместо предисловия">Вперед <span class="icon icon-circle-arrow-right"></span></a>
     </div>
 
   <hr>
@@ -287,7 +287,7 @@
     <!-- Copyright etc -->
   </div>
 
-  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+  Собрано в <a href="https://www.mkdocs.org/">MkDocs</a> с использованием <a href="https://github.com/readthedocs/sphinx_rtd_theme">темы</a> от <a href="https://readthedocs.org">Read the Docs</a>.
 </footer>
           
         </div>
@@ -297,24 +297,24 @@
 
   </div>
 
-  <div class="rst-versions" role="note" aria-label="Versions">
+  <div class="rst-versions" role="note" aria-label="Версии">
   <span class="rst-current-version" data-toggle="rst-current-version">
     
     
-      <span><a href="../features/" style="color: #fcfcfc">« Previous</a></span>
+      <span><a href="../features/" style="color: #fcfcfc">« Назад</a></span>
     
     
-      <span><a href="../src/intro/" style="color: #fcfcfc">Next »</a></span>
+      <span><a href="../src/intro/" style="color: #fcfcfc">Вперед »</a></span>
     
   </span>
 </div>
-    <script src="../js/jquery-3.6.0.min.js"></script>
-    <script>var base_url = "..";</script>
-    <script src="../js/theme_extra.js"></script>
-    <script src="../js/theme.js"></script>
-      <script src="../js/mathjax.js"></script>
-      <script src="../js/mathjax/tex-mml-chtml.js"></script>
-      <script src="../search/main.js"></script>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../js/mathjax.js"></script>
+      <script src="../../js/mathjax/tex-mml-chtml.js"></script>
+      <script src="../../search/main.js"></script>
     <script>
         jQuery(function () {
             SphinxRtdTheme.Navigation.enable(true);
