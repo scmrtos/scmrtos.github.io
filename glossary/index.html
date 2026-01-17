@@ -1,0 +1,314 @@
+<!DOCTYPE html><html class="writer-html5" lang="en"><head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link rel="shortcut icon" href="../img/favicon.ico">
+    <title>Glossary - scmRTOS</title>
+    <link rel="stylesheet" href="../css/theme.css">
+    <link rel="stylesheet" href="../css/theme_extra.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css">
+        <link href="../extra.css" rel="stylesheet">
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Glossary";
+        var mkdocs_page_input_path = "en/glossary.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script>
+   
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const selectorDiv = document.createElement("div");
+      selectorDiv.style.padding = "0.7em 0";
+      selectorDiv.style.textAlign = "center";
+      selectorDiv.style.borderBottom = "1px solid #ddd";
+      selectorDiv.style.marginBottom = "0.7em";
+
+      selectorDiv.style.display = "flex";
+      selectorDiv.style.alignItems = "center";
+      selectorDiv.style.gap = "10px";
+      selectorDiv.style.justifyContent = "center";
+
+      const select = document.createElement("select");
+      select.id = "lang-switcher";
+      select.style.width = "30%";
+      select.style.padding = "0.1em";
+      select.style.fontSize = "0.7em";
+      select.style.borderRadius = "10px";
+      select.style.textAlign = "center";
+      select.style.background = "#fff";
+      //select.style.border = "1px solid #ccc";
+
+      const currentLang = "en";
+
+      const languages = [
+          { code: 'en', name: 'English', prefix: '/' },
+          { code: 'ru', name: 'Русский', prefix: '/ru/' }
+      ];
+      
+      // get the page path and remove the leading slash
+      let pagePath = "glossary/".replace(/^\//, '');
+      
+      // remove current lang prefix from the path
+      const currentLangObj = languages.find(lang => lang.code === currentLang);
+      if (currentLangObj && currentLangObj.prefix !== '/') {
+          // remove the leading slash from the prefix for comparison
+          const langPrefixWithoutSlash = currentLangObj.prefix.replace(/^\//, '');
+          
+          // if the path starts with the lang prefix, delete it
+          if (pagePath.startsWith(langPrefixWithoutSlash)) {
+              pagePath = pagePath.substring(langPrefixWithoutSlash.length);
+              
+              // remove the possible remaining leading slash
+              pagePath = pagePath.replace(/^\//, '');
+          }
+      }
+      
+      console.log("Current lang:", currentLang, "page.url raw:", "glossary/", "normalized path:", pagePath);
+      
+      languages.forEach(lang => {
+          const option = document.createElement("option");
+          let targetUrl;
+      
+          // build target URL
+          if (pagePath === '') {
+              // main page
+              targetUrl = lang.prefix === '/' ? '/' : lang.prefix;
+              // make sure the path ended with a slash
+              if (!targetUrl.endsWith('/')) {
+                  targetUrl += '/';
+              }
+          } else {
+              // all remaining pages - just combine the prefix and the path
+              targetUrl = lang.prefix + pagePath;
+          }
+      
+          option.value = targetUrl;
+          option.text = lang.name;
+          if (lang.code === currentLang) option.selected = true;
+      
+          select.appendChild(option);
+      });
+
+      const label = document.createElement("div");
+      label.style.fontSize = "0.8em";
+      label.style.color = "#fff";
+      label.style.marginTop = "0.3em";
+      label.textContent = "Language / Язык";
+
+      selectorDiv.appendChild(label);
+      selectorDiv.appendChild(select);
+
+      // Insert at top of sidebar
+      const target = document.querySelector(".wy-side-nav-search");
+      if (target) {
+        target.insertBefore(selectorDiv, target.firstChild);
+      } else {
+        console.warn("Could not find .wy-side-nav-search for lang selector");
+      }
+
+      select.addEventListener("change", function() {
+        if (this.value) window.location.href = this.value;
+      });
+    });
+  </script>
+
+<link href="../assets/stylesheets/glightbox.min.css" rel="stylesheet"><script src="../assets/javascripts/glightbox.min.js"></script><style id="glightbox-style">
+            html.glightbox-open { overflow: initial; height: 100%; }
+            .gslide-title { margin-top: 0px; user-select: text; }
+            .gslide-desc { color: #666; user-select: text; }
+            .gslide-image img { background: white; }
+        </style></head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> scmRTOS
+        </a><div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here">
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption"><span class="caption-text">Intro</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="..">Synopsis</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../preface/">Preface</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../overview/">Overview</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">RTOS Components</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../kernel/">Kernel</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../processes/">Processes</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../ipcs/">Interprocess Communication</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../ports/">Ports</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Appendix</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../debug/">Debugging</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../profiler/">Process Profiling</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../example-job-queue/">Example: Job Queue</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Glossary</a>
+    <ul class="current">
+    </ul>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">scmRTOS</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Appendix</li>
+      <li class="breadcrumb-item active">Glossary</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="acronyms-and-terms">Acronyms and Terms<a class="headerlink" href="#acronyms-and-terms" title="Permanent link">🔗</a></h1>
+<p><strong>C</strong></p>
+<p>A general-purpose, low-level procedural programming language.</p>
+<p><br><strong>C++</strong></p>
+<p>A general-purpose programming language supporting procedural, object-based, and object-oriented programming paradigms.</p>
+<p><br><strong>Critical Section</strong></p>
+<p>A code fragment during whose execution control transfer is prohibited. In <strong>scmRTOS</strong>, this is currently implemented in the simplest way by globally disabling interrupts.</p>
+<p><br><strong>Idle Process (RTOS Background Process)</strong></p>
+<p>A system process that receives control when all user processes are waiting for events. This process cannot enter a waiting state and may execute a user hook if enabled during configuration.</p>
+<p><br><strong>Interprocess Communication (IPC) Services</strong></p>
+<p>Objects and/or OS extensions designed for safe interaction (work synchronization and data exchange) between different processes, as well as for organizing event-driven program execution based on events occurring in interrupts and processes.</p>
+<p><br><strong>Interrupt Stack</strong></p>
+<p>A specially allocated RAM area intended for use as a stack during execution of interrupt handler code. When an interrupt stack is used, the processor's stack pointer is switched to the interrupt stack upon entering an interrupt handler and switched back to the process stack upon exit.</p>
+<p><br><strong>ISR</strong></p>
+<p>Interrupt Service Routine&nbsp;– an interrupt handler.</p>
+<p><br><strong>Kernel</strong></p>
+<p>The most important and central part of the operating system, responsible for organizing processes, scheduling their execution, supporting interprocess communication, managing system time, and handling OS extensions.</p>
+<p><br><strong>MCU</strong></p>
+<p>Microcontroller.</p>
+<p><br><strong>Operating System Process</strong></p>
+<p>An object that implements the execution of a complete, independent program fragment asynchronous to others, including support for control transfer at both the process level and the interrupt level.</p>
+<p><br><strong>OS</strong></p>
+<p>Operating System.</p>
+<p><br><strong>OS Configuration</strong></p>
+<p>The set of macros, types, other definitions, and declarations that specify the quantitative and qualitative characteristics and properties of the operating system in a specific project. Configuration is performed by defining the contents of special header configuration files and by certain user code executed before OS startup.</p>
+<p><br><strong>OS Extensions</strong></p>
+<p>Software objects that extend the functionality of the operating system but are not part of the core OS. An example of an extension is <a href="../profiler/#profiler-profiler">the process activity profiler</a>.</p>
+<p><br><strong>OS Port</strong></p>
+<p>The combination of common and platform-dependent OS code adapted to a specific software and hardware platform.</p>
+<p><br><strong>Preemption</strong></p>
+<p>The set of actions performed by operating system components aimed at forcibly transferring control from one process to another.</p>
+<p><br><strong>Process Context</strong></p>
+<p>The software and hardware environment of the executing code, including processor registers, stack pointers, and other resources necessary for program execution. Because control transfer between processes in a preemptive OS can occur at an unpredictable moment, the process context must be saved until the next time the process receives control. Each process executes independently and asynchronously relative to others; therefore, to ensure correct operation of a preemptive OS, each process must have its own context.</p>
+<p><br><strong>Process Executable Function</strong></p>
+<p>A static member function of the process class that implements an independent, asynchronous program execution flow in the form of an infinite loop.</p>
+<p><br><strong>Process Map</strong></p>
+<p>An operating system object containing one or more process tags. Physically implemented as an integer variable. Each bit in the process map corresponds to one process and uniquely maps to the process priority.</p>
+<p><br><strong>Process Priority</strong></p>
+<p>A property of a process (an integer-type object) that determines the order of process selection during scheduler operations and in other OS components. Serves as a unique process identifier.</p>
+<p><br><strong>Process Stack</strong></p>
+<p>A memory area in the form of an array that is a data member of the process object, used as a stack in the process's executable function. Also serves as the location where the process context is saved during control transfer.</p>
+<p><br><strong>Process Tag</strong></p>
+<p>A binary mask containing only one non-zero bit, whose position is uniquely related to the process priority number. Like the process priority, the tag is a unique identifier but has a different representation. Each representation (priority or tag) is used where it provides better program efficiency.</p>
+<p><br><strong>Profiler</strong></p>
+<p>An object that measures, by one means or another, the distribution of processor time among processes and provides facilities for delivering this information to the user.</p>
+<p><br><strong>RAM</strong></p>
+<p>Random Access Memory.</p>
+<p><br><strong>Ring Buffer</strong></p>
+<p>A data object representing a queue. It has two data ports (access functions): an input for writing and an output for reading. Implemented using an array and two indices (pointers) denoting the start and end of the queue. Upon reaching the physical end of the array, writing/reading wraps to the beginning, hence the name.</p>
+<p><br><strong>RTOS</strong></p>
+<p>Real-Time Operating System.</p>
+<p><br><strong>Scheduler</strong></p>
+<p>A core component of the OS kernel responsible for managing the order of process execution.</p>
+<p><br><strong>Stack Frame</strong></p>
+<p>A set of data placed in the process stack exactly as it would be when the process context is saved during control transfer.</p>
+<p><br><strong>System Timer</strong></p>
+<p>A hardware timer of the target processor selected as the source for generating interrupts at a specified period, together with the OS function called from the timer's ISR that implements the logic for handling process timeouts.</p>
+<p><br><strong>User Hook</strong></p>
+<p>A function called from OS code whose body must be defined by the user. This allows user-defined code to execute directly from within the operating system's internal functions without modifying the OS source. To avoid requiring the user to define unused hooks, a hook is called only if explicitly enabled during configuration.</p>
+<p><br><strong>Timeout</strong></p>
+<p>A time interval, specified by an integer-type object, used for organizing conditional or unconditional event waiting by processes.</p>
+<p><br><strong>TOS</strong></p>
+<p>Top Of Stack&nbsp;– the address of the stack element pointed to by the processor's hardware stack pointer.</p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../example-job-queue/" class="btn btn-neutral float-left" title="Example: Job Queue"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+    </div>
+
+  <hr>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../example-job-queue/" style="color: #fcfcfc">« Previous</a></span>
+    
+    
+  </span>
+</div>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+      <script src="../static/js/mathjax.js"></script>
+      <script src="../static/js/mathjax/tex-mml-chtml.js"></script>
+      <script src="../static/js/color-symbols.js"></script>
+      <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+
+
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+</script></body></html>

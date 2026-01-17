@@ -1,9 +1,9 @@
 <!DOCTYPE html><html class="writer-html5" lang="en"><head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="description" content="None">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <link rel="shortcut icon" href="img/favicon.ico">
-    <title>scmRTOS</title>
+    <title>Synopsis - scmRTOS</title>
     <link rel="stylesheet" href="css/theme.css">
     <link rel="stylesheet" href="css/theme_extra.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css">
@@ -11,7 +11,7 @@
     
       <script>
         // Current page data
-        var mkdocs_page_name = "Synopsys";
+        var mkdocs_page_name = "Synopsis";
         var mkdocs_page_input_path = "en/index.md";
         var mkdocs_page_url = null;
       </script>
@@ -142,45 +142,43 @@
       </div>
 
       <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <ul class="current">
-                <li class="toctree-l1 current"><a class="reference internal current" href="#">Synopsys</a>
-                </li>
-              </ul>
-              <ul>
-                <li class="toctree-l1"><a class="reference internal" href="features/">Features</a>
-                </li>
-              </ul>
-              <ul>
-                <li class="toctree-l1"><a class="reference internal" href="platforms/">Supported Platforms</a>
-                </li>
-              </ul>
               <p class="caption"><span class="caption-text">Intro</span></p>
-              <ul>
-                  <li class="toctree-l1"><a class="reference internal" href="src/preface/">Preface</a>
+              <ul class="current">
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Synopsis</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#about-scmrtos">About scmRTOS</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#features">Features</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#supported-target-platforms">Supported Target Platforms</a>
+    </li>
+    </ul>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="src/overview/">Overview</a>
+                  <li class="toctree-l1"><a class="reference internal" href="preface/">Preface</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="overview/">Overview</a>
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">RTOS Components</span></p>
               <ul>
-                  <li class="toctree-l1"><a class="reference internal" href="src/kernel/">Kernel</a>
+                  <li class="toctree-l1"><a class="reference internal" href="kernel/">Kernel</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="src/processes/">Processes</a>
+                  <li class="toctree-l1"><a class="reference internal" href="processes/">Processes</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="src/ipcs/">Interprocess Communications</a>
+                  <li class="toctree-l1"><a class="reference internal" href="ipcs/">Interprocess Communication</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="src/ports/">Ports</a>
+                  <li class="toctree-l1"><a class="reference internal" href="ports/">Ports</a>
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">Appendix</span></p>
               <ul>
-                  <li class="toctree-l1"><a class="reference internal" href="src/debug/">Debug</a>
+                  <li class="toctree-l1"><a class="reference internal" href="debug/">Debugging</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="src/profiler/">Process Profiling</a>
+                  <li class="toctree-l1"><a class="reference internal" href="profiler/">Process Profiling</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="src/example-job-queue/">Example: Job Queue</a>
+                  <li class="toctree-l1"><a class="reference internal" href="example-job-queue/">Example: Job Queue</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="src/glossary/">Glossary</a>
+                  <li class="toctree-l1"><a class="reference internal" href="glossary/">Glossary</a>
                   </li>
               </ul>
       </div>
@@ -197,7 +195,8 @@
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href="." class="icon icon-home" aria-label="Docs"></a></li>
-      <li class="breadcrumb-item active">Synopsys</li>
+          <li class="breadcrumb-item">Intro</li>
+      <li class="breadcrumb-item active">Synopsis</li>
     <li class="wy-breadcrumbs-aside">
     </li>
   </ul>
@@ -206,15 +205,120 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <p><strong>scmRTOS</strong> is compact Real-Time Preemptive Operating System intended for use with Single-Chip Microcontrollers. </p>
-<p><strong>scmRTOS</strong> is capable to run on tiny uCs with as small amount of RAM as 512 bytes. The RTOS is written on C++ and supports <a href="platforms/">various platforms</a>. See next sections and <a href="src/preface/">online documentation</a> for more details.</p>
-<p>Source code can be cloned or downloaded from <a href="https://github.com/scmrtos/scmrtos">github.com</a>. There are a <a href="https://github.com/scmrtos/scmrtos-sample-projects">number of sample projects</a> that demonstrates RTOS usage.</p>
-<p>Full distribution including RTOS sources, sample projects, documentation<sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup>, etc available on <a href="https://github.com/scmrtos/scmrtos/releases/">releases page</a>.</p>
+                <h1 id="synopsis">Synopsis<a class="headerlink" href="#synopsis" title="Permanent link">🔗</a></h1>
+<h2 id="about-scmrtos">About scmRTOS<a class="headerlink" href="#about-scmrtos" title="Permanent link">🔗</a></h2>
+<p><strong>scmRTOS</strong> is compact Real-Time Preemptive Operating System intended for use with Single-Chip Microcontrollers. </p>
+<p><strong>scmRTOS</strong> is capable to run on tiny uCs with as small amount of RAM as 512 bytes. The RTOS is written on C++ and supports <a href="#index-supported-targets">various platforms</a>. See next sections and for more details. Additionally, the documentation is also available in <a href="https://github.com/scmrtos/scmrtos-doc">PDF format</a>.</p>
+<p>Source code can be cloned or downloaded from <a href="https://github.com/scmrtos/scmrtos">Github</a>. There are a <a href="https://github.com/scmrtos/scmrtos-sample-projects">number of sample projects</a> that demonstrates RTOS usage.</p>
+<p>Full distribution including RTOS sources, sample projects, documentation, etc available on <a href="https://github.com/scmrtos/scmrtos/releases/">releases page</a>.</p>
+<h2 id="features">Features<a class="headerlink" href="#features" title="Permanent link">🔗</a></h2>
+<ul>
+<li>
+<p>Written entirely on C++.</p>
+<ul>
+<li>High reliability.</li>
+<li>Simplicity and ease-of-use.</li>
+</ul>
+</li>
+<li>
+<p>Introduce Extensions mechanism at kernel level.</p>
+<ul>
+<li>User defined extensions.</li>
+<li>Debug features.</li>
+</ul>
+</li>
+<li>
+<p>Minimal process switching latency<sup id="fnref:index-1"><a class="footnote-ref" href="#fn:index-1">1</a></sup>.</p>
+<ul>
+<li>900 ns on Cortex-M4 @ 168 MHz.</li>
+<li>1.8 us on Blackfin @ 200 MHz.</li>
+<li>2.7 us on Cortex-M3 @ 72 MHz.</li>
+<li>700 ns on Cortex-A9 @ 400 MHz (with full FPU context save/restore).</li>
+<li>5 us on ARM7 @ 50 MHz.</li>
+<li>38-42 us on AVR @ 8 MHz.</li>
+<li>45-50 us on MSP430 @ 5 MHz.</li>
+<li>18-20 us on STM8 @ 16 MHz.</li>
+</ul>
+</li>
+<li>
+<p>Small footprint.</p>
+<ul>
+<li>From 512 bytes of RAM.</li>
+<li>From ~1K code.</li>
+</ul>
+</li>
+</ul>
+<h2 id="supported-target-platforms">Supported Target Platforms <span id="index-supported-targets"></span><a class="headerlink" href="#supported-target-platforms" title="Permanent link">🔗</a></h2>
+<p>The following target platforms are supported for now.</p>
+<table>
+<thead>
+<tr>
+<th>CPU/MCU</th>
+<th style="text-align: center;">GCC</th>
+<th style="text-align: center;">EW (IAR)</th>
+<th style="text-align: center;">VDSP++ (ADI)</th>
+<th style="text-align: center;">CCES (ADI)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MSP430</td>
+<td style="text-align: center;">✔</td>
+<td style="text-align: center;">✔</td>
+<td style="text-align: center;">–</td>
+<td style="text-align: center;">–</td>
+</tr>
+<tr>
+<td>AVR</td>
+<td style="text-align: center;">✔</td>
+<td style="text-align: center;">✔</td>
+<td style="text-align: center;">–</td>
+<td style="text-align: center;">–</td>
+</tr>
+<tr>
+<td>ARM7</td>
+<td style="text-align: center;">✔</td>
+<td style="text-align: center;">✘</td>
+<td style="text-align: center;">–</td>
+<td style="text-align: center;">–</td>
+</tr>
+<tr>
+<td>Cortex-M</td>
+<td style="text-align: center;">✔</td>
+<td style="text-align: center;">✔</td>
+<td style="text-align: center;">–</td>
+<td style="text-align: center;">–</td>
+</tr>
+<tr>
+<td>Cortex-A</td>
+<td style="text-align: center;">✔</td>
+<td style="text-align: center;">✘</td>
+<td style="text-align: center;">–</td>
+<td style="text-align: center;">–</td>
+</tr>
+<tr>
+<td>Blackfin</td>
+<td style="text-align: center;">✔</td>
+<td style="text-align: center;">–</td>
+<td style="text-align: center;">✔</td>
+<td style="text-align: center;">✔</td>
+</tr>
+<tr>
+<td>STM8</td>
+<td style="text-align: center;">–</td>
+<td style="text-align: center;">✔</td>
+<td style="text-align: center;">–</td>
+<td style="text-align: center;">–</td>
+</tr>
+</tbody>
+</table>
+<p><br>
+'–' means toolchain does not support CPU/MCU</p>
 <div class="footnote">
 <hr>
 <ol>
-<li id="fn:1">
-<p>Distribution includes PDF documents. It's recommended to use <a href="src/preface/">online documentation</a>, as it is updated more frequently and contains all the latest changes.&nbsp;<a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text">↩</a></p>
+<li id="fn:index-1">
+<p>This includes overall control transfer time, not only context switch&nbsp;<a class="footnote-backref" href="#fnref:index-1" title="Jump back to footnote 1 in the text">↩</a></p>
 </li>
 </ol>
 </div>
@@ -222,7 +326,7 @@
             </div>
           </div><footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
-        <a href="features/" class="btn btn-neutral float-right" title="Features">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="preface/" class="btn btn-neutral float-right" title="Preface">Next <span class="icon icon-circle-arrow-right"></span></a>
     </div>
 
   <hr>
@@ -246,7 +350,7 @@
     
     
     
-      <span><a href="features/" style="color: #fcfcfc">Next »</a></span>
+      <span><a href="preface/" style="color: #fcfcfc">Next »</a></span>
     
   </span>
 </div>
@@ -254,8 +358,9 @@
     <script>var base_url = ".";</script>
     <script src="js/theme_extra.js"></script>
     <script src="js/theme.js"></script>
-      <script src="js/mathjax.js"></script>
-      <script src="js/mathjax/tex-mml-chtml.js"></script>
+      <script src="static/js/mathjax.js"></script>
+      <script src="static/js/mathjax/tex-mml-chtml.js"></script>
+      <script src="static/js/color-symbols.js"></script>
       <script src="search/main.js"></script>
     <script>
         jQuery(function () {
@@ -265,10 +370,5 @@
 
 
 
-
-
 <script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
-</script></body></html><!--
-MkDocs version : 1.6.1
-Build Date UTC : 2026-01-11 03:56:49.888894+00:00
--->
+</script></body></html>

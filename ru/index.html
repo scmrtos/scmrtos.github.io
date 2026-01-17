@@ -3,7 +3,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <link rel="shortcut icon" href="../img/favicon.ico">
-    <title>Общие сведения - scmRTOS</title>
+    <title>О проекте - scmRTOS</title>
     <link rel="stylesheet" href="../css/theme.css">
     <link rel="stylesheet" href="../css/theme_extra.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css">
@@ -11,7 +11,7 @@
     
       <script>
         // Current page data
-        var mkdocs_page_name = "\u041e\u0431\u0449\u0438\u0435 \u0441\u0432\u0435\u0434\u0435\u043d\u0438\u044f";
+        var mkdocs_page_name = "\u041e \u043f\u0440\u043e\u0435\u043a\u0442\u0435";
         var mkdocs_page_input_path = "ru/index.md";
         var mkdocs_page_url = null;
       </script>
@@ -142,45 +142,43 @@
       </div>
 
       <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Навигационное меню">
-              <ul class="current">
-                <li class="toctree-l1 current"><a class="reference internal current" href="#">Общие сведения</a>
-                </li>
-              </ul>
-              <ul>
-                <li class="toctree-l1"><a class="reference internal" href="features/">Характеристики</a>
-                </li>
-              </ul>
-              <ul>
-                <li class="toctree-l1"><a class="reference internal" href="platforms/">Поддерживаемые платформы</a>
-                </li>
-              </ul>
               <p class="caption"><span class="caption-text">Введение</span></p>
-              <ul>
-                  <li class="toctree-l1"><a class="reference internal" href="src/preface/">Предисловие</a>
+              <ul class="current">
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">О проекте</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#scmrtos">Что такое scmRTOS</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#_2">Свойства и возможности</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#_3">Поддерживаемые платформы</a>
+    </li>
+    </ul>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="src/overview/">Обзор операционной системы</a>
+                  <li class="toctree-l1"><a class="reference internal" href="preface/">Предисловие</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="overview/">Общие сведения</a>
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">Компоненты</span></p>
               <ul>
-                  <li class="toctree-l1"><a class="reference internal" href="src/kernel/">Ядро</a>
+                  <li class="toctree-l1"><a class="reference internal" href="kernel/">Ядро</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="src/processes/">Процессы</a>
+                  <li class="toctree-l1"><a class="reference internal" href="processes/">Процессы</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="src/ipcs/">Межпроцессное взаимодействие</a>
+                  <li class="toctree-l1"><a class="reference internal" href="ipcs/">Межпроцессное взаимодействие</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="src/ports/">Порты</a>
+                  <li class="toctree-l1"><a class="reference internal" href="ports/">Порты</a>
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">Приложения</span></p>
               <ul>
-                  <li class="toctree-l1"><a class="reference internal" href="src/debug/">Отладка</a>
+                  <li class="toctree-l1"><a class="reference internal" href="debug/">Отладка</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="src/profiler/">Профилировка процессов</a>
+                  <li class="toctree-l1"><a class="reference internal" href="profiler/">Профилировка процессов</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="src/example-job-queue/">Пример: очередь заданий</a>
+                  <li class="toctree-l1"><a class="reference internal" href="example-job-queue/">Пример: очередь заданий</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="src/glossary/">Термины и сокращения</a>
+                  <li class="toctree-l1"><a class="reference internal" href="glossary/">Термины и сокращения</a>
                   </li>
               </ul>
       </div>
@@ -197,7 +195,8 @@
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href="./" class="icon icon-home" aria-label="Документация"></a></li>
-      <li class="breadcrumb-item active">Общие сведения</li>
+          <li class="breadcrumb-item">Введение</li>
+      <li class="breadcrumb-item active">О проекте</li>
     <li class="wy-breadcrumbs-aside">
     </li>
   </ul>
@@ -206,15 +205,121 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <p><strong>scmRTOS</strong> &nbsp;– это компактная операционная система (ОС) реального времени, предназначенная для использования в микроконтроллерах (МК). </p>
-<p><strong>scmRTOS</strong> способна выполняться на совсем крошечных МК, имеющих объём оперативной памяти порядка 512 байт. Она написана на языке программирования С++ и поддерживает <a href="platforms/">ряд платформ</a>. Подробное описание ОС, включая <a href="src/preface/">интерактивную документацию</a>, приведено в следующих разделах сайта.</p>
-<p>Исходный код ОС может быть склонирован или загружен с сайта <a href="https://github.com/scmrtos/scmrtos">github.com</a>. Там же можно найти <a href="https://github.com/scmrtos/scmrtos-sample-projects">ряд примеров</a>, которые иллюстрируют использование ОС и могут служить отправной точкой для рабочих проектов.</p>
-<p>Полный архив, включающий исходный код ОС, примеры, документацию<sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup> и т.п. также может быть загружен с <a href="https://github.com/scmrtos/scmrtos/releases/">соответствующей страницы проекта на github.com</a>.</p>
+                <h1 id="_1">Краткий обзор<a class="headerlink" href="#_1" title="Permanent link">🔗</a></h1>
+<h2 id="scmrtos">Что такое scmRTOS<a class="headerlink" href="#scmrtos" title="Permanent link">🔗</a></h2>
+<p><strong>scmRTOS</strong> &nbsp;– это компактная операционная система (ОС) реального времени, предназначенная для использования в микроконтроллерах (МК). </p>
+<p><strong>scmRTOS</strong> способна выполняться на совсем крошечных МК, имеющих объём оперативной памяти порядка 512 байт. Она написана на языке программирования С++ и поддерживает <a href="#index-supported-targets">ряд платформ</a>. Подробное описание ОС приведено в следующих разделах. Кроме того, доступна <a href="https://github.com/scmrtos/scmrtos-doc">версия документации в формате PDF</a>.</p>
+<p>Исходный код ОС может быть склонирован или загружен с сайта <a href="https://github.com/scmrtos/scmrtos">Github</a>. Там же можно найти <a href="https://github.com/scmrtos/scmrtos-sample-projects">ряд примеров</a>, которые иллюстрируют использование ОС и могут служить отправной точкой для рабочих проектов.</p>
+<p>Полный архив, включающий исходный код ОС, примеры, документацию<sup id="fnref:index-1"><a class="footnote-ref" href="#fn:index-1">1</a></sup> и т.п. также скачать со <a href="https://github.com/scmrtos/scmrtos/releases/"> страницы релизов проекта</a>.</p>
+<h2 id="_2">Свойства и возможности<a class="headerlink" href="#_2" title="Permanent link">🔗</a></h2>
+<p><strong>scmRTOS</strong> обладает следующими основными свойствами и предоставляет ряд возможностей:</p>
+<ul>
+<li>
+<p>реализована на C++:</p>
+<ul>
+<li>предоставляет более безопасную (чем в парадигме процедурного программирования) модель использования за счёт принципов инкапсуляции и абстракции&nbsp;– отделения интерфейса от реализации;</li>
+<li>более простое использование в рамках объектной модели языка программирования.</li>
+</ul>
+</li>
+<li>
+<p>предоставляет механизм расширений:</p>
+<ul>
+<li>позволяет дополнять проект собственными расширениями, не внося правок в код ОС;</li>
+<li>содержит отладочные средства, на основе представленного механизма, которые могут, в том числе, использоваться как отправная точка при разработке собственных расширений.</li>
+</ul>
+</li>
+<li>
+<p>время передачи управления между процессами<sup id="fnref2:index-1"><a class="footnote-ref" href="#fn:index-1">1</a></sup>:</p>
+<ul>
+<li>900 ns on Cortex-M4 @ 168 MHz</li>
+<li>1.8 us on Blackfin @ 200 MHz</li>
+<li>2.7 us on Cortex-M3 @ 72 MHz</li>
+<li>700 ns on Cortex-A9 @ 400 MHz (with full FPU context save/restore)</li>
+<li>5 us on ARM7 @ 50 MHz</li>
+<li>38-42 us on AVR @ 8 MHz</li>
+<li>45-50 us on MSP430 @ 5 MHz</li>
+<li>18-20 us on STM8 @ 16 MHz</li>
+</ul>
+</li>
+<li>
+<p>компактный размер:</p>
+<ul>
+<li>от 512 байт оперативной памяти;</li>
+<li>от ~1k байт памяти программ.</li>
+</ul>
+</li>
+</ul>
+<h2 id="_3">Поддерживаемые платформы <span id="index-supported-targets"></span><a class="headerlink" href="#_3" title="Permanent link">🔗</a></h2>
+<p>В настоящее время поддерживаются следующие целевые платформы:</p>
+<table>
+<thead>
+<tr>
+<th>CPU/MCU</th>
+<th style="text-align: center;">GCC</th>
+<th style="text-align: center;">EW (IAR)</th>
+<th style="text-align: center;">VDSP++ (ADI)</th>
+<th style="text-align: center;">CCES (ADI)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MSP430</td>
+<td style="text-align: center;">✔</td>
+<td style="text-align: center;">✔</td>
+<td style="text-align: center;">–</td>
+<td style="text-align: center;">–</td>
+</tr>
+<tr>
+<td>AVR</td>
+<td style="text-align: center;">✔</td>
+<td style="text-align: center;">✔</td>
+<td style="text-align: center;">–</td>
+<td style="text-align: center;">–</td>
+</tr>
+<tr>
+<td>ARM7</td>
+<td style="text-align: center;">✔</td>
+<td style="text-align: center;">✘</td>
+<td style="text-align: center;">–</td>
+<td style="text-align: center;">–</td>
+</tr>
+<tr>
+<td>Cortex-M</td>
+<td style="text-align: center;">✔</td>
+<td style="text-align: center;">✔</td>
+<td style="text-align: center;">–</td>
+<td style="text-align: center;">–</td>
+</tr>
+<tr>
+<td>Cortex-A</td>
+<td style="text-align: center;">✔</td>
+<td style="text-align: center;">✘</td>
+<td style="text-align: center;">–</td>
+<td style="text-align: center;">–</td>
+</tr>
+<tr>
+<td>Blackfin</td>
+<td style="text-align: center;">✔</td>
+<td style="text-align: center;">–</td>
+<td style="text-align: center;">✔</td>
+<td style="text-align: center;">✔</td>
+</tr>
+<tr>
+<td>STM8</td>
+<td style="text-align: center;">–</td>
+<td style="text-align: center;">✔</td>
+<td style="text-align: center;">–</td>
+<td style="text-align: center;">–</td>
+</tr>
+</tbody>
+</table>
+<p><br>
+'–' означает, что тулчейн не поддерживает CPU/MCU</p>
 <div class="footnote">
 <hr>
 <ol>
-<li id="fn:1">
-<p>Данный архив включает в себя PDF версии документации. Этот вариант является устаревшим и не рекомендуется для использования. Вместо него предлагается <a href="src/preface/">онлайн вариант</a>, как более удобный, оперативный и содержащий описание всех актуальных изменений.&nbsp;<a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text">↩</a></p>
+<li id="fn:index-1">
+<p>Это включает в себя полное время передачи, включая работу функций средств межпроцессного взаимодействия и планировщика, а не только переключение контекстов.&nbsp;<a class="footnote-backref" href="#fnref:index-1" title="Jump back to footnote 1 in the text">↩</a><a class="footnote-backref" href="#fnref2:index-1" title="Jump back to footnote 1 in the text">↩</a></p>
 </li>
 </ol>
 </div>
@@ -222,7 +327,7 @@
             </div>
           </div><footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="Навигация по странице">
-        <a href="features/" class="btn btn-neutral float-right" title="Характеристики">Вперед <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="preface/" class="btn btn-neutral float-right" title="Предисловие">Вперед <span class="icon icon-circle-arrow-right"></span></a>
     </div>
 
   <hr>
@@ -246,7 +351,7 @@
     
     
     
-      <span><a href="features/" style="color: #fcfcfc">Вперед »</a></span>
+      <span><a href="preface/" style="color: #fcfcfc">Вперед »</a></span>
     
   </span>
 </div>
@@ -254,8 +359,9 @@
     <script>var base_url = "..";</script>
     <script src="../js/theme_extra.js"></script>
     <script src="../js/theme.js"></script>
-      <script src="../js/mathjax.js"></script>
-      <script src="../js/mathjax/tex-mml-chtml.js"></script>
+      <script src="../static/js/mathjax.js"></script>
+      <script src="../static/js/mathjax/tex-mml-chtml.js"></script>
+      <script src="../static/js/color-symbols.js"></script>
       <script src="../search/main.js"></script>
     <script>
         jQuery(function () {
