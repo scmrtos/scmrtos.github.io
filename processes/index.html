@@ -205,11 +205,11 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../ipcs/">Interprocess Communication</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../ports/">Ports</a>
-                  </li>
               </ul>
               <p class="caption"><span class="caption-text">Appendix</span></p>
               <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../porting/">Porting</a>
+                  </li>
                   <li class="toctree-l1"><a class="reference internal" href="../debug/">Debugging</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../profiler/">Process Profiling</a>
@@ -365,7 +365,7 @@
 <p><span id="processes-process-stack"></span></p>
 <h3 id="stack">Stack<a class="headerlink" href="#stack" title="Permanent link">🔗</a></h3>
 <p>A process stack is a contiguous region of RAM used to store process data, save the process context, and hold return addresses from functions and interrupts.</p>
-<p>Due to architectural features of some processors, two separate stacks may be used&nbsp;– one for data and one for return addresses. <strong>scmRTOS</strong> supports this capability, allowing each process object to contain two distinct RAM regions (two stacks), with sizes specified individually based on application requirements. Support for separate stacks is enabled via the <code>SEPARATE_RETURN_STACK</code> macro defined in <code>os_target.h</code>.</p>
+<p>Due to architectural features of some processors, two separate stacks may be used&nbsp;– one for data and one for return addresses. <strong>scmRTOS</strong> supports this capability, allowing each process object to contain two distinct RAM regions (two stacks), with sizes specified individually based on application requirements. Support for separate stacks is enabled via the <code>SEPARATE_RETURN_STACK</code> macro defined in <strong>os_target.h</strong>.</p>
 <p>Within a protected section, a critically important function <code>init_stack_frame()</code> is declared, responsible for constructing the initial stack frame. The reason is that process executable functions do not start like ordinary functions&nbsp;– they are not called in the traditional way. Control reaches them through the same mechanism used for context switches between processes. Therefore, starting a process involves restoring its context from the stack followed by a jump to the address stored as the saved interrupt return point.</p>
 <p>To enable this startup method, the process stack must be prepared accordingly: specific memory cells in the stack are initialized with required values, making the stack appear as if the process had previously been preempted (with its context properly saved). The exact steps for preparing the stack frame are platform-specific, so the implementation of <code>init_stack_frame()</code> is delegated to the OS port layer.</p>
 <h3 id="timeouts">Timeouts<a class="headerlink" href="#timeouts" title="Permanent link">🔗</a></h3>
@@ -590,9 +590,9 @@
     <script>var base_url = "..";</script>
     <script src="../js/theme_extra.js"></script>
     <script src="../js/theme.js"></script>
-      <script src="../static/js/mathjax.js"></script>
-      <script src="../static/js/mathjax/tex-mml-chtml.js"></script>
-      <script src="../static/js/color-symbols.js"></script>
+      <script src="../extra_js/mathjax.js"></script>
+      <script src="../extra_js/mathjax/tex-mml-chtml.js"></script>
+      <script src="../extra_js/color-symbols.js"></script>
       <script src="../search/main.js"></script>
     <script>
         jQuery(function () {

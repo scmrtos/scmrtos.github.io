@@ -159,11 +159,11 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../ipcs/">Interprocess Communication</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../ports/">Ports</a>
-                  </li>
               </ul>
               <p class="caption"><span class="caption-text">Appendix</span></p>
               <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../porting/">Porting</a>
+                  </li>
                   <li class="toctree-l1"><a class="reference internal" href="../debug/">Debugging</a>
                   </li>
                   <li class="toctree-l1 current"><a class="reference internal current" href="#">Process Profiling</a>
@@ -306,7 +306,7 @@ N_{max} = \frac{2^{32} - 1}{10000} = \frac{4294967295}{10000} = 429496 \tag{1}
 \]</div>
 <p>This value is relatively small; to relax this constraint, calculations are performed with 64-bit precision: the counter value is cast to a 64-bit unsigned integer (line 26).</p>
 <p>The user must also ensure that counters do not overflow during the profiling period, i.e., no accumulated counter value exceeds <span class="arithmatex">\(2^{32}-1\)</span>. This requirement is met by coordinating the profiling period with the upper limit of the value returned by <code>time_interval()</code>.</p>
-<p>Integrating the profiler into a project is done by including the header file <code>profiler.h</code> in the project's configuration file <code>scmRTOS_extensions.h</code>.</p>
+<p>Integrating the profiler into a project is done by including the header file <code>profiler.h</code> in the project's configuration file <strong>scmRTOS_extensions.h</strong>.</p>
 <h3 id="application">Application<a class="headerlink" href="#application" title="Permanent link">🔗</a></h3>
 <h4 id="statistical-sampling-method">Statistical (Sampling) Method<a class="headerlink" href="#statistical-sampling-method" title="Permanent link">🔗</a></h4>
 <p>For the statistical method, the call to <code>advance_counters()</code> should be placed in code that executes periodically at equal time intervals&nbsp;– for example, in an interrupt handler of a hardware timer. In <strong>scmRTOS</strong>, the system timer interrupt handler is well-suited for this purpose; the call to <code>advance_counters()</code> is placed in the user hook for the system timer, which must be enabled during configuration. In this case, <code>time_interval()</code> should always return 1.</p>
@@ -438,9 +438,9 @@ N = \frac{1}{2.5 \cdot 10^{-9}} = 400\,000\,000 \tag{2}
     <script>var base_url = "..";</script>
     <script src="../js/theme_extra.js"></script>
     <script src="../js/theme.js"></script>
-      <script src="../static/js/mathjax.js"></script>
-      <script src="../static/js/mathjax/tex-mml-chtml.js"></script>
-      <script src="../static/js/color-symbols.js"></script>
+      <script src="../extra_js/mathjax.js"></script>
+      <script src="../extra_js/mathjax/tex-mml-chtml.js"></script>
+      <script src="../extra_js/color-symbols.js"></script>
       <script src="../search/main.js"></script>
     <script>
         jQuery(function () {

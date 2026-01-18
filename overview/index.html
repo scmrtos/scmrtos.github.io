@@ -187,11 +187,11 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../ipcs/">Interprocess Communication</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../ports/">Ports</a>
-                  </li>
               </ul>
               <p class="caption"><span class="caption-text">Appendix</span></p>
               <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../porting/">Porting</a>
+                  </li>
                   <li class="toctree-l1"><a class="reference internal" href="../debug/">Debugging</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../profiler/">Process Profiling</a>
@@ -340,7 +340,7 @@
 <h3 id="critical-sections">Critical Sections<a class="headerlink" href="#critical-sections" title="Permanent link">🔗</a></h3>
 <p>Due to the preemptive nature of process execution, any process can be interrupted at an arbitrary moment. On the other hand, there are cases<sup id="fnref:overview-6"><a class="footnote-ref" href="#fn:overview-6">6</a></sup> where it is necessary to prevent a process from being interrupted during the execution of a specific code fragment. This is achieved by disabling context switching<sup id="fnref:overview-7"><a class="footnote-ref" href="#fn:overview-7">7</a></sup> for the duration of that fragment's execution. In other words, this fragment acts as a non-interruptible section.</p>
 <p>In OS terms, such a section is called a critical section. To simplify the organization of a critical section, a special wrapper class <code>TCritSect</code> is used. Its constructor saves the state of the processor resource controlling global interrupt enable/disable and then disables interrupts. The destructor restores this processor resource to the state it was in before the interrupts were disabled.</p>
-<p>Thus, if interrupts were already disabled, they remain disabled. If they were enabled, they are re-enabled. The implementation of this class is platform-dependent, so its definition is contained in the corresponding file <code>os_target.h</code>.</p>
+<p>Thus, if interrupts were already disabled, they remain disabled. If they were enabled, they are re-enabled. The implementation of this class is platform-dependent, so its definition is contained in the corresponding file <strong>os_target.h</strong>.</p>
 <p>Using <code>TCritSect</code> is straightforward: at the point corresponding to the start of the critical section, simply declare an object of this type, and from the declaration point until the end of the block, interrupts will be disabled<sup id="fnref:overview-8"><a class="footnote-ref" href="#fn:overview-8">8</a></sup>.</p>
 <h3 id="type-aliases-for-built-in-types">Type Aliases for Built-in Types<a class="headerlink" href="#type-aliases-for-built-in-types" title="Permanent link">🔗</a></h3>
 <p>To facilitate working with source code and improve portability, the following type aliases are introduced:</p>
@@ -426,7 +426,7 @@
 </figcaption>
 </figure>
 <p>Each process, as mentioned earlier, has an executable function. When using the scheme described above, this executable function is named <code>exec</code> and looks as shown in "Listing 1. Process Execution Function".</p>
-<p>Configuration information is specified in a dedicated header file <code>scmRTOS_config.h</code>. The list of configuration macros and their meanings<sup id="fnref:overview-14"><a class="footnote-ref" href="#fn:overview-14">14</a></sup> are provided below.</p>
+<p>Configuration information is specified in a dedicated header file <strong>scmRTOS_config</strong>.h. The list of configuration macros and their meanings<sup id="fnref:overview-14"><a class="footnote-ref" href="#fn:overview-14">14</a></sup> are provided below.</p>
 <ul>
 <li>
 <p><code>scmRTOS_PROCESS_COUNT</code></p>
@@ -603,9 +603,9 @@
     <script>var base_url = "..";</script>
     <script src="../js/theme_extra.js"></script>
     <script src="../js/theme.js"></script>
-      <script src="../static/js/mathjax.js"></script>
-      <script src="../static/js/mathjax/tex-mml-chtml.js"></script>
-      <script src="../static/js/color-symbols.js"></script>
+      <script src="../extra_js/mathjax.js"></script>
+      <script src="../extra_js/mathjax/tex-mml-chtml.js"></script>
+      <script src="../extra_js/color-symbols.js"></script>
       <script src="../search/main.js"></script>
     <script>
         jQuery(function () {

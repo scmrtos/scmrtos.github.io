@@ -187,11 +187,11 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../ipcs/">Межпроцессное взаимодействие</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../ports/">Порты</a>
-                  </li>
               </ul>
               <p class="caption"><span class="caption-text">Приложения</span></p>
               <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../porting/">Портирование</a>
+                  </li>
                   <li class="toctree-l1"><a class="reference internal" href="../debug/">Отладка</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../profiler/">Профилировка процессов</a>
@@ -340,7 +340,7 @@
 <h3 id="_10">Критические секции<a class="headerlink" href="#_10" title="Permanent link">🔗</a></h3>
 <p>В силу вытесняющего характера работы процессов, любой из них может быть прерван в произвольный момент времени. С другой стороны, существует ряд случаев<sup id="fnref:overview-6"><a class="footnote-ref" href="#fn:overview-6">6</a></sup>, когда необходимо исключить возможность прервать процесс во время выполнения определённого фрагмента кода. Это достигается запрещением передачи управления<sup id="fnref:overview-7"><a class="footnote-ref" href="#fn:overview-7">7</a></sup> на период выполнения упомянутого фрагмента. Т.е. этот фрагмент является как бы непрерываемой секцией.</p>
 <p>В терминах ОС такая секция называется критической. Для упрощения организации критической секции используется специальный класс-"обёртка" <code>TCritSect</code>. В конструкторе этого класса запоминается состояние процессорного ресурса, управляющего общим разрешением/запрещением прерываний, и прерывания запрещаются. В деструкторе этот процессорный ресурс приводится к тому состоянию, в котором он пребывал перед запрещением прерываний.</p>
-<p>Таким образом, если прерывания были запрещены, то они и останутся запрещёнными. Если были разрешены, то будут разрешены. Реализация этого класса платформеннозависима, поэтому её определение содержится в соответствующем файле os_target.h.
+<p>Таким образом, если прерывания были запрещены, то они и останутся запрещёнными. Если были разрешены, то будут разрешены. Реализация этого класса платформеннозависима, поэтому её определение содержится в соответствующем файле <strong>os_target.h</strong>.
 Использование <code>TCritSect</code> тривиально: в точке, которая соответствует началу критической секции, достаточно объявить объект этого типа, и от места объявления до конца блока прерывания будут запрещены<sup id="fnref:overview-8"><a class="footnote-ref" href="#fn:overview-8">8</a></sup>.</p>
 <h3 id="_11">Синонимы встроенных типов<a class="headerlink" href="#_11" title="Permanent link">🔗</a></h3>
 <p>Для облегчения работы с исходным текстом, а также для переносимости введены следующие синонимы:</p>
@@ -425,7 +425,7 @@
 </figcaption>
 </figure>
 <p>Каждый процесс, как уже упоминалось выше, имеет исполняемую функцию. При использовании приведённой выше схемы исполняемая функция процесса называется exec и выглядит как показано на "Листинг 1. Исполняемая функция процесса".</p>
-<p>Конфигурационная информация задаётся в специальном заголовочном файле scmRTOS_config.h. Состав и значения<sup id="fnref:overview-14"><a class="footnote-ref" href="#fn:overview-14">14</a></sup> конфигурационных макросов приведены в списке ниже:</p>
+<p>Конфигурационная информация задаётся в специальном заголовочном файле <strong>scmRTOS_config.h</strong>. Состав и значения<sup id="fnref:overview-14"><a class="footnote-ref" href="#fn:overview-14">14</a></sup> конфигурационных макросов приведены в списке ниже:</p>
 <ul>
 <li>
 <p><code>scmRTOS_PROCESS_COUNT</code></p>
@@ -602,9 +602,9 @@
     <script>var base_url = "../..";</script>
     <script src="../../js/theme_extra.js"></script>
     <script src="../../js/theme.js"></script>
-      <script src="../../static/js/mathjax.js"></script>
-      <script src="../../static/js/mathjax/tex-mml-chtml.js"></script>
-      <script src="../../static/js/color-symbols.js"></script>
+      <script src="../../extra_js/mathjax.js"></script>
+      <script src="../../extra_js/mathjax/tex-mml-chtml.js"></script>
+      <script src="../../extra_js/color-symbols.js"></script>
       <script src="../../search/main.js"></script>
     <script>
         jQuery(function () {

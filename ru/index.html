@@ -167,11 +167,11 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="ipcs/">Межпроцессное взаимодействие</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="ports/">Порты</a>
-                  </li>
               </ul>
               <p class="caption"><span class="caption-text">Приложения</span></p>
               <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="porting/">Портирование</a>
+                  </li>
                   <li class="toctree-l1"><a class="reference internal" href="debug/">Отладка</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="profiler/">Профилировка процессов</a>
@@ -210,7 +210,7 @@
 <p><strong>scmRTOS</strong> &nbsp;– это компактная операционная система (ОС) реального времени, предназначенная для использования в микроконтроллерах (МК). </p>
 <p><strong>scmRTOS</strong> способна выполняться на совсем крошечных МК, имеющих объём оперативной памяти порядка 512 байт. Она написана на языке программирования С++ и поддерживает <a href="#index-supported-targets">ряд платформ</a>. Подробное описание ОС приведено в следующих разделах. Кроме того, доступна <a href="https://github.com/scmrtos/scmrtos-doc">версия документации в формате PDF</a>.</p>
 <p>Исходный код ОС может быть склонирован или загружен с сайта <a href="https://github.com/scmrtos/scmrtos">Github</a>. Там же можно найти <a href="https://github.com/scmrtos/scmrtos-sample-projects">ряд примеров</a>, которые иллюстрируют использование ОС и могут служить отправной точкой для рабочих проектов.</p>
-<p>Полный архив, включающий исходный код ОС, примеры, документацию<sup id="fnref:index-1"><a class="footnote-ref" href="#fn:index-1">1</a></sup> и т.п. также скачать со <a href="https://github.com/scmrtos/scmrtos/releases/"> страницы релизов проекта</a>.</p>
+<p>Полный архив, включающий исходный код ОС, примеры, документацию и др., также можно скачать со <a href="https://github.com/scmrtos/scmrtos/releases/"> страницы релизов проекта</a>.</p>
 <h2 id="_2">Свойства и возможности<a class="headerlink" href="#_2" title="Permanent link">🔗</a></h2>
 <p><strong>scmRTOS</strong> обладает следующими основными свойствами и предоставляет ряд возможностей:</p>
 <ul>
@@ -229,7 +229,7 @@
 </ul>
 </li>
 <li>
-<p>время передачи управления между процессами<sup id="fnref2:index-1"><a class="footnote-ref" href="#fn:index-1">1</a></sup>:</p>
+<p>время передачи управления между процессами<sup id="fnref:index-1"><a class="footnote-ref" href="#fn:index-1">1</a></sup>:</p>
 <ul>
 <li>900 ns on Cortex-M4 @ 168 MHz</li>
 <li>1.8 us on Blackfin @ 200 MHz</li>
@@ -319,7 +319,7 @@
 <hr>
 <ol>
 <li id="fn:index-1">
-<p>Это включает в себя полное время передачи, включая работу функций средств межпроцессного взаимодействия и планировщика, а не только переключение контекстов.&nbsp;<a class="footnote-backref" href="#fnref:index-1" title="Jump back to footnote 1 in the text">↩</a><a class="footnote-backref" href="#fnref2:index-1" title="Jump back to footnote 1 in the text">↩</a></p>
+<p>Это включает в себя полное время передачи, включая работу функций средств межпроцессного взаимодействия и планировщика, а не только переключение контекстов.&nbsp;<a class="footnote-backref" href="#fnref:index-1" title="Jump back to footnote 1 in the text">↩</a></p>
 </li>
 </ol>
 </div>
@@ -359,9 +359,9 @@
     <script>var base_url = "..";</script>
     <script src="../js/theme_extra.js"></script>
     <script src="../js/theme.js"></script>
-      <script src="../static/js/mathjax.js"></script>
-      <script src="../static/js/mathjax/tex-mml-chtml.js"></script>
-      <script src="../static/js/color-symbols.js"></script>
+      <script src="../extra_js/mathjax.js"></script>
+      <script src="../extra_js/mathjax/tex-mml-chtml.js"></script>
+      <script src="../extra_js/color-symbols.js"></script>
       <script src="../search/main.js"></script>
     <script>
         jQuery(function () {

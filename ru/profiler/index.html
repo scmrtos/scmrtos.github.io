@@ -159,11 +159,11 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../ipcs/">Межпроцессное взаимодействие</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../ports/">Порты</a>
-                  </li>
               </ul>
               <p class="caption"><span class="caption-text">Приложения</span></p>
               <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../porting/">Портирование</a>
+                  </li>
                   <li class="toctree-l1"><a class="reference internal" href="../debug/">Отладка</a>
                   </li>
                   <li class="toctree-l1 current"><a class="reference internal current" href="#">Профилировка процессов</a>
@@ -306,7 +306,7 @@ N_{max} = \frac{2^{32} - 1}{10000} = \frac{4294967295}{10000} = 429496 \tag{1}
 \]</div>
 <p>Полученная величина является достаточно небольшой, поэтому, чтобы расширить данное оганичение, вычисления производятся с 64-разрядной точностью&nbsp;– значение счётчика приводится к 64-разрядному беззнаковому целому (26).</p>
 <p>Также пользователь должен позаботиться о том, чтобы за период профилировки не происходило переполнения счётчиков, т.е. накопленная любым счётчиком величина не превышала значения  <span class="arithmatex">\(2^{32}-1\)</span>. Удовлетворение этого требования достигается путём согласования периода профилировки и максимальной величины возвращаемого функцией <code>time_interval()</code> значения.</p>
-<p>Подключение профилировщика к проекту осуществляется путём включения заголовочного файла profiler.h в конфигурационный файл проекта scmRTOS_extensions.h.</p>
+<p>Подключение профилировщика к проекту осуществляется путём включения заголовочного файла <strong>profiler.h</strong> в конфигурационный файл проекта <strong>scmRTOS_extensions.h</strong>.</p>
 <h3 id="_4">Использование<a class="headerlink" href="#_4" title="Permanent link">🔗</a></h3>
 <h4 id="_5">Статистический метод<a class="headerlink" href="#_5" title="Permanent link">🔗</a></h4>
 <p>В случае статистического метода вызов функции <code>advance_counters()</code> следует поместить в код, который периодически получает управление с равными интервалами времени,&nbsp;– например, в обработчик прерывания какого-либо таймера; в случае <strong>scmRTOS</strong> для этих целей хорошо подходит обработчик прерываний системного таймера, в этом случае вызов функции <code>advance_counters()</code> помещается в пользовательский хук системного таймера, вызов которого требуется разрешить при конфигурации. Функция <code>time_interval()</code> в этом случае всегда должна возвращать 1. </p>
@@ -439,9 +439,9 @@ N = \frac{1}{2.5 \cdot 10^{-9}} = 400 000 000 \tag{2}
     <script>var base_url = "../..";</script>
     <script src="../../js/theme_extra.js"></script>
     <script src="../../js/theme.js"></script>
-      <script src="../../static/js/mathjax.js"></script>
-      <script src="../../static/js/mathjax/tex-mml-chtml.js"></script>
-      <script src="../../static/js/color-symbols.js"></script>
+      <script src="../../extra_js/mathjax.js"></script>
+      <script src="../../extra_js/mathjax/tex-mml-chtml.js"></script>
+      <script src="../../extra_js/color-symbols.js"></script>
       <script src="../../search/main.js"></script>
     <script>
         jQuery(function () {

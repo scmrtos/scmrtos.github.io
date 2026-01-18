@@ -3,7 +3,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <link rel="shortcut icon" href="../../img/favicon.ico">
-    <title>Порты - scmRTOS</title>
+    <title>Портирование - scmRTOS</title>
     <link rel="stylesheet" href="../../css/theme.css">
     <link rel="stylesheet" href="../../css/theme_extra.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css">
@@ -11,8 +11,8 @@
     
       <script>
         // Current page data
-        var mkdocs_page_name = "\u041f\u043e\u0440\u0442\u044b";
-        var mkdocs_page_input_path = "ru/ports.md";
+        var mkdocs_page_name = "\u041f\u043e\u0440\u0442\u0438\u0440\u043e\u0432\u0430\u043d\u0438\u0435";
+        var mkdocs_page_input_path = "ru/porting.md";
         var mkdocs_page_url = null;
       </script>
     
@@ -54,7 +54,7 @@
       ];
       
       // get the page path and remove the leading slash
-      let pagePath = "ru/ports/".replace(/^\//, '');
+      let pagePath = "ru/porting/".replace(/^\//, '');
       
       // remove current lang prefix from the path
       const currentLangObj = languages.find(lang => lang.code === currentLang);
@@ -71,7 +71,7 @@
           }
       }
       
-      console.log("Current lang:", currentLang, "page.url raw:", "ru/ports/", "normalized path:", pagePath);
+      console.log("Current lang:", currentLang, "page.url raw:", "ru/porting/", "normalized path:", pagePath);
       
       languages.forEach(lang => {
           const option = document.createElement("option");
@@ -152,14 +152,17 @@
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">Компоненты</span></p>
-              <ul class="current">
+              <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../kernel/">Ядро</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../processes/">Процессы</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../ipcs/">Межпроцессное взаимодействие</a>
                   </li>
-                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Порты</a>
+              </ul>
+              <p class="caption"><span class="caption-text">Приложения</span></p>
+              <ul class="current">
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Портирование</a>
     <ul class="current">
     <li class="toctree-l2"><a class="reference internal" href="#_2">Общие замечания</a>
     </li>
@@ -173,15 +176,12 @@
     </li>
         </ul>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#_7">Портирование</a>
+    <li class="toctree-l2"><a class="reference internal" href="#_7">Реализация</a>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#_8">Запуск в составе рабочего проекта</a>
     </li>
     </ul>
                   </li>
-              </ul>
-              <p class="caption"><span class="caption-text">Приложения</span></p>
-              <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../debug/">Отладка</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../profiler/">Профилировка процессов</a>
@@ -205,8 +205,8 @@
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href="../" class="icon icon-home" aria-label="Документация"></a></li>
-          <li class="breadcrumb-item">Компоненты</li>
-      <li class="breadcrumb-item active">Порты</li>
+          <li class="breadcrumb-item">Приложения</li>
+      <li class="breadcrumb-item active">Портирование</li>
     <li class="wy-breadcrumbs-aside">
     </li>
   </ul>
@@ -215,15 +215,15 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h1 id="_1">Порты<a class="headerlink" href="#_1" title="Permanent link">🔗</a></h1>
+                <h1 id="_1">Портирование<a class="headerlink" href="#_1" title="Permanent link">🔗</a></h1>
 <h2 id="_2">Общие замечания<a class="headerlink" href="#_2" title="Permanent link">🔗</a></h2>
-<p>Ввиду больших отличий как аппаратных архитектур, так и средств разработки под них, возникает необходимость в специальной адаптации кода ОС<sup id="fnref:ports-1"><a class="footnote-ref" href="#fn:ports-1">1</a></sup> под них. Результатом этой работы является платформеннозависимая часть, которая в совокупности с общей частью и составляет порт под ту или иную платформу. Процесс подготовки платформеннозависимой части называется портированием.</p>
+<p>Ввиду больших отличий как аппаратных архитектур, так и средств разработки под них, возникает необходимость в специальной адаптации кода ОС<sup id="fnref:porting-1"><a class="footnote-ref" href="#fn:porting-1">1</a></sup> под них. Результатом этой работы является платформеннозависимая часть, которая в совокупности с общей частью и составляет порт под ту или иную платформу. Процесс подготовки платформеннозависимой части называется портированием.</p>
 <p>В настоящей главе будут рассмотрены, главным образом, платформеннозависимые части, их содержимое и особенности,  также дана краткая инструкция по портированию ОС, т.е. что нужно сделать, чтобы создать порт.</p>
 <p>Платформеннозависимая часть каждой целевой платформы содержится в отдельной директории и минимально содержит три файла:</p>
 <ul>
-<li>os_target.h – платформеннозависимые объявления и макросы.</li>
-<li>os_target_asm.ext<sup id="fnref:ports-2"><a class="footnote-ref" href="#fn:ports-2">2</a></sup> – низкоуровневый код, функции переключения контекста, старта ОС.</li>
-<li>os_target.cpp – определения функции инициализации стекового кадра процесса и функции обработчика прерывания от таймера, используемого в качестве системного.</li>
+<li><strong>os_target.h</strong> – платформеннозависимые объявления и макросы.</li>
+<li><strong>os_target_asm.ext</strong><sup id="fnref:porting-2"><a class="footnote-ref" href="#fn:porting-2">2</a></sup> – низкоуровневый код, функции переключения контекста, старта ОС.</li>
+<li><strong>os_target.cpp</strong> – определения функции инициализации стекового кадра процесса и функции обработчика прерывания от таймера, используемого в качестве системного.</li>
 </ul>
 <p>Настройка кода ОС на целевую платформу осуществляется путём:</p>
 <ul>
@@ -233,7 +233,7 @@
 <li>заданием псевдонимов некоторых типов;</li>
 <li>определением функций, код которых вынесен на уровень порта.</li>
 </ul>
-<p>Важной и "тонкой" частью кода порта является определение ассемблерных подпрограмм, осуществляющих старт системы, сохранение контекста прерываемого процесса, переключение указателей стека и восстановление контекста процесса, получившего управление, в том числе и обработчик программного прерывания, в теле которого производится переключение контекстов процессов. Чтобы реализовать этот код, от разработчика порта требуются глубокие знания целевой аппаратной архитектуры на низком уровне, а также умение использовать программный пакет (компилятор, ассемблер, линкер) для работы со "смешанными"<sup id="fnref:ports-3"><a class="footnote-ref" href="#fn:ports-3">3</a></sup> проектами. </p>
+<p>Важной и "тонкой" частью кода порта является определение ассемблерных подпрограмм, осуществляющих старт системы, сохранение контекста прерываемого процесса, переключение указателей стека и восстановление контекста процесса, получившего управление, в том числе и обработчик программного прерывания, в теле которого производится переключение контекстов процессов. Чтобы реализовать этот код, от разработчика порта требуются глубокие знания целевой аппаратной архитектуры на низком уровне, а также умение использовать программный пакет (компилятор, ассемблер, линкер) для работы со "смешанными"<sup id="fnref:porting-3"><a class="footnote-ref" href="#fn:porting-3">3</a></sup> проектами. </p>
 <p>Процесс портирования сводится, главным образом, к определению объектов портирования и написанию платформеннозависимого кода.</p>
 <h2 id="_3">Объекты портирования<a class="headerlink" href="#_3" title="Permanent link">🔗</a></h2>
 <h3 id="_4">Макросы<a class="headerlink" href="#_4" title="Permanent link">🔗</a></h3>
@@ -243,7 +243,7 @@
 Задаёт поведение функций при встраивании. Обычно состоит из платформеннозависимой директивы безусловного встраивания и ключевого слова <code>inline</code>.<p></p>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">OS_PROCESS</span>
 </span></code></pre></div>
-<p>Квалифицирует исполняемую функцию процесса. Содержит платформеннозависимый атрибут, указывающий компилятору, что функция не имеет возврата, поэтому preserved<sup id="fnref:ports-4"><a class="footnote-ref" href="#fn:ports-4">4</a></sup> регистры процессора можно использовать без сохранения. Это экономит код и пространство в стеке.</p>
+<p>Квалифицирует исполняемую функцию процесса. Содержит платформеннозависимый атрибут, указывающий компилятору, что функция не имеет возврата, поэтому preserved<sup id="fnref:porting-4"><a class="footnote-ref" href="#fn:porting-4">4</a></sup> регистры процессора можно использовать без сохранения. Это экономит код и пространство в стеке.</p>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">OS_INTERRUPT</span>
 </span></code></pre></div>
 <p>Содержит платформеннозависимое расширение, используемое для квалификации обработчиков прерываний на целевой платформе.</p>
@@ -300,22 +300,22 @@
 <p>Функция, реализованная на ассемблере, производит переключение контекстов процессов в варианте с прямой передачей управления.</p>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="n">context_switcher_isr</span><span class="p">()</span>
 </span></code></pre></div>
-<p>Обработчик прерываний переключения контекстов. Реализуется на ассемблере. Производит сохранение контекста прерываемого процесса, переключение указателей стеков процессов путём вызова <code>context_switch_hook()</code><sup id="fnref:ports-5"><a class="footnote-ref" href="#fn:ports-5">5</a></sup> и восстановление контекста активируемого процесса.</p>
+<p>Обработчик прерываний переключения контекстов. Реализуется на ассемблере. Производит сохранение контекста прерываемого процесса, переключение указателей стеков процессов путём вызова <code>context_switch_hook()</code><sup id="fnref:porting-5"><a class="footnote-ref" href="#fn:porting-5">5</a></sup> и восстановление контекста активируемого процесса.</p>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-20-1"><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="n">TBaseProcess</span><span class="o">::</span><span class="n">init_stack_frame</span><span class="p">()</span>
 </span></code></pre></div>
 <p>Функция подготовки стекового кадра, которая формирует значения ячеек памяти в стеке таким образом, чтобы состояние стека было таким, как будто процесс, которому принадлежит стек, прерван и контекст процесса сохранён в стеке. Функция используется конструктором процесса и при рестарте процесса.</p>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-21-1"><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="n">system_timer_isr</span><span class="p">()</span>
 </span></code></pre></div>
 <p>Обработчик прерываний системного таймера. Вызывает функцию <code>TKernel::system_timer()</code>.</p>
-<h2 id="_7">Портирование<a class="headerlink" href="#_7" title="Permanent link">🔗</a></h2>
-<p>Для портирования, как правило, достаточно определить для целевой платформы все вышеперечисленные макросы, типы и функции.</p>
+<h2 id="_7">Реализация<a class="headerlink" href="#_7" title="Permanent link">🔗</a></h2>
+<p>В процессе портирования, как правило, достаточно определить для целевой платформы все вышеперечисленные макросы, типы и функции.</p>
 <p>Наиболее "тонкая" и ответственная работа при портировании выпадает на реализацию ассемблерного кода и на функцию подготовки стекового кадра. Ряд моментов, на которые следует обратить особое внимание:</p>
 <ul>
 <li>выяснить, какие используются соглашения о вызове функций у используемого компилятора, чтобы знать, какие регистры (или область стека) используются для передачи аргументов тех или иных типов;</li>
 <li>определить особенности работы процессора в части сохранения адресов возвратов и статусных регистров при возникновении прерывания&nbsp;– это необходимо для понимания, как формируется стековый кадр на целевой аппаратной платформе, что, в свою очередь, важно для реализации функции (и обработчика прерываний) переключения контекстов, и функции формирования стекового кадра;</li>
-<li>проверить схему кодирования экспортируемых/импортируемых имён ассемблера. В простейшем случае имена объектов и функций на С (и <code>"extern C"</code><sup id="fnref:ports-6"><a class="footnote-ref" href="#fn:ports-6">6</a></sup> на С++) на ассемблере видны без изменений, но на некоторых платформах<sup id="fnref:ports-7"><a class="footnote-ref" href="#fn:ports-7">7</a></sup> к самому имени могут добавляться префиксы и/или суффиксы, что потребует ассемблерные функции именовать в соответствии с этой схемой, иначе линкер не сможет правильно выполнить связи.</li>
+<li>проверить схему кодирования экспортируемых/импортируемых имён ассемблера. В простейшем случае имена объектов и функций на С (и <code>"extern C"</code><sup id="fnref:porting-6"><a class="footnote-ref" href="#fn:porting-6">6</a></sup> на С++) на ассемблере видны без изменений, но на некоторых платформах<sup id="fnref:porting-7"><a class="footnote-ref" href="#fn:porting-7">7</a></sup> к самому имени могут добавляться префиксы и/или суффиксы, что потребует ассемблерные функции именовать в соответствии с этой схемой, иначе линкер не сможет правильно выполнить связи.</li>
 </ul>
-<p>Весь ассемблерный код должен быть помещён в файл os_target_asm.ext, упомянутый выше. Определения макросов и типов, а также встраиваемых функций&nbsp;– в файл os_target.h. В файле os_target.cpp объявляются объекты типов, если необходимо,&nbsp;– например, <code>OS::TPrioMaskTable OS::PrioMaskTable</code>, а также определяются функция <code>TBaseProcess::init_stack_frame()</code> и обработчик прерывания системного таймера <code>system_timer_isr()</code>.</p>
+<p>Весь ассемблерный код должен быть помещён в файл <strong>os_target_asm.ext</strong>, упомянутый выше. Определения макросов и типов, а также встраиваемых функций&nbsp;– в файл <strong>os_target.h</strong>. В файле <strong>os_target.cpp</strong> объявляются объекты типов, если необходимо,&nbsp;– например, <code>OS::TPrioMaskTable</code> <code>OS::PrioMaskTable</code>, а также определяются функция <code>TBaseProcess::init_stack_frame()</code> и обработчик прерывания системного таймера <code>system_timer_isr()</code>.</p>
 <p>Вышеописанное является лишь общими сведениями, относящимися к порту ОС, при портировании возникает достаточно много нюансов, описание которых является весьма частным и выходит за рамки настоящего документа.</p>
 <div class="admonition tip">
 <p class="admonition-title"><strong>СОВЕТ</strong></p>
@@ -325,35 +325,35 @@
 <p>Для повышения гибкости и эффективности использования часть платформеннозависимого кода, зависящая от частных особенностей того или иного проекта и конкретно используемого микроконтроллера, вынесена на уровень проекта. Сюда, как правило, относится выбор аппаратного таймера процессора, используемого в качестве системного, а также выбор прерывания переключения контекстов, если процессор не имеет специализированного программного прерывания.</p>
 <p>Для конфигурирования порта проект должен содержать файлы:</p>
 <ul>
-<li>scmRTOS_config.h;</li>
-<li>scmRTOS_target_cfg.h;</li>
+<li><strong>scmRTOS_config.h</strong>;</li>
+<li><strong>scmRTOS_target_cfg.h</strong>.</li>
 </ul>
 <p>scmRTOS_config.h содержит большинство конфигурационных макросов, задающих такие параметры, как количество процессов в программе, способ передачи управления, включение функции системного времени, разрешение использования пользовательских хуков, порядок нумерации значений приоритетов и т.д.</p>
-<p>В scmRTOS_target_cfg.h размещён код управления ресурсами целевого процессора, выбранными для реализации системных функций&nbsp;– всё тот же системный таймер, прерывание переключения контекстов.</p>
+<p>В <strong>scmRTOS_target_cfg.h</strong> размещён код управления ресурсами целевого процессора, выбранными для реализации системных функций&nbsp;– всё тот же системный таймер, прерывание переключения контекстов.</p>
 <p>Содержимое обоих конфигурационных файлов подробно описано в документах, посвящённых конкретным портам.</p>
 <div class="footnote">
 <hr>
 <ol>
-<li id="fn:ports-1">
-<p>Это касается не только ОС, но и других кроссплатформенных программ.&nbsp;<a class="footnote-backref" href="#fnref:ports-1" title="Jump back to footnote 1 in the text">↩</a></p>
+<li id="fn:porting-1">
+<p>Это касается не только ОС, но и других кроссплатформенных программ.&nbsp;<a class="footnote-backref" href="#fnref:porting-1" title="Jump back to footnote 1 in the text">↩</a></p>
 </li>
-<li id="fn:ports-2">
-<p>Расширение ассемблерного файла для целевого процессора.&nbsp;<a class="footnote-backref" href="#fnref:ports-2" title="Jump back to footnote 2 in the text">↩</a></p>
+<li id="fn:porting-2">
+<p>Расширение ассемблерного файла для целевого процессора.&nbsp;<a class="footnote-backref" href="#fnref:porting-2" title="Jump back to footnote 2 in the text">↩</a></p>
 </li>
-<li id="fn:ports-3">
-<p>Т.е. содержащими исходные файлы на разных языках программирования&nbsp;– в нашем случае С++ и ассемблер целевой аппаратной платформы.&nbsp;<a class="footnote-backref" href="#fnref:ports-3" title="Jump back to footnote 3 in the text">↩</a></p>
+<li id="fn:porting-3">
+<p>Т.е. содержащими исходные файлы на разных языках программирования&nbsp;– в нашем случае С++ и ассемблер целевой аппаратной платформы.&nbsp;<a class="footnote-backref" href="#fnref:porting-3" title="Jump back to footnote 3 in the text">↩</a></p>
 </li>
-<li id="fn:ports-4">
-<p>Те, значение которых перед использованием должно быть сохранено, а после использования восстановлено, чтобы вызывающая функция не получила искажения контекста при вызове другой функции.&nbsp;<a class="footnote-backref" href="#fnref:ports-4" title="Jump back to footnote 4 in the text">↩</a></p>
+<li id="fn:porting-4">
+<p>Те, значение которых перед использованием должно быть сохранено, а после использования восстановлено, чтобы вызывающая функция не получила искажения контекста при вызове другой функции.&nbsp;<a class="footnote-backref" href="#fnref:porting-4" title="Jump back to footnote 4 in the text">↩</a></p>
 </li>
-<li id="fn:ports-5">
-<p>Через функцию-"обёртку"" <code>os_context_switch_hook()</code>, имеющую спецификацию связывания <code>"extern C"</code>.&nbsp;<a class="footnote-backref" href="#fnref:ports-5" title="Jump back to footnote 5 in the text">↩</a></p>
+<li id="fn:porting-5">
+<p>Через функцию-"обёртку"" <code>os_context_switch_hook()</code>, имеющую спецификацию связывания <code>"extern C"</code>.&nbsp;<a class="footnote-backref" href="#fnref:porting-5" title="Jump back to footnote 5 in the text">↩</a></p>
 </li>
-<li id="fn:ports-6">
-<p>Имена в С++ подвергаются специальному кодированию в целях поддержки перегрузки имён функций, а также для типобезопасного связывания, по какой причине получить к ним доступ на ассемблере задача трудновыполнимая. Поэтому имена функций, описанных в файлах, которые компилируются С++ компилятором и к которым необходим доступ из ассемблерного кода, должны быть объявлены в исходных файлах как <code>"extern C"</code>.&nbsp;<a class="footnote-backref" href="#fnref:ports-6" title="Jump back to footnote 6 in the text">↩</a></p>
+<li id="fn:porting-6">
+<p>Имена в С++ подвергаются специальному кодированию в целях поддержки перегрузки имён функций, а также для типобезопасного связывания, по какой причине получить к ним доступ на ассемблере задача трудновыполнимая. Поэтому имена функций, описанных в файлах, которые компилируются С++ компилятором и к которым необходим доступ из ассемблерного кода, должны быть объявлены в исходных файлах как <code>"extern C"</code>.&nbsp;<a class="footnote-backref" href="#fnref:porting-6" title="Jump back to footnote 6 in the text">↩</a></p>
 </li>
-<li id="fn:ports-7">
-<p>В частности, на Blackfin.&nbsp;<a class="footnote-backref" href="#fnref:ports-7" title="Jump back to footnote 7 in the text">↩</a></p>
+<li id="fn:porting-7">
+<p>В частности, на Blackfin.&nbsp;<a class="footnote-backref" href="#fnref:porting-7" title="Jump back to footnote 7 in the text">↩</a></p>
 </li>
 </ol>
 </div>
@@ -396,9 +396,9 @@
     <script>var base_url = "../..";</script>
     <script src="../../js/theme_extra.js"></script>
     <script src="../../js/theme.js"></script>
-      <script src="../../static/js/mathjax.js"></script>
-      <script src="../../static/js/mathjax/tex-mml-chtml.js"></script>
-      <script src="../../static/js/color-symbols.js"></script>
+      <script src="../../extra_js/mathjax.js"></script>
+      <script src="../../extra_js/mathjax/tex-mml-chtml.js"></script>
+      <script src="../../extra_js/color-symbols.js"></script>
       <script src="../../search/main.js"></script>
     <script>
         jQuery(function () {

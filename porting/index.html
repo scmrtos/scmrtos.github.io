@@ -3,7 +3,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <link rel="shortcut icon" href="../img/favicon.ico">
-    <title>Ports - scmRTOS</title>
+    <title>Porting - scmRTOS</title>
     <link rel="stylesheet" href="../css/theme.css">
     <link rel="stylesheet" href="../css/theme_extra.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css">
@@ -11,8 +11,8 @@
     
       <script>
         // Current page data
-        var mkdocs_page_name = "Ports";
-        var mkdocs_page_input_path = "en/ports.md";
+        var mkdocs_page_name = "Porting";
+        var mkdocs_page_input_path = "en/porting.md";
         var mkdocs_page_url = null;
       </script>
     
@@ -54,7 +54,7 @@
       ];
       
       // get the page path and remove the leading slash
-      let pagePath = "ports/".replace(/^\//, '');
+      let pagePath = "porting/".replace(/^\//, '');
       
       // remove current lang prefix from the path
       const currentLangObj = languages.find(lang => lang.code === currentLang);
@@ -71,7 +71,7 @@
           }
       }
       
-      console.log("Current lang:", currentLang, "page.url raw:", "ports/", "normalized path:", pagePath);
+      console.log("Current lang:", currentLang, "page.url raw:", "porting/", "normalized path:", pagePath);
       
       languages.forEach(lang => {
           const option = document.createElement("option");
@@ -152,14 +152,17 @@
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">RTOS Components</span></p>
-              <ul class="current">
+              <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../kernel/">Kernel</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../processes/">Processes</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../ipcs/">Interprocess Communication</a>
                   </li>
-                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Ports</a>
+              </ul>
+              <p class="caption"><span class="caption-text">Appendix</span></p>
+              <ul class="current">
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Porting</a>
     <ul class="current">
     <li class="toctree-l2"><a class="reference internal" href="#general-notes">General Notes</a>
     </li>
@@ -179,9 +182,6 @@
     </li>
     </ul>
                   </li>
-              </ul>
-              <p class="caption"><span class="caption-text">Appendix</span></p>
-              <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../debug/">Debugging</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../profiler/">Process Profiling</a>
@@ -205,8 +205,8 @@
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
-          <li class="breadcrumb-item">RTOS Components</li>
-      <li class="breadcrumb-item active">Ports</li>
+          <li class="breadcrumb-item">Appendix</li>
+      <li class="breadcrumb-item active">Porting</li>
     <li class="wy-breadcrumbs-aside">
     </li>
   </ul>
@@ -215,15 +215,15 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h1 id="ports">Ports<a class="headerlink" href="#ports" title="Permanent link">🔗</a></h1>
+                <h1 id="porting">Porting<a class="headerlink" href="#porting" title="Permanent link">🔗</a></h1>
 <h2 id="general-notes">General Notes<a class="headerlink" href="#general-notes" title="Permanent link">🔗</a></h2>
-<p>Due to significant differences in both hardware architectures and the development tools targeting them, adaptation of the OS code<sup id="fnref:ports-1"><a class="footnote-ref" href="#fn:ports-1">1</a></sup> to specific platforms is required. The result of this effort is the platform-specific portion, which, together with the common core, constitutes the complete port for a given platform. The process of preparing the platform-specific portion is referred to as porting.</p>
-<p>This chapter primarily examines the platform-specific components, their contents and characteristics, and provides brief instructions for porting the OS&nbsp;– i.e., the steps required to create a new port.</p>
+<p>Due to significant differences in both hardware architectures and the development tools targeting them, adaptation of the OS code<sup id="fnref:porting-1"><a class="footnote-ref" href="#fn:porting-1">1</a></sup> to specific platforms is required. The result of this effort is the platform-specific portion, which, together with the common core, constitutes the complete port for a given platform. The process of preparing the platform-specific portion is referred to as porting.</p>
+<p>This section primarily examines the platform-specific components, their contents and characteristics, and provides brief instructions for porting the OS&nbsp;– i.e., the steps required to create a new port.</p>
 <p>The platform-specific code for each target platform is contained in a separate directory and minimally includes three files:</p>
 <ul>
-<li><code>os_target.h</code> – platform-specific declarations and macros.</li>
-<li><code>os_target_asm.ext</code><sup id="fnref:ports-2"><a class="footnote-ref" href="#fn:ports-2">2</a></sup> – low-level code, including context switch functions and OS startup routines.</li>
-<li><code>os_target.cpp</code> – definitions of the process stack frame initialization function and the interrupt handler for the timer used as the system timer.</li>
+<li><strong>os_target.h</strong>. Pplatform-specific declarations and macros.</li>
+<li><strong>os_target_asm.ext</strong><sup id="fnref:porting-2"><a class="footnote-ref" href="#fn:porting-2">2</a></sup>. Low-level code, including context switch functions and OS startup routines.</li>
+<li><strong>os_target.cpp</strong>. Definitions of the process stack frame initialization function and the interrupt handler for the timer used as the system timer.</li>
 </ul>
 <p>Configuration of the OS code for a target platform is achieved through:</p>
 <ul>
@@ -233,7 +233,7 @@
 <li>Type aliases for certain types.</li>
 <li>Definition of functions whose implementation is delegated to the port level.</li>
 </ul>
-<p>A critical and delicate part of the port code involves the implementation of assembly language subroutines responsible for system startup, saving the context of the interrupted process, switching stack pointers, and restoring the context of the process gaining control, including the software interrupt handler that performs context switching. Implementing this code requires the port developer to have in-depth knowledge of the target hardware architecture at a low level, as well as proficiency in using the toolchain (compiler, assembler, linker) for mixed-language<sup id="fnref:ports-3"><a class="footnote-ref" href="#fn:ports-3">3</a></sup> projects.</p>
+<p>A critical and delicate part of the port code involves the implementation of assembly language subroutines responsible for system startup, saving the context of the interrupted process, switching stack pointers, and restoring the context of the process gaining control, including the software interrupt handler that performs context switching. Implementing this code requires the port developer to have in-depth knowledge of the target hardware architecture at a low level, as well as proficiency in using the toolchain (compiler, assembler, linker) for mixed-language<sup id="fnref:porting-3"><a class="footnote-ref" href="#fn:porting-3">3</a></sup> projects.</p>
 <p>The porting process primarily consists of identifying the required porting objects and implementing the platform-specific code.</p>
 <h2 id="porting-objects">Porting Objects<a class="headerlink" href="#porting-objects" title="Permanent link">🔗</a></h2>
 <h3 id="macros">Macros<a class="headerlink" href="#macros" title="Permanent link">🔗</a></h3>
@@ -243,7 +243,7 @@
 <p>Specifies the inlining behavior for functions. Typically consists of a platform-specific unconditional inlining directive combined with the <code>inline</code> keyword.</p>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">OS_PROCESS</span>
 </span></code></pre></div>
-<p>Qualifies the executable function of a process. Contains a platform-specific attribute that informs the compiler that the function does not return, allowing preserved<sup id="fnref:ports-4"><a class="footnote-ref" href="#fn:ports-4">4</a></sup> registers to be used without saving them. This reduces code size and stack usage.</p>
+<p>Qualifies the executable function of a process. Contains a platform-specific attribute that informs the compiler that the function does not return, allowing preserved<sup id="fnref:porting-4"><a class="footnote-ref" href="#fn:porting-4">4</a></sup> registers to be used without saving them. This reduces code size and stack usage.</p>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">OS_INTERRUPT</span>
 </span></code></pre></div>
 <p>Contains a platform-specific extension used to qualify interrupt handlers on the target platform.</p>
@@ -300,7 +300,7 @@
 <p>Assembly function that performs direct context switching between processes.</p>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="n">context_switcher_isr</span><span class="p">()</span>
 </span></code></pre></div>
-<p>Interrupt handler for context switching. Implemented in assembly language. Saves the context of the interrupted process, switches stack pointers via a call to <code>context_switch_hook()</code><sup id="fnref:ports-5"><a class="footnote-ref" href="#fn:ports-5">5</a></sup>, and restores the context of the activated process.</p>
+<p>Interrupt handler for context switching. Implemented in assembly language. Saves the context of the interrupted process, switches stack pointers via a call to <code>context_switch_hook()</code><sup id="fnref:porting-5"><a class="footnote-ref" href="#fn:porting-5">5</a></sup>, and restores the context of the activated process.</p>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-20-1"><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="n">TBaseProcess</span><span class="o">::</span><span class="n">init_stack_frame</span><span class="p">()</span>
 </span></code></pre></div>
 <p>Initializes the stack frame of a process, arranging memory cells such that the stack appears as if the process was interrupted and its context saved. Used by the process constructor and during process restart.</p>
@@ -313,9 +313,9 @@
 <ul>
 <li>Determining the calling conventions used by the compiler to identify which registers (or stack areas) are used for passing arguments of various types.</li>
 <li>Understanding how the processor handles saving of return addresses and status registers upon interrupt occurrence&nbsp;– this is essential for correct stack frame construction on the target platform, which in turn is necessary for implementing context switch functions/handlers and stack frame initialization.</li>
-<li>Verifying the name mangling scheme for exported/imported symbols in assembly code. In the simplest case, C names (and <code>"extern C"</code><sup id="fnref:ports-6"><a class="footnote-ref" href="#fn:ports-6">6</a></sup> names in C++) are visible unchanged in assembly code, but on some platforms<sup id="fnref:ports-7"><a class="footnote-ref" href="#fn:ports-7">7</a></sup> prefixes and/or suffixes may be added, requiring assembly functions to be named accordingly for correct linker resolution.</li>
+<li>Verifying the name mangling scheme for exported/imported symbols in assembly code. In the simplest case, C names (and <code>"extern C"</code><sup id="fnref:porting-6"><a class="footnote-ref" href="#fn:porting-6">6</a></sup> names in C++) are visible unchanged in assembly code, but on some platforms<sup id="fnref:porting-7"><a class="footnote-ref" href="#fn:porting-7">7</a></sup> prefixes and/or suffixes may be added, requiring assembly functions to be named accordingly for correct linker resolution.</li>
 </ul>
-<p>All assembly code should be placed in the file <code>os_target_asm.ext</code> mentioned earlier. Macro and type definitions, along with inline functions, belong in <code>os_target.h</code>. The file <code>os_target.cpp</code> should declare type objects if needed (e.g., <code>OS::TPrioMaskTable OS::PrioMaskTable</code>), define <code>TBaseProcess::init_stack_frame()</code> and the system timer interrupt handler <code>system_timer_isr()</code>.</p>
+<p>All assembly code should be placed in the file <strong>os_target_asm.ext</strong> mentioned earlier. Macro and type definitions, along with inline functions, belong in <strong>os_target.h</strong>. The file <code>os_target.cpp</code> should declare type objects if needed (e.g., <code>OS::TPrioMaskTable</code> <code>OS::PrioMaskTable</code>), define <code>TBaseProcess::init_stack_frame()</code> and the system timer interrupt handler <code>system_timer_isr()</code>.</p>
 <p>The above provides only general information related to OS ports. Porting involves numerous specific nuances whose detailed description is beyond the scope of this document.</p>
 <div class="admonition tip">
 <p class="admonition-title"><strong>TIP</strong></p>
@@ -325,35 +325,35 @@
 <p>To enhance flexibility and efficiency, certain platform-specific code that depends on project-specific details and the particular microcontroller used is delegated to the project level. This typically includes selection of the hardware timer used as the system timer and, where applicable, the context-switch interrupt when the processor lacks a dedicated software interrupt.</p>
 <p>For port configuration, the project must include the following files:</p>
 <ul>
-<li><code>scmRTOS_config.h</code>;</li>
-<li><code>scmRTOS_target_cfg.h</code>;</li>
+<li><strong>scmRTOS_config.h</strong>;</li>
+<li><strong>scmRTOS_target_cfg.h</strong>;</li>
 </ul>
-<p>The file <code>scmRTOS_config.h</code> contains most configuration macros defining parameters such as the number of processes, context switch method, enabling of system time functions, user hook support, priority value ordering, and similar settings.</p>
-<p>The file <code>scmRTOS_target_cfg.h</code> contains code for managing target processor resources selected for system functions&nbsp;– primarily the system timer and context-switch interrupt.</p>
+<p>The file <strong>scmRTOS_config.h</strong> contains most configuration macros defining parameters such as the number of processes, context switch method, enabling of system time functions, user hook support, priority value ordering, and similar settings.</p>
+<p>The file <strong>scmRTOS_target_cfg.h</strong> contains code for managing target processor resources selected for system functions&nbsp;– primarily the system timer and context-switch interrupt.</p>
 <p>The contents of both configuration files are described in detail in documents specific to individual ports.</p>
 <div class="footnote">
 <hr>
 <ol>
-<li id="fn:ports-1">
-<p>This applies not only to the OS but also to other cross-platform software.&nbsp;<a class="footnote-backref" href="#fnref:ports-1" title="Jump back to footnote 1 in the text">↩</a></p>
+<li id="fn:porting-1">
+<p>This applies not only to the OS but also to other cross-platform software.&nbsp;<a class="footnote-backref" href="#fnref:porting-1" title="Jump back to footnote 1 in the text">↩</a></p>
 </li>
-<li id="fn:ports-2">
-<p>The file extension for assembly source code specific to the target processor.&nbsp;<a class="footnote-backref" href="#fnref:ports-2" title="Jump back to footnote 2 in the text">↩</a></p>
+<li id="fn:porting-2">
+<p>The file extension for assembly source code specific to the target processor.&nbsp;<a class="footnote-backref" href="#fnref:porting-2" title="Jump back to footnote 2 in the text">↩</a></p>
 </li>
-<li id="fn:ports-3">
-<p>That is, projects containing source files in different programming languages&nbsp;– in this case, C++ and the assembly language of the target hardware platform.&nbsp;<a class="footnote-backref" href="#fnref:ports-3" title="Jump back to footnote 3 in the text">↩</a></p>
+<li id="fn:porting-3">
+<p>That is, projects containing source files in different programming languages&nbsp;– in this case, C++ and the assembly language of the target hardware platform.&nbsp;<a class="footnote-backref" href="#fnref:porting-3" title="Jump back to footnote 3 in the text">↩</a></p>
 </li>
-<li id="fn:ports-4">
-<p>Registers whose values must be saved before use and restored afterward to prevent corruption of the calling function's context when invoking another function.&nbsp;<a class="footnote-backref" href="#fnref:ports-4" title="Jump back to footnote 4 in the text">↩</a></p>
+<li id="fn:porting-4">
+<p>Registers whose values must be saved before use and restored afterward to prevent corruption of the calling function's context when invoking another function.&nbsp;<a class="footnote-backref" href="#fnref:porting-4" title="Jump back to footnote 4 in the text">↩</a></p>
 </li>
-<li id="fn:ports-5">
-<p>Through the wrapper function <code>os_context_switch_hook()</code>, which has <code>"extern C"</code> linkage.&nbsp;<a class="footnote-backref" href="#fnref:ports-5" title="Jump back to footnote 5 in the text">↩</a></p>
+<li id="fn:porting-5">
+<p>Through the wrapper function <code>os_context_switch_hook()</code>, which has <code>"extern C"</code> linkage.&nbsp;<a class="footnote-backref" href="#fnref:porting-5" title="Jump back to footnote 5 in the text">↩</a></p>
 </li>
-<li id="fn:ports-6">
-<p>C++ names undergo special mangling to support function overloading and type-safe linking, making direct assembly level access difficult. Therefore, functions defined in C++-compiled files that need to be accessed from assembly code must be declared with <code>"extern C"</code> linkage.&nbsp;<a class="footnote-backref" href="#fnref:ports-6" title="Jump back to footnote 6 in the text">↩</a></p>
+<li id="fn:porting-6">
+<p>C++ names undergo special mangling to support function overloading and type-safe linking, making direct assembly level access difficult. Therefore, functions defined in C++-compiled files that need to be accessed from assembly code must be declared with <code>"extern C"</code> linkage.&nbsp;<a class="footnote-backref" href="#fnref:porting-6" title="Jump back to footnote 6 in the text">↩</a></p>
 </li>
-<li id="fn:ports-7">
-<p>Notably on Blackfin.&nbsp;<a class="footnote-backref" href="#fnref:ports-7" title="Jump back to footnote 7 in the text">↩</a></p>
+<li id="fn:porting-7">
+<p>Notably on Blackfin.&nbsp;<a class="footnote-backref" href="#fnref:porting-7" title="Jump back to footnote 7 in the text">↩</a></p>
 </li>
 </ol>
 </div>
@@ -396,9 +396,9 @@
     <script>var base_url = "..";</script>
     <script src="../js/theme_extra.js"></script>
     <script src="../js/theme.js"></script>
-      <script src="../static/js/mathjax.js"></script>
-      <script src="../static/js/mathjax/tex-mml-chtml.js"></script>
-      <script src="../static/js/color-symbols.js"></script>
+      <script src="../extra_js/mathjax.js"></script>
+      <script src="../extra_js/mathjax/tex-mml-chtml.js"></script>
+      <script src="../extra_js/color-symbols.js"></script>
       <script src="../search/main.js"></script>
     <script>
         jQuery(function () {
