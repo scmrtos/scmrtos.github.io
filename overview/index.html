@@ -229,7 +229,7 @@
 <h2 id="brief-description">Brief Description<a class="headerlink" href="#brief-description" title="Permanent link">🔗</a></h2>
 <p><strong>scmRTOS</strong> is a real-time operating system featuring priority-based preemptive multitasking. The OS supports up to 32 processes (including the system <strong>IdleProc</strong> process, i.e., up to 31 user processes), each with a unique priority. All processes are static, meaning their number is defined at the project build stage and they cannot be added or removed at runtime.</p>
 <p><span id="overview-avoid-dynamic-process"></span></p>
-<p>The decision to forgo dynamic process creation is driven by resource conservation considerations, as resources in single-chip microcontrollers are limited. Dynamic process deletion is also not implemented, as it offers little benefit: the program memory used by the process is not freed, and RAM for subsequent use would require allocation/deallocation via a memory manager, which is a complex component that consumes significant resources and is generally not used in single-chip microcontroller projects<sup id="fnref:overview-1"><a class="footnote-ref" href="#fn:overview-1">1</a></sup>.</p>
+<p>The decision to forgo dynamic process creation is driven by resource conservation considerations, as resources in single-chip microcontrollers are limited. Dynamic process deletion is also not implemented<sup id="fnref:overview-0"><a class="footnote-ref" href="#fn:overview-0">1</a></sup>, as it offers little benefit: the program memory used by the process is not freed, and RAM for subsequent use would require allocation/deallocation via a memory manager, which is a complex component that consumes significant resources and is generally not used in single-chip microcontroller projects<sup id="fnref:overview-1"><a class="footnote-ref" href="#fn:overview-1">2</a></sup>.</p>
 <p>In the current version, process priorities are also static: each process is assigned a priority at the project build stage, and the priority cannot be changed during program execution. This approach is motivated by the goal of making the system as lightweight as possible in terms of resource requirements while maintaining high responsiveness. Changing priorities during system operation is a non-trivial mechanism that, for correct operation, requires analyzing the state of the entire system (kernel, services) followed by modifications to kernel components and other OS parts (semaphores, event flags, etc.). This inevitably leads to prolonged periods with interrupts disabled, significantly degrading the system's dynamic characteristics.</p>
 <h2 id="os-structure">OS Structure<a class="headerlink" href="#os-structure" title="Permanent link">🔗</a></h2>
 <p>The system consists of three main components: the kernel, processes, and interprocess communication services.</p>
@@ -262,7 +262,7 @@
 <p>Listing 1. Process Execution Function</p>
 </figcaption>
 </figure>
-<p>Upon system startup, control is transferred to the process function, where declarations of used data (line 3) and initialization code (line 4) can be placed at the beginning, followed by the process's main loop (lines 5–8). User code must be written to prevent exiting the process function. For example, once entering the main loop, do not leave it (the primary approach), or if exiting the main loop, enter another loop (even an empty one) or an infinite "sleep" by calling the <code>sleep()</code> function<sup id="fnref:overview-2"><a class="footnote-ref" href="#fn:overview-2">2</a></sup> without parameters (or with parameter "0"), see <a href="../processes/#processes-process-sleep">The sleep() Function</a> for details. The process code must not contain <code>return</code> statements.</p>
+<p>Upon system startup, control is transferred to the process function, where declarations of used data (line 3) and initialization code (line 4) can be placed at the beginning, followed by the process's main loop (lines 5–8). User code must be written to prevent exiting the process function. For example, once entering the main loop, do not leave it (the primary approach), or if exiting the main loop, enter another loop (even an empty one) or an infinite "sleep" by calling the <code>sleep()</code> function<sup id="fnref:overview-2"><a class="footnote-ref" href="#fn:overview-2">3</a></sup> without parameters (or with parameter "0"), see <a href="../processes/#processes-process-sleep">The sleep() Function</a> for details. The process code must not contain <code>return</code> statements.</p>
 <div class="admonition info">
 <p class="admonition-title"><strong>NOTE</strong></p>
 <p>In the example shown, the role of the process executable function is played by the <code>exec()</code> function&nbsp;– a static member function of the class that describes the process type. This is not the only way to define a process executable function: in addition to a static member function, any function of the form <code>void fun()</code> can be used, whose address must be passed to the process constructor. This includes the ability to inline the function body as a constructor argument using the C++ lambda function mechanism. For more details see <a href="../processes/#processes-alternate-process-exec">"Alternative Ways to Declare a Process Object"</a></p>
@@ -296,11 +296,11 @@
 <li><strong>usrlib.h</strong>. Support library type and template definitions.</li>
 <li><strong>usrlib.cpp</strong>. Support library function definitions.</li>
 </ul>
-<p>As evident from the list, <strong>scmRTOS</strong> includes a small support library containing code used by OS components<sup id="fnref:overview-3"><a class="footnote-ref" href="#fn:overview-3">3</a></sup>. Since this library is not essentially part of the OS, it will not be discussed further here.</p>
+<p>As evident from the list, <strong>scmRTOS</strong> includes a small support library containing code used by OS components<sup id="fnref:overview-3"><a class="footnote-ref" href="#fn:overview-3">4</a></sup>. Since this library is not essentially part of the OS, it will not be discussed further here.</p>
 <p>The platform-dependent part source code is in three files:</p>
 <ul>
 <li><strong>os_target.h</strong>. Platform-dependent declarations and macros.</li>
-<li><strong>os_target_asm.ext</strong><sup id="fnref:overview-4"><a class="footnote-ref" href="#fn:overview-4">4</a></sup>. Low-level code for context switching and OS startup functions.</li>
+<li><strong>os_target_asm.ext</strong><sup id="fnref:overview-4"><a class="footnote-ref" href="#fn:overview-4">5</a></sup>. Low-level code for context switching and OS startup functions.</li>
 <li><strong>os_target.cpp</strong>. Process stack frame initialization function definition, system timer interrupt handler, and the idle process root function.</li>
 </ul>
 <p>The project-dependent part consists of three header files:</p>
@@ -311,7 +311,7 @@
 </ul>
 <h3 id="internal-structure">Internal Structure<a class="headerlink" href="#internal-structure" title="Permanent link">🔗</a></h3>
 <p>Everything related to <strong>scmRTOS</strong>, except a few assembly-implemented functions with <code>extern "C"</code> linkage, is placed inside the <code>OS</code> namespace that provides a dedicated namespace for OS components.</p>
-<p>Within this namespace, the following classes are declared<sup id="fnref:overview-5"><a class="footnote-ref" href="#fn:overview-5">5</a></sup>:</p>
+<p>Within this namespace, the following classes are declared<sup id="fnref:overview-5"><a class="footnote-ref" href="#fn:overview-5">6</a></sup>:</p>
 <ul>
 <li><code>TKernel</code>. Since only one kernel instance exists, there is only one object of this class. Users should not create the class instances.</li>
 <li><code>TBaseProcess</code>. Implements the base object type for the <code>process</code> template, on which all (user or system) processes are built.</li>
@@ -338,28 +338,28 @@
 <li><code>get_proc()</code>. Returns a pointer to the constant process object by the index passed as an argument to the function. The index is effectively the process priority value.</li>
 </ul>
 <h3 id="critical-sections">Critical Sections<a class="headerlink" href="#critical-sections" title="Permanent link">🔗</a></h3>
-<p>Due to the preemptive nature of process execution, any process can be interrupted at an arbitrary moment. On the other hand, there are cases<sup id="fnref:overview-6"><a class="footnote-ref" href="#fn:overview-6">6</a></sup> where it is necessary to prevent a process from being interrupted during the execution of a specific code fragment. This is achieved by disabling context switching<sup id="fnref:overview-7"><a class="footnote-ref" href="#fn:overview-7">7</a></sup> for the duration of that fragment's execution. In other words, this fragment acts as a non-interruptible section.</p>
+<p>Due to the preemptive nature of process execution, any process can be interrupted at an arbitrary moment. On the other hand, there are cases<sup id="fnref:overview-6"><a class="footnote-ref" href="#fn:overview-6">7</a></sup> where it is necessary to prevent a process from being interrupted during the execution of a specific code fragment. This is achieved by disabling context switching<sup id="fnref:overview-7"><a class="footnote-ref" href="#fn:overview-7">8</a></sup> for the duration of that fragment's execution. In other words, this fragment acts as a non-interruptible section.</p>
 <p>In OS terms, such a section is called a critical section. To simplify the organization of a critical section, a special wrapper class <code>TCritSect</code> is used. Its constructor saves the state of the processor resource controlling global interrupt enable/disable and then disables interrupts. The destructor restores this processor resource to the state it was in before the interrupts were disabled.</p>
 <p>Thus, if interrupts were already disabled, they remain disabled. If they were enabled, they are re-enabled. The implementation of this class is platform-dependent, so its definition is contained in the corresponding file <strong>os_target.h</strong>.</p>
-<p>Using <code>TCritSect</code> is straightforward: at the point corresponding to the start of the critical section, simply declare an object of this type, and from the declaration point until the end of the block, interrupts will be disabled<sup id="fnref:overview-8"><a class="footnote-ref" href="#fn:overview-8">8</a></sup>.</p>
+<p>Using <code>TCritSect</code> is straightforward: at the point corresponding to the start of the critical section, simply declare an object of this type, and from the declaration point until the end of the block, interrupts will be disabled<sup id="fnref:overview-8"><a class="footnote-ref" href="#fn:overview-8">9</a></sup>.</p>
 <h3 id="type-aliases-for-built-in-types">Type Aliases for Built-in Types<a class="headerlink" href="#type-aliases-for-built-in-types" title="Permanent link">🔗</a></h3>
 <p>To facilitate working with source code and improve portability, the following type aliases are introduced:</p>
 <ul>
-<li><code>TProcessMap</code> – type for defining a variable that serves as a process map. Its size depends on the number of processes in the system. Each process corresponds to a unique tag&nbsp;– a mask with only one non-zero bit positioned according to the process's priority. The highest-priority process corresponds to the least significant bit (position 0)<sup id="fnref:overview-9"><a class="footnote-ref" href="#fn:overview-9">9</a></sup>. With fewer than 8 user processes, the process map size is 8 bits. With 8 to 15, it is 16 bits; with 16 or more user processes, it is 32 bits.</li>
+<li><code>TProcessMap</code> – type for defining a variable that serves as a process map. Its size depends on the number of processes in the system. Each process corresponds to a unique tag&nbsp;– a mask with only one non-zero bit positioned according to the process's priority. The highest-priority process corresponds to the least significant bit (position 0)<sup id="fnref:overview-9"><a class="footnote-ref" href="#fn:overview-9">10</a></sup>. With fewer than 8 user processes, the process map size is 8 bits. With 8 to 15, it is 16 bits; with 16 or more user processes, it is 32 bits.</li>
 <li><code>stack_item_t</code> – type for a stack element. Depends on the target architecture. For example, on 8-bit <strong>AVR</strong>, this type is defined as <code>uint8_t</code>; on 16-bit <strong>MSP430</strong>, as <code>uint16_t</code>; and on 32-bit platforms, typically as <code>uint32_t</code>.</li>
 </ul>
 <h3 id="using-the-os">Using the OS<a class="headerlink" href="#using-the-os" title="Permanent link">🔗</a></h3>
 <p>As noted earlier, to achieve maximum efficiency, static mechanisms are used wherever possible&nbsp;– i.e., all functionality is determined at compile time.</p>
-<p>This primarily concerns processes. Before using each process, its type must be defined<sup id="fnref:overview-10"><a class="footnote-ref" href="#fn:overview-10">10</a></sup>, specifying the process type name, its priority, and the size of the RAM area allocated for the <a href="../processes/#processes-process-stack">process stack</a>. For example:</p>
+<p>This primarily concerns processes. Before using each process, its type must be defined<sup id="fnref:overview-10"><a class="footnote-ref" href="#fn:overview-10">11</a></sup>, specifying the process type name, its priority, and the size of the RAM area allocated for the <a href="../processes/#processes-process-stack">process stack</a>. For example:</p>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">OS</span><span class="o">::</span><span class="n">process</span><span class="o">&lt;</span><span class="n">OS</span><span class="o">::</span><span class="n">pr2</span><span class="p">,</span><span class="w"> </span><span class="mi">200</span><span class="o">&gt;</span><span class="w"> </span><span class="n">MainProc</span><span class="p">;</span>
 </span></code></pre></div>
-<p>This defines a process with priority <code>pr2</code> and a stack size of 200 bytes. Such a declaration may seem somewhat verbose due to its length, as referencing the process type requires writing the full expression&nbsp;– for example, when defining the process execution function<sup id="fnref:overview-11"><a class="footnote-ref" href="#fn:overview-11">11</a></sup>:</p>
+<p>This defines a process with priority <code>pr2</code> and a stack size of 200 bytes. Such a declaration may seem somewhat verbose due to its length, as referencing the process type requires writing the full expression&nbsp;– for example, when defining the process execution function<sup id="fnref:overview-11"><a class="footnote-ref" href="#fn:overview-11">12</a></sup>:</p>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">template</span><span class="o">&lt;&gt;</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">OS</span><span class="o">::</span><span class="n">process</span><span class="o">&lt;</span><span class="n">OS</span><span class="o">::</span><span class="n">pr2</span><span class="p">,</span><span class="w"> </span><span class="mi">200</span><span class="o">&gt;::</span><span class="n">exec</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">...</span><span class="w"> </span><span class="p">}</span>
 </span></code></pre></div>
 <p>because the type is precisely the expression</p>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="n">OS</span><span class="o">::</span><span class="n">process</span><span class="o">&lt;</span><span class="n">OS</span><span class="o">::</span><span class="n">pr2</span><span class="p">,</span><span class="w"> </span><span class="mi">200</span><span class="o">&gt;</span>
 </span></code></pre></div>
-<p>A similar situation arises in other cases where referencing the process type is required. To eliminate this inconvenience, it is recommended to use <strong>type aliases</strong> introduced via <code>typedef</code> or <code>using</code>. This is the preferred coding style: first define type aliases for processes (preferably in a single header file for easy overview of all processes in the project), and then declare the actual process objects in the source files as needed. With this approach, the earlier example becomes<sup id="fnref:overview-12"><a class="footnote-ref" href="#fn:overview-12">12</a></sup>:</p>
+<p>A similar situation arises in other cases where referencing the process type is required. To eliminate this inconvenience, it is recommended to use <strong>type aliases</strong> introduced via <code>typedef</code> or <code>using</code>. This is the preferred coding style: first define type aliases for processes (preferably in a single header file for easy overview of all processes in the project), and then declare the actual process objects in the source files as needed. With this approach, the earlier example becomes<sup id="fnref:overview-12"><a class="footnote-ref" href="#fn:overview-12">13</a></sup>:</p>
 <div class="language-cpp highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="c1">// In a header file</span>
 </span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="k">typedef</span><span class="w"> </span><span class="n">OS</span><span class="o">::</span><span class="n">process</span><span class="o">&lt;</span><span class="n">OS</span><span class="o">::</span><span class="n">pr2</span><span class="p">,</span><span class="w"> </span><span class="mi">200</span><span class="o">&gt;</span><span class="w"> </span><span class="n">TMainProc</span><span class="p">;</span>
 </span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="p">...</span>
@@ -377,7 +377,7 @@
 <p>There is nothing unusual about this sequence&nbsp;– it is the standard way of defining a type alias and creating an object of that type in C and C++.</p>
 <div class="admonition warning">
 <p class="admonition-title"><strong>IMPORTANT NOTE</strong></p>
-<p>When configuring the system, the number of processes must be explicitly specified. This number must exactly match the number of processes actually defined in the project; otherwise, the system will not function correctly. Note that priorities are specified using a dedicated enumerated type <code>TPriority</code>, which defines the allowed priority values<sup id="fnref:overview-13"><a class="footnote-ref" href="#fn:overview-13">13</a></sup>.</p>
+<p>When configuring the system, the number of processes must be explicitly specified. This number must exactly match the number of processes actually defined in the project; otherwise, the system will not function correctly. Note that priorities are specified using a dedicated enumerated type <code>TPriority</code>, which defines the allowed priority values<sup id="fnref:overview-13"><a class="footnote-ref" href="#fn:overview-13">14</a></sup>.</p>
 <p>Additionally, process priorities must be consecutive with no gaps. For example, if the system has 4 processes, their priorities must be <code>pr0</code>, <code>pr1</code>, <code>pr2</code>, and <code>pr3</code>. Duplicate priority values are also not allowed, each process must have a unique priority.</p>
 <p>For instance, with 4 user processes (resulting in 5 processes total, including the system <code>IdleProc</code>), the priorities should be <code>pr0</code>, <code>pr1</code>, <code>pr2</code>, <code>pr3</code> (<code>prIDLE</code> is reserved for <code>IdleProc</code>), where <code>pr0</code> is the highest-priority process and <code>pr3</code> is the lowest-priority user process. The lowest-priority process overall is always <code>IdleProc</code>. This process exists permanently in the system and does not need to be declared. It receives control whenever all user processes are inactive.</p>
 <p>The compiler does not check for gaps in priority numbering or for priority uniqueness, as—following the principle of separate compilation—there is no efficient way to automate such configuration integrity checks using language features alone.</p>
@@ -426,7 +426,7 @@
 </figcaption>
 </figure>
 <p>Each process, as mentioned earlier, has an executable function. When using the scheme described above, this executable function is named <code>exec</code> and looks as shown in "Listing 1. Process Execution Function".</p>
-<p>Configuration information is specified in a dedicated header file <strong>scmRTOS_config.h</strong>. The list of configuration macros and their meanings<sup id="fnref:overview-14"><a class="footnote-ref" href="#fn:overview-14">14</a></sup> are provided below.</p>
+<p>Configuration information is specified in a dedicated header file <strong>scmRTOS_config.h</strong>. The list of configuration macros and their meanings<sup id="fnref:overview-14"><a class="footnote-ref" href="#fn:overview-14">15</a></sup> are provided below.</p>
 <ul>
 <li>
 <p><code>scmRTOS_PROCESS_COUNT</code></p>
@@ -439,7 +439,7 @@
 <p><code>scmRTOS_SYSTIMER_NEST_INTS_ENABLE</code></p>
 <ul>
 <li><strong>value</strong> : 0/1.</li>
-<li><strong>description</strong> : Enables nested interrupts in the system timer interrupt handler<sup id="fnref:overview-15"><a class="footnote-ref" href="#fn:overview-15">15</a></sup>.</li>
+<li><strong>description</strong> : Enables nested interrupts in the system timer interrupt handler<sup id="fnref:overview-15"><a class="footnote-ref" href="#fn:overview-15">16</a></sup>.</li>
 </ul>
 </li>
 <li>
@@ -516,51 +516,54 @@
 <div class="footnote">
 <hr>
 <ol>
+<li id="fn:overview-0">
+<p>See the technique <a href="../processes/#processes-restart-process-tip">described in the "Processes" section</a> for implementing functionality similar to dynamic process creation and deletion.&nbsp;<a class="footnote-backref" href="#fnref:overview-0" title="Jump back to footnote 1 in the text">↩</a></p>
+</li>
 <li id="fn:overview-1">
 <p>This refers to the standard memory manager typically provided with development tools. There are situations where program operation requires storing data between function calls (i.e., automatic storage on the stack or in CPU registers is unsuitable), and the amount of such data is unknown at compile time&nbsp;– their creation and lifetime are determined by events occurring at runtime. The best approach for storing such data is in free memory&nbsp;– the "heap." These operations are usually handled by a memory manager.Thus, some applications cannot do without it, but given the resource consumption of standard memory managers, their use is often unacceptable.</p>
-<p>In such cases, a specialized memory manager tailored to the application's needs is frequently employed. Considering the above, creating a universal memory manager equally suitable for diverse projects is impractical, which explains the absence of a memory manager in <strong>scmRTOS</strong>.&nbsp;<a class="footnote-backref" href="#fnref:overview-1" title="Jump back to footnote 1 in the text">↩</a></p>
+<p>In such cases, a specialized memory manager tailored to the application's needs is frequently employed. Considering the above, creating a universal memory manager equally suitable for diverse projects is impractical, which explains the absence of a memory manager in <strong>scmRTOS</strong>.&nbsp;<a class="footnote-backref" href="#fnref:overview-1" title="Jump back to footnote 2 in the text">↩</a></p>
 </li>
 <li id="fn:overview-2">
-<p>In this case, no other process should "wake" this sleeping process before exit, as it would lead to undefined behavior and likely cause the system to crash. The only safe action applicable to a process in this state is to terminate it (with the option to restart from the beginning); see <a href="../processes/#processes-process-restart">Process Restart</a>.&nbsp;<a class="footnote-backref" href="#fnref:overview-2" title="Jump back to footnote 2 in the text">↩</a></p>
+<p>In this case, no other process should "wake" this sleeping process before exit, as it would lead to undefined behavior and likely cause the system to crash. The only safe action applicable to a process in this state is to terminate it (with the option to restart from the beginning); see <a href="../processes/#processes-process-restart">Process Restart</a>.&nbsp;<a class="footnote-backref" href="#fnref:overview-2" title="Jump back to footnote 3 in the text">↩</a></p>
 </li>
 <li id="fn:overview-3">
-<p>In particular, the ring buffer class/template.&nbsp;<a class="footnote-backref" href="#fnref:overview-3" title="Jump back to footnote 3 in the text">↩</a></p>
+<p>In particular, the ring buffer class/template.&nbsp;<a class="footnote-backref" href="#fnref:overview-3" title="Jump back to footnote 4 in the text">↩</a></p>
 </li>
 <li id="fn:overview-4">
-<p>Assembly file extension for the target processor.&nbsp;<a class="footnote-backref" href="#fnref:overview-4" title="Jump back to footnote 4 in the text">↩</a></p>
+<p>Assembly file extension for the target processor.&nbsp;<a class="footnote-backref" href="#fnref:overview-4" title="Jump back to footnote 5 in the text">↩</a></p>
 </li>
 <li id="fn:overview-5">
-<p>Nearly all OS classes are declared as friends of each other to ensure access among OS components to each other's internals.&nbsp;<a class="footnote-backref" href="#fnref:overview-5" title="Jump back to footnote 5 in the text">↩</a></p>
+<p>Nearly all OS classes are declared as friends of each other to ensure access among OS components to each other's internals.&nbsp;<a class="footnote-backref" href="#fnref:overview-5" title="Jump back to footnote 6 in the text">↩</a></p>
 </li>
 <li id="fn:overview-6">
-<p>For example, accessing OS kernel variables or internals of interprocess communication services.&nbsp;<a class="footnote-backref" href="#fnref:overview-6" title="Jump back to footnote 6 in the text">↩</a></p>
+<p>For example, accessing OS kernel variables or internals of interprocess communication services.&nbsp;<a class="footnote-backref" href="#fnref:overview-6" title="Jump back to footnote 7 in the text">↩</a></p>
 </li>
 <li id="fn:overview-7">
-<p>In the current version of <strong>scmRTOS</strong>, this is achieved by globally disabling interrupts.&nbsp;<a class="footnote-backref" href="#fnref:overview-7" title="Jump back to footnote 7 in the text">↩</a></p>
+<p>In the current version of <strong>scmRTOS</strong>, this is achieved by globally disabling interrupts.&nbsp;<a class="footnote-backref" href="#fnref:overview-7" title="Jump back to footnote 8 in the text">↩</a></p>
 </li>
 <li id="fn:overview-8">
-<p>Upon exiting the block, the destructor is automatically called, restoring the state that existed before entering the critical section. This approach eliminates the possibility of "forgetting" to re-enable interrupts when exiting the critical section.&nbsp;<a class="footnote-backref" href="#fnref:overview-8" title="Jump back to footnote 8 in the text">↩</a></p>
+<p>Upon exiting the block, the destructor is automatically called, restoring the state that existed before entering the critical section. This approach eliminates the possibility of "forgetting" to re-enable interrupts when exiting the critical section.&nbsp;<a class="footnote-backref" href="#fnref:overview-8" title="Jump back to footnote 9 in the text">↩</a></p>
 </li>
 <li id="fn:overview-9">
-<p>This order is the default. If <code>scmRTOS_PRIORITY_ORDER</code> is defined as 1, the bit order in the process map is reversed: the most significant bit corresponds to the highest-priority process, and the least significant bit to the lowest-priority one. Reverse priority order can be useful for processors with hardware support for finding the first non-zero bit in a word, such as the <strong>Blackfin</strong> family.&nbsp;<a class="footnote-backref" href="#fnref:overview-9" title="Jump back to footnote 9 in the text">↩</a></p>
+<p>This order is the default. If <code>scmRTOS_PRIORITY_ORDER</code> is defined as 1, the bit order in the process map is reversed: the most significant bit corresponds to the highest-priority process, and the least significant bit to the lowest-priority one. Reverse priority order can be useful for processors with hardware support for finding the first non-zero bit in a word, such as the <strong>Blackfin</strong> family.&nbsp;<a class="footnote-backref" href="#fnref:overview-9" title="Jump back to footnote 10 in the text">↩</a></p>
 </li>
 <li id="fn:overview-10">
-<p>Each process is an object of a separate type (class) derived from the common base class <code>TBaseProcess</code>.&nbsp;<a class="footnote-backref" href="#fnref:overview-10" title="Jump back to footnote 10 in the text">↩</a></p>
+<p>Each process is an object of a separate type (class) derived from the common base class <code>TBaseProcess</code>.&nbsp;<a class="footnote-backref" href="#fnref:overview-10" title="Jump back to footnote 11 in the text">↩</a></p>
 </li>
 <li id="fn:overview-11">
-<p>The execution function of a specific process is technically a full specialization of the <code>OS::process::exec()</code> template member function, so its definition uses the template specialization syntax <code>template&lt;&gt;</code>.&nbsp;<a class="footnote-backref" href="#fnref:overview-11" title="Jump back to footnote 11 in the text">↩</a></p>
+<p>The execution function of a specific process is technically a full specialization of the <code>OS::process::exec()</code> template member function, so its definition uses the template specialization syntax <code>template&lt;&gt;</code>.&nbsp;<a class="footnote-backref" href="#fnref:overview-11" title="Jump back to footnote 12 in the text">↩</a></p>
 </li>
 <li id="fn:overview-12">
-<p>It is recommended to declare a prototype of the process execution function specialization before the first instantiation of the template: this allows the compiler to recognize that a full specialization exists for that instance, avoiding attempts to generate the default template implementation. In some cases, this prevents compilation errors.&nbsp;<a class="footnote-backref" href="#fnref:overview-12" title="Jump back to footnote 12 in the text">↩</a></p>
+<p>It is recommended to declare a prototype of the process execution function specialization before the first instantiation of the template: this allows the compiler to recognize that a full specialization exists for that instance, avoiding attempts to generate the default template implementation. In some cases, this prevents compilation errors.&nbsp;<a class="footnote-backref" href="#fnref:overview-12" title="Jump back to footnote 13 in the text">↩</a></p>
 </li>
 <li id="fn:overview-13">
-<p>This is done to improve type safety&nbsp;– arbitrary integer values cannot be used; only those defined in <code>TPriority</code> are permitted. The values in <code>TPriority</code> are tied to the process count specified via the configuration macro <code>scmRTOS_PROCESS_COUNT</code>. Thus, only a limited, valid set of priorities is available. Priority values take the form <code>pr0</code>, <code>pr1</code>, etc., where the number indicates the priority level. The system <code>IdleProc</code> process has its own dedicated priority designation: <code>prIDLE</code>.&nbsp;<a class="footnote-backref" href="#fnref:overview-13" title="Jump back to footnote 13 in the text">↩</a></p>
+<p>This is done to improve type safety&nbsp;– arbitrary integer values cannot be used; only those defined in <code>TPriority</code> are permitted. The values in <code>TPriority</code> are tied to the process count specified via the configuration macro <code>scmRTOS_PROCESS_COUNT</code>. Thus, only a limited, valid set of priorities is available. Priority values take the form <code>pr0</code>, <code>pr1</code>, etc., where the number indicates the priority level. The system <code>IdleProc</code> process has its own dedicated priority designation: <code>prIDLE</code>.&nbsp;<a class="footnote-backref" href="#fnref:overview-13" title="Jump back to footnote 14 in the text">↩</a></p>
 </li>
 <li id="fn:overview-14">
-<p>The list shows example values. In each project, values are set individually based on project requirements.&nbsp;<a class="footnote-backref" href="#fnref:overview-14" title="Jump back to footnote 14 in the text">↩</a></p>
+<p>The list shows example values. In each project, values are set individually based on project requirements.&nbsp;<a class="footnote-backref" href="#fnref:overview-14" title="Jump back to footnote 15 in the text">↩</a></p>
 </li>
 <li id="fn:overview-15">
-<p>If the port supports only one variant, the corresponding macro value is predefined in the port. The same applies to all other macros.&nbsp;<a class="footnote-backref" href="#fnref:overview-15" title="Jump back to footnote 15 in the text">↩</a></p>
+<p>If the port supports only one variant, the corresponding macro value is predefined in the port. The same applies to all other macros.&nbsp;<a class="footnote-backref" href="#fnref:overview-15" title="Jump back to footnote 16 in the text">↩</a></p>
 </li>
 </ol>
 </div>

@@ -519,6 +519,7 @@
 <h3 id="terminate-process-execution">Terminate Process Execution<a class="headerlink" href="#terminate-process-execution" title="Permanent link">🔗</a></h3>
 <p>The <code>terminate()</code> function is intended to be called from outside the process being stopped. Inside it, all resources associated with the process are reset to their initial state, and the process is marked as not ready-to-run. If the process was waiting on a service, its tag is removed from that service's waiting process map.</p>
 <p>The <code>terminate()</code> function can accept a pointer to a function as an argument; this function will serve as the executable entry point for the process on the next start. This provides considerable flexibility in program implementation&nbsp;– on each restart, the exact executable function required in the current program context can be specified.</p>
+<p><span id="processes-restart-process-tip"></span></p>
 <div class="admonition tip">
 <p class="admonition-title"><strong>TIP</strong></p>
 <p>The ability to specify the executable function on restart can be effectively used to simulate process deletion and creation&nbsp;– some libraries are designed to require dynamic resource allocation for their operation, in particular the creation of processes to perform tasks followed by their deletion.</p>
